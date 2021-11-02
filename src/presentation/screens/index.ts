@@ -1,3 +1,3 @@
-const name = 'manuel';
+const name = 'manuel'
 
-export {name};
+export { name }

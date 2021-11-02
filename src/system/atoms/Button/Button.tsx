@@ -1,7 +1,7 @@
-import {Button as RNButton, ButtonProps as RNButtonProps} from 'react-native';
+import { Button as RNButton, ButtonProps as RNButtonProps } from 'react-native'
 
-type Props = {} & RNButtonProps;
+type Props = {} & RNButtonProps
 
-const Button: React.FC<Props> = props => <RNButton {...props} />;
+const Button: React.FC<Props> = props => <RNButton {...props} />
 
-export default Button;
+export default Button

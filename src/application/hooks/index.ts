@@ -1,1 +1,1 @@
-export const useQuery = {};
+export {}
