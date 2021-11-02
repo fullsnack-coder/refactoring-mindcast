@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": "@react-native-community",
+  "rules": {
+    "curly": "error",
+    "no-unused-vars": ["error"],
+    "semi": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}
