@@ -1,24 +1,39 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import DiscoverScreen from '@presentation/screens/Discover'
-import LibraryScreen from '@presentation/screens/Library'
-import SearchScreen from '@presentation/screens/Search'
-import SettingsScreen from '@presentation/screens/Settings'
+import * as HomeViews from './stacks'
 
-const Stack = createNativeStackNavigator()
+const HomeTabs = createBottomTabNavigator()
 
-//TODO: use stacks instead of screens in component prop
+const homeTabs = [
+  { name: 'home-discover', stack: HomeViews.DiscoverStack, icon: 'compass' },
+  { name: 'home-search', stack: HomeViews.SearchStack, icon: 'magnify' },
+  {
+    name: 'home-library',
+    stack: HomeViews.LibraryStack,
+    icon: 'music-circle-outline',
+  },
+  {
+    name: 'home-settings',
+    stack: HomeViews.SettingsStack,
+    icon: 'account-settings',
+  },
+]
+
 const AppHomeStackNavigation: React.FC = () => (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="discover"
-      component={DiscoverScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen name="search" component={SearchScreen} />
-    <Stack.Screen name="library" component={LibraryScreen} />
-    <Stack.Screen name="settings" component={SettingsScreen} />
-  </Stack.Navigator>
+  <HomeTabs.Navigator>
+    {homeTabs.map(({ name, stack, icon }) => (
+      <HomeTabs.Screen
+        key={name}
+        name={name}
+        component={stack}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => <Icon name={icon} size={22} />,
+        }}
+      />
+    ))}
+  </HomeTabs.Navigator>
 )
 
 export default AppHomeStackNavigation
