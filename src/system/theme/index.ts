@@ -23,6 +23,8 @@ const appTheme = createTheme({
     primaryText: palette['coolGray-900'],
     secondaryText: palette.mineshaft,
     primaryTransparent: `${palette.red}3b`,
+    buttonTextPrimary: palette.white,
+    buttonTextSecondary: palette.red,
   },
   breakpoints: {
     phone: 0,
@@ -33,6 +35,24 @@ const appTheme = createTheme({
     md: 16,
     lg: 24,
     xl: 40,
+  },
+  textVariants: {
+    heading: {
+      fontSize: 40,
+      fontFamily: 'CircularStd-Black',
+    },
+    subheading: {
+      fontSize: 30,
+      fontFamily: 'CircularStd-Bold',
+    },
+    title: {
+      fontSize: 24,
+      fontFamily: 'CircularStd-Book',
+    },
+    paragraph: {
+      fontSize: 16,
+      fontFamily: 'CircularStd-Medium',
+    },
   },
 })
 
