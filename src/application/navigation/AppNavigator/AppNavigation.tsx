@@ -1,10 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import AppHomeStack from '@application/navigation/AppHome'
 import YourInterestsStack from '@presentation/screens/YourInterests'
 import AboutScreen from '@presentation/screens/About'
 
+import AppHomeStack from '../AppHome'
 import AuthStack from '../Auth'
 import OnboardingStack from '../Onboarding'
 import { AppStackParamList } from './types'
