@@ -11,6 +11,7 @@ const palette = {
   'coolGray-900': '#111827',
   'coolGray-500': '#4B5563',
   'coolGray-200': '#E5E7EB',
+  transparent: 'transparent',
 }
 
 const appTheme = createTheme({
@@ -25,16 +26,20 @@ const appTheme = createTheme({
     primaryTransparent: `${palette.red}3b`,
     buttonTextPrimary: palette.white,
     buttonTextSecondary: palette.red,
+    transparent: palette.transparent,
   },
   breakpoints: {
     phone: 0,
     tablet: 768,
   },
   spacing: {
+    xxs: 2,
+    xs: 4,
     sm: 8,
     md: 16,
     lg: 24,
     xl: 40,
+    xxl: 60,
   },
   textVariants: {
     heading: {
