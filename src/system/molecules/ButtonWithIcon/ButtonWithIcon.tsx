@@ -1,5 +1,5 @@
 import { useAppTheme } from '@application/hooks'
-import Button, { ButtonProps } from '@system/atoms/Button'
+import Button, { ButtonProps, getFontColor } from '@system/atoms/Button'
 import Icon, { IconProps } from '@system/atoms/Icon'
 
 type Props = {
@@ -15,20 +15,24 @@ const ButtonWithIcon: React.FC<Props> = ({
   ...rest
 }) => {
   const { colors } = useAppTheme()
-  const colorIcon =
-    rest.type === 'primary'
-      ? colors.buttonTextPrimary
-      : colors.buttonTextSecondary
+  const colorIcon = getFontColor({
+    scheme: rest.scheme || 'colorfull',
+    type: rest.type,
+  })
   return (
     <Button
       startIcon={
         leftIconName ? (
-          <Icon name={leftIconName} color={colorIcon} size={iconSize} />
+          <Icon name={leftIconName} color={colors[colorIcon]} size={iconSize} />
         ) : undefined
       }
       endIcon={
         rightIconName ? (
-          <Icon name={rightIconName} color={colorIcon} size={iconSize} />
+          <Icon
+            name={rightIconName}
+            color={colors[colorIcon]}
+            size={iconSize}
+          />
         ) : undefined
       }
       {...rest}

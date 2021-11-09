@@ -24,6 +24,7 @@ const appTheme = createTheme({
     primaryText: palette['coolGray-900'],
     secondaryText: palette.mineshaft,
     primaryTransparent: `${palette.red}3b`,
+    primaryTextTransparent: `${palette['coolGray-900']}6b`,
     buttonTextPrimary: palette.white,
     buttonTextSecondary: palette.red,
     transparent: palette.transparent,
@@ -55,9 +56,24 @@ const appTheme = createTheme({
       fontFamily: 'CircularStd-Book',
     },
     paragraph: {
-      fontSize: 16,
+      fontSize: 18,
       fontFamily: 'CircularStd-Medium',
     },
+  },
+  textSize: {
+    xs: 12,
+    sm: 14,
+    md: 18,
+    lg: 24,
+    xl: 36,
+  },
+  borderRadii: {
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 32,
+    xl: 100,
+    xxl: 999,
   },
 })
 
