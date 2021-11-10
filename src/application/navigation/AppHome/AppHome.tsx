@@ -1,24 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import * as HomeViews from './stacks'
+import type { HomeTabsParamList } from './types'
+import { homeTabs } from './utils'
 
-const HomeTabs = createBottomTabNavigator()
-
-const homeTabs = [
-  { name: 'home-discover', stack: HomeViews.DiscoverStack, icon: 'compass' },
-  { name: 'home-search', stack: HomeViews.SearchStack, icon: 'magnify' },
-  {
-    name: 'home-library',
-    stack: HomeViews.LibraryStack,
-    icon: 'music-circle-outline',
-  },
-  {
-    name: 'home-settings',
-    stack: HomeViews.SettingsStack,
-    icon: 'account-settings',
-  },
-]
+const HomeTabs = createBottomTabNavigator<HomeTabsParamList>()
 
 const AppHomeStackNavigation: React.FC = () => (
   <HomeTabs.Navigator>

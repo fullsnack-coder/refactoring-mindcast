@@ -18,16 +18,23 @@ import TopicScreen from '@presentation/screens/Topic'
 import YourPodcastsScreen from '@presentation/screens/YourPodcasts'
 import YourInterestsScreen from '@presentation/screens/YourInterests'
 
-const DiscoverNativeStack = createNativeStackNavigator()
-const SearchNativeStack = createNativeStackNavigator()
-const LibraryNativeStack = createNativeStackNavigator()
-const SettingsNativeStack = createNativeStackNavigator()
+import {
+  DiscoverStackParamList,
+  SearchStackParamList,
+  LibraryStackParamList,
+  SettingsStackParamList,
+} from './types'
+
+const DiscoverNativeStack = createNativeStackNavigator<DiscoverStackParamList>()
+const SearchNativeStack = createNativeStackNavigator<SearchStackParamList>()
+const LibraryNativeStack = createNativeStackNavigator<LibraryStackParamList>()
+const SettingsNativeStack = createNativeStackNavigator<SettingsStackParamList>()
 
 export const DiscoverStack: React.FC = () => (
   <DiscoverNativeStack.Navigator screenOptions={{ headerShown: false }}>
     <DiscoverNativeStack.Screen name="discover" component={DiscoverScreen} />
     <DiscoverNativeStack.Screen
-      name="podcast-detail"
+      name="podcast-details"
       component={PodcastDetailScreen}
     />
     <DiscoverNativeStack.Screen
@@ -58,7 +65,7 @@ export const SearchStack: React.FC = () => (
       component={AuthorDetailScreen}
     />
     <SearchNativeStack.Screen
-      name="podcast-detail"
+      name="podcast-details"
       component={PodcastDetailScreen}
     />
   </SearchNativeStack.Navigator>
@@ -78,7 +85,7 @@ export const LibraryStack: React.FC = () => (
       component={RecentlyPlayedScreen}
     />
     <LibraryNativeStack.Screen
-      name="podcast-detail"
+      name="podcast-details"
       component={PodcastDetailScreen}
     />
     <LibraryNativeStack.Screen
