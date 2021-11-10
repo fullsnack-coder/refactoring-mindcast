@@ -1,8 +1,10 @@
+import { NavigatorScreenParams } from '@react-navigation/native'
+
 export type HomeTabsParamList = {
-  'home-discover': undefined
-  'home-search': undefined
-  'home-library': undefined
-  'home-settings': undefined
+  'home-discover': NavigatorScreenParams<DiscoverStackParamList>
+  'home-search': NavigatorScreenParams<SearchStackParamList>
+  'home-library': NavigatorScreenParams<LibraryStackParamList>
+  'home-settings': NavigatorScreenParams<SettingsStackParamList>
 }
 
 export type DiscoverStackParamList = {

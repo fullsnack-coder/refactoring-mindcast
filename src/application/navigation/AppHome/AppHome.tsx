@@ -1,4 +1,6 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { AppStackParamList } from '@application/navigation/AppNavigator'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import type { HomeTabsParamList } from './types'
@@ -6,7 +8,9 @@ import { homeTabs } from './utils'
 
 const HomeTabs = createBottomTabNavigator<HomeTabsParamList>()
 
-const AppHomeStackNavigation: React.FC = () => (
+type Props = {} & NativeStackScreenProps<AppStackParamList, 'home'>
+
+const AppHomeStackNavigation: React.FC<Props> = () => (
   <HomeTabs.Navigator>
     {homeTabs.map(({ name, stack, icon }) => (
       <HomeTabs.Screen

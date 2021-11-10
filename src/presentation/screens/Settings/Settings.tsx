@@ -1,6 +1,10 @@
+import { SettingsStackParamList } from '@application/navigation/AppHome'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Text, View } from 'react-native'
 
-const SettingsScreen: React.FC = () => (
+type Props = {} & NativeStackScreenProps<SettingsStackParamList, 'settings'>
+
+const SettingsScreen: React.FC<Props> = () => (
   <View>
     <Text>Hello from Settings Screen</Text>
   </View>
