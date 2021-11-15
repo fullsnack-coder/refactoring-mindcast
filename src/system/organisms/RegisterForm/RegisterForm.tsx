@@ -10,6 +10,7 @@ import FormField from '@system/molecules/FormField'
 import PasswordInput from '@system/molecules/PasswordInput'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
+import { Pressable } from 'react-native'
 
 import { registerSchema } from './utils'
 
@@ -23,9 +24,10 @@ type RegisterFormValues = {
 
 type Props = {
   onSubmitForm?: (values: RegisterFormValues) => void | Promise<void>
+  onLoginTap?: () => void
 }
 
-const RegisterForm: React.FC<Props> = ({ onSubmitForm }) => {
+const RegisterForm: React.FC<Props> = ({ onLoginTap, onSubmitForm }) => {
   const { colors } = useAppTheme()
   const {
     control,
@@ -95,9 +97,12 @@ const RegisterForm: React.FC<Props> = ({ onSubmitForm }) => {
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between">
-        <Text color="primaryBackground">
-          Has account? <Text color="primary">Log-In!</Text>
-        </Text>
+        <Box flexDirection="row">
+          <Text color="primaryBackground">Has account? </Text>
+          <Pressable onPress={onLoginTap}>
+            <Text color="primary">Log-In!</Text>
+          </Pressable>
+        </Box>
         <Box>
           <Button
             text="REGISTER"
