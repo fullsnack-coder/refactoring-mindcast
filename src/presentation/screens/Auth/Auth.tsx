@@ -1,5 +1,7 @@
+import { useAppDispatch } from '@application/hooks/store'
 import { AppStackParamList } from '@application/navigation/AppNavigator'
 import { AuthStackParamList } from '@application/navigation/Auth'
+import { LoginStart, RegisterStart } from '@application/store/modules/auth'
 import {
   CompositeNavigationProp,
   useNavigation,
@@ -29,6 +31,7 @@ const { Heading } = Typography
 const AuthScreen: React.FC = () => {
   const { navigate } = useNavigation<Navigation>()
   const panelSliderRef = useRef<SliderHandle>(null)
+  const dispatch = useAppDispatch()
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -51,7 +54,18 @@ const AuthScreen: React.FC = () => {
             <Box flex={1}>
               <LoginForm
                 onRegisterTap={() => panelSliderRef.current?.nextStep()}
-                onSubmitForm={() => navigate('interests')}
+                onSubmitForm={values => {
+                  dispatch(
+                    LoginStart(values, () =>
+                      navigate('home', {
+                        screen: 'home-discover',
+                        params: {
+                          screen: 'discover',
+                        },
+                      }),
+                    ),
+                  )
+                }}
               />
               <Box pt="lg" flex={1} justifyContent="flex-end" pb="xl">
                 <Box
@@ -81,7 +95,9 @@ const AuthScreen: React.FC = () => {
             <Box flex={1}>
               <RegisterForm
                 onLoginTap={() => panelSliderRef.current?.prevStep()}
-                onSubmitForm={() => navigate('interests')}
+                onSubmitForm={values => {
+                  dispatch(RegisterStart(values, () => navigate('interests')))
+                }}
               />
               <Box pt="lg" flex={1} justifyContent="flex-end" pb="xl">
                 <Box
