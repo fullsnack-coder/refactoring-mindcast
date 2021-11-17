@@ -1,17 +1,30 @@
+import { useAppTheme } from '@application/hooks'
 import { AppStackParamList } from '@application/navigation/AppNavigator'
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { Button, Text, View } from 'react-native'
+import AuthScreen from '@presentation/screens/Auth'
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack'
+import { StatusBar } from 'react-native'
 
-type Navigation = NativeStackNavigationProp<AppStackParamList, 'auth'>
+import { AuthStackParamList } from './types'
 
-const AuthStack: React.FC = () => {
-  const navigation = useNavigation<Navigation>()
+const Stack = createNativeStackNavigator<AuthStackParamList>()
+
+type Props = NativeStackScreenProps<AppStackParamList, 'auth'>
+
+const AuthStack: React.FC<Props> = () => {
+  const { colors } = useAppTheme()
   return (
-    <View>
-      <Text>Auth</Text>
-      <Button title="home" onPress={() => navigation.navigate('home')} />
-    </View>
+    <>
+      <StatusBar
+        backgroundColor={colors.primaryText}
+        barStyle="light-content"
+      />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="auth-forms" component={AuthScreen} />
+      </Stack.Navigator>
+    </>
   )
 }
 
