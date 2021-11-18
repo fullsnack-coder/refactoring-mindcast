@@ -43,3 +43,12 @@ export type Author = {
   subjects: PodcastSubject[]
   podcasts: number
 }
+
+export type Podcast = {
+  author: Author
+  averagePuntuation: number
+  coverImage?: string
+  description: string
+  title: string
+  subjects: PodcastSubject[]
+}
