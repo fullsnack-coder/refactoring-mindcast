@@ -27,3 +27,19 @@ export type AuthRegisterInput = {
   password: string
   confirmPassword: string
 }
+
+export type PodcastSubject = {
+  id: string
+  description: string
+  title: string
+  tag: string
+}
+
+export type Author = {
+  firsName: string
+  lastName?: string
+  avatarUrl?: string
+  description: string
+  subjects: PodcastSubject[]
+  podcasts: number
+}
