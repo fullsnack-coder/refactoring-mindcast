@@ -28,6 +28,7 @@ const appTheme = createTheme({
     buttonTextPrimary: palette.white,
     buttonTextSecondary: palette.red,
     transparent: palette.transparent,
+    warning: palette.saffron,
   },
   breakpoints: {
     phone: 0,
