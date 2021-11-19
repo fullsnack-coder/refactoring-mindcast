@@ -15,7 +15,7 @@ type Props = {
 const { Text } = Typography
 
 const Avatar: React.FC<Props> = ({ name = '', size = 'default', ...rest }) => {
-  const [showName, setShownName] = useState(true)
+  const [showName, setShownName] = useState(false)
   const { colors } = useAppTheme()
   const [nameInitial] = name
   const isDefaultSize = size === 'default'
