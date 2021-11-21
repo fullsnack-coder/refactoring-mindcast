@@ -1,3 +1,5 @@
+import 'react-native-gesture-handler'
+
 import AppNavigator from '@application/navigation'
 import store from '@application/store'
 import { ThemeProvider } from '@shopify/restyle'
