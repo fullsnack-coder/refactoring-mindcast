@@ -36,6 +36,7 @@ export type PodcastSubject = {
 }
 
 export type Author = {
+  id: string
   firsName: string
   lastName?: string
   avatarUrl?: string
@@ -45,6 +46,7 @@ export type Author = {
 }
 
 export type Podcast = {
+  id: string
   author: Author
   averagePuntuation: number
   coverImage?: string
