@@ -38,13 +38,11 @@ const AuthorCardTrending: React.FC<Props> = ({
       color="secondaryBackground"
       textAlign="center">{`${author.podcasts} podcasts`}</Text>
     <Separator y={12} />
-    <Box>
-      <Button
-        onPress={() => onCallToAction?.(author)}
-        type="primary"
-        text="LEARN MORE"
-      />
-    </Box>
+    <Button
+      onPress={() => onCallToAction?.(author)}
+      type="primary"
+      text="LEARN MORE"
+    />
     <Separator y={16} />
   </Box>
 )

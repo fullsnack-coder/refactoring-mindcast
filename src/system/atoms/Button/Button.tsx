@@ -1,6 +1,6 @@
 import Box, { BoxProps } from '@system/atoms/Box'
 import Typography from '@system/atoms/Typography'
-import { Pressable, PressableProps, StyleSheet } from 'react-native'
+import { Pressable, PressableProps, StyleProp, ViewStyle } from 'react-native'
 
 import { getBackgroundColor, getFontColor } from './utils'
 
@@ -24,6 +24,7 @@ export type Props = {
   startIcon?: JSX.Element
   type?: ButtonTypes
   contentProps?: BoxProps
+  containerStyle?: StyleProp<ViewStyle>
 } & PressableProps
 
 const { Text } = Typography
@@ -39,6 +40,7 @@ const Button: React.FC<Props> = ({
   type = 'secondary',
   contentProps = {},
   children: _,
+  containerStyle,
   ...rest
 }) => {
   const isPrimary = type === 'primary'
@@ -47,7 +49,9 @@ const Button: React.FC<Props> = ({
   const fontColor = getFontColor({ scheme, type })
 
   return (
-    <Pressable style={styles.pressable} {...rest}>
+    <Pressable
+      style={[{ flex: fullWidth ? 1 : undefined }, containerStyle]}
+      {...rest}>
       <Box
         alignSelf={fullWidth ? 'center' : 'flex-start'}
         alignItems="center"
@@ -67,11 +71,5 @@ const Button: React.FC<Props> = ({
     </Pressable>
   )
 }
-
-const styles = StyleSheet.create({
-  pressable: {
-    width: '100%',
-  },
-})
 
 export default Button
