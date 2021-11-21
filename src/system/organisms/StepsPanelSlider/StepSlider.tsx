@@ -2,12 +2,13 @@ import Box from '@system/atoms/Box'
 import {
   Children,
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
 } from 'react'
-import { FlatList, FlatListProps } from 'react-native'
+import { FlatList, FlatListProps, Dimensions } from 'react-native'
 
 import StepPanel from './StepPanel'
 
@@ -41,6 +42,13 @@ const Slider = forwardRef<SliderHandle, Props>(
     }))
     const [currentIndex, setCurrentIndex] = useState(0)
     const flatListRef = useRef<FlatList>(null)
+
+    useEffect(() => {
+      const subscription = Dimensions.addEventListener('change', () =>
+        flatListRef.current?.scrollToIndex({ index: 0 }),
+      )
+      return () => subscription.remove()
+    }, [currentIndex])
 
     const actions = useMemo(() => {
       const lastIndex = arraySteps.length - 1
