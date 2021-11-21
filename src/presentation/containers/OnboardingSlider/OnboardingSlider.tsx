@@ -34,7 +34,7 @@ const OnboardingSlider: React.FC<Props> = ({ onComplete, onSkip }) => {
   return (
     <StepsPanelSlider
       renderFooter={({ goNext, goPrev, currentIndex, total }) => (
-        <Box flexDirection="row" pb="lg" bg="primaryBackground">
+        <Box flexDirection="row">
           <Box
             flexDirection="row"
             justifyContent="space-between"
@@ -42,7 +42,6 @@ const OnboardingSlider: React.FC<Props> = ({ onComplete, onSkip }) => {
             width="100%">
             {currentIndex === total ? (
               <Button
-                style={{ width: '100%' }}
                 text="GET STARTED"
                 onPress={onComplete}
                 fullWidth
@@ -51,23 +50,19 @@ const OnboardingSlider: React.FC<Props> = ({ onComplete, onSkip }) => {
               />
             ) : (
               <>
-                <Box flex={1}>
-                  {currentIndex === 1 ? (
-                    <Button text="SKIP" onPress={onSkip} fullWidth size="md" />
-                  ) : (
-                    <Button text="PREV" onPress={goPrev} fullWidth size="md" />
-                  )}
-                </Box>
+                {currentIndex === 1 ? (
+                  <Button text="SKIP" onPress={onSkip} fullWidth size="md" />
+                ) : (
+                  <Button text="PREV" onPress={goPrev} fullWidth size="md" />
+                )}
                 <Separator x={12} />
-                <Box flex={1}>
-                  <Button
-                    text="NEXT"
-                    type="primary"
-                    onPress={goNext}
-                    fullWidth
-                    size="md"
-                  />
-                </Box>
+                <Button
+                  text="NEXT"
+                  type="primary"
+                  onPress={goNext}
+                  fullWidth
+                  size="md"
+                />
               </>
             )}
           </Box>

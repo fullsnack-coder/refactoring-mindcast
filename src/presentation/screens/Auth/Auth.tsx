@@ -79,17 +79,19 @@ const AuthScreen: React.FC = () => {
                   </Heading>
                   <Box bg="secondaryBackground" width={60} height={2} ml="md" />
                 </Box>
-                <SocialButton
-                  text="Login with"
-                  socialNetwork="facebook"
-                  fullWidth
-                />
-                <Separator y={12} />
-                <SocialButton
-                  text="Login with"
-                  socialNetwork="google"
-                  fullWidth
-                />
+                <Box>
+                  <SocialButton
+                    text="Login with"
+                    socialNetwork="facebook"
+                    fullWidth
+                  />
+                  <Separator y={12} />
+                  <SocialButton
+                    text="Login with"
+                    socialNetwork="google"
+                    fullWidth
+                  />
+                </Box>
               </Box>
             </Box>
             <Box flex={1}>
@@ -111,17 +113,19 @@ const AuthScreen: React.FC = () => {
                   </Heading>
                   <Box bg="secondaryBackground" width={60} height={2} ml="md" />
                 </Box>
-                <SocialButton
-                  text="Register with"
-                  socialNetwork="facebook"
-                  fullWidth
-                />
-                <Separator y={12} />
-                <SocialButton
-                  text="Register with"
-                  socialNetwork="google"
-                  fullWidth
-                />
+                <Box>
+                  <SocialButton
+                    text="Register with"
+                    socialNetwork="facebook"
+                    fullWidth
+                  />
+                  <Separator y={12} />
+                  <SocialButton
+                    text="Register with"
+                    socialNetwork="google"
+                    fullWidth
+                  />
+                </Box>
               </Box>
             </Box>
           </StepsPanelSlider>

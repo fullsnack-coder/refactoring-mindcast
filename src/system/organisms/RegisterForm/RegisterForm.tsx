@@ -103,13 +103,11 @@ const RegisterForm: React.FC<Props> = ({ onLoginTap, onSubmitForm }) => {
             <Text color="primary">Log-In!</Text>
           </Pressable>
         </Box>
-        <Box>
-          <Button
-            text="REGISTER"
-            type="primary"
-            onPress={handleSubmit(submitForm)}
-          />
-        </Box>
+        <Button
+          text="REGISTER"
+          type="primary"
+          onPress={handleSubmit(submitForm)}
+        />
       </Box>
     </Box>
   )
