@@ -8,21 +8,27 @@ import { useState } from 'react'
 type AvatarSize = 'small' | 'default'
 
 type Props = {
+  avatarUri?: string
   name?: string
   size?: AvatarSize
-} & ImageProps
+} & Omit<ImageProps, 'sourceUri'>
 
 const { Text } = Typography
 
-const Avatar: React.FC<Props> = ({ name = '', size = 'default', ...rest }) => {
-  const [showName, setShownName] = useState(false)
+const Avatar: React.FC<Props> = ({
+  avatarUri = '',
+  name = '',
+  size = 'default',
+  ...rest
+}) => {
+  const [showName, setShownName] = useState(!avatarUri)
   const { colors } = useAppTheme()
   const [nameInitial] = name
   const isDefaultSize = size === 'default'
 
   return (
     <>
-      {showName ? (
+      {showName || !avatarUri ? (
         <Box
           bg="secondaryBackground"
           borderRadius="xxl"
@@ -44,6 +50,7 @@ const Avatar: React.FC<Props> = ({ name = '', size = 'default', ...rest }) => {
           height={isDefaultSize ? 80 : 50}
           onError={() => setShownName(true)}
           style={{ borderRadius: 999 }}
+          sourceUri={avatarUri}
           {...rest}
         />
       )}

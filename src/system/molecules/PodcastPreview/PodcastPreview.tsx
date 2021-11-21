@@ -35,7 +35,11 @@ const PodcastPreview: React.FC<Props> = ({ podcast, ...rest }) => {
           borderRadius="md"
           bg="primaryTextTransparent">
           <Box flexDirection="row" alignItems="center">
-            <Avatar sourceUri={author.avatarUrl!} size="small" />
+            <Avatar
+              name={author.firsName}
+              avatarUri={author.avatarUrl}
+              size="small"
+            />
             <Separator x={12} />
             <Text numberOfLines={1} color="buttonTextPrimary">{`${
               author.firsName
