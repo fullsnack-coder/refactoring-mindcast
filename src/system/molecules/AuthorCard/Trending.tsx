@@ -28,7 +28,7 @@ const AuthorCardTrending: React.FC<Props> = ({
     px="sm"
     {...rest}>
     <Separator y={16} />
-    <Avatar sourceUri={author.avatarUrl || ''} />
+    <Avatar name={author.firsName} avatarUri={author.avatarUrl} />
     <Separator y={22} />
     <Text color="primaryText" textAlign="center" numberOfLines={2}>
       {`${author.firsName} ${author.lastName || ''}`}
