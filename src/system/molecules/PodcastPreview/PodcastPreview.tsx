@@ -36,13 +36,13 @@ const PodcastPreview: React.FC<Props> = ({ podcast, ...rest }) => {
           bg="primaryTextTransparent">
           <Box flexDirection="row" alignItems="center">
             <Avatar
-              name={author.firsName}
+              name={author.firstName}
               avatarUri={author.avatarUrl}
               size="small"
             />
             <Separator x={12} />
             <Text numberOfLines={1} color="buttonTextPrimary">{`${
-              author.firsName
+              author.firstName
             } ${author.lastName || ''}`}</Text>
           </Box>
           <Box>

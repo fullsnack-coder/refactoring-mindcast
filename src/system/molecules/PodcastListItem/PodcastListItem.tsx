@@ -37,7 +37,7 @@ const PodcastListItem: React.FC<Props> = ({
             {title}
           </Text>
           <Text color="secondaryBackground" fontSize={textSize.sm}>
-            {author.firsName}
+            {author.firstName}
           </Text>
         </Box>
       </Box>

@@ -37,7 +37,7 @@ export type PodcastSubject = {
 
 export type Author = {
   id: string
-  firsName: string
+  firstName: string
   lastName?: string
   avatarUrl?: string
   description: string
