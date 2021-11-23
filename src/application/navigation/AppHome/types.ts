@@ -1,3 +1,4 @@
+import { Podcast } from '@application/types'
 import { NavigatorScreenParams } from '@react-navigation/native'
 
 export type HomeTabsParamList = {
@@ -9,7 +10,9 @@ export type HomeTabsParamList = {
 
 export type DiscoverStackParamList = {
   discover: undefined
-  'podcast-details': undefined
+  'podcast-details': {
+    podcastId: Podcast['id']
+  }
   'author-details': undefined
   'new-releases': undefined
   'hottest-podcasts': undefined
