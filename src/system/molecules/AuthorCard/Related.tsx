@@ -15,7 +15,7 @@ const AuthorCardTrending: React.FC<Props> = ({ author, ...rest }) => (
     <Box mb="sm" height={250} width={145} borderRadius="sm" overflow="hidden">
       <Image sourceUri={author.avatarUrl || ''} height="100%" width="100%" />
     </Box>
-    <Text color="primaryText">{author.firsName}</Text>
+    <Text color="primaryText">{author.firstName}</Text>
   </Pressable>
 )
 

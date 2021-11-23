@@ -3,7 +3,7 @@ import { createTheme } from '@shopify/restyle'
 const palette = {
   red: '#EF010B',
   punch: '#DD4B39',
-  white: '#f5f5f5',
+  white: '#fff',
   saffron: '#F8C330',
   chambray: '#3B5998',
   silver: '#bbb',

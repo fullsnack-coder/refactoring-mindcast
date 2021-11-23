@@ -28,10 +28,10 @@ const AuthorCardTrending: React.FC<Props> = ({
     px="sm"
     {...rest}>
     <Separator y={16} />
-    <Avatar name={author.firsName} avatarUri={author.avatarUrl} />
+    <Avatar name={author.firstName} avatarUri={author.avatarUrl} />
     <Separator y={22} />
     <Text color="primaryText" textAlign="center" numberOfLines={2}>
-      {`${author.firsName} ${author.lastName || ''}`}
+      {`${author.firstName} ${author.lastName || ''}`}
     </Text>
     <Separator y={12} />
     <Text
