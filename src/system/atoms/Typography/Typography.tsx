@@ -15,9 +15,14 @@ const Heading: React.FC<TextProps> = props => (
   <BaseText color="primaryText" variant="heading" {...props} />
 )
 
+const Link: React.FC<TextProps> = props => (
+  <BaseText color="primary" variant="paragraph" {...props} />
+)
+
 const Typography = () => null
 
 Typography.Heading = Heading
 Typography.Text = Text
+Typography.Link = Link
 
 export default Typography
