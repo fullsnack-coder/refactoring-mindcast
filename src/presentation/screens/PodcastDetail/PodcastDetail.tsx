@@ -1,7 +1,11 @@
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 
 const PodcastDetailScreen: React.FC = () => {
-  return <View>from podcast details screen</View>
+  return (
+    <View>
+      <Text>from podcast details screen</Text>
+    </View>
+  )
 }
 
 export default PodcastDetailScreen

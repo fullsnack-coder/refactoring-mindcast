@@ -20,7 +20,7 @@ import AuthorCard from '@system/molecules/AuthorCard'
 import PodcastHottestPreview from '@system/molecules/PodcastHottestPreview'
 import PodcastPreview from '@system/molecules/PodcastPreview'
 import Section from '@system/molecules/Section'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   ActivityIndicator,
   FlatList,
@@ -46,6 +46,7 @@ const DiscoverScreen: React.FC = () => {
     state => state.authors,
   )
   const dispatch = useAppDispatch()
+  const [isPulled, setIsPulled] = useState(false)
   const { colors } = useAppTheme()
 
   const dataIsFetching = useMemo(
@@ -72,8 +73,11 @@ const DiscoverScreen: React.FC = () => {
         contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={
           <RefreshControl
-            onRefresh={loadScreenData}
-            refreshing={dataIsFetching}
+            onRefresh={() => {
+              loadScreenData()
+              setIsPulled(true)
+            }}
+            refreshing={dataIsFetching && isPulled}
             colors={[colors.primary]}
           />
         }>
@@ -92,13 +96,7 @@ const DiscoverScreen: React.FC = () => {
             </Box>
             <Section
               title="New Releases"
-              callToActionButton={
-                <Button
-                  type="primary"
-                  onPress={() => navigate('new-releases')}
-                  text="SEE ALL"
-                />
-              }>
+              callToActionButton={<Button type="primary" text="SEE ALL" />}>
               <FlatList
                 data={hottestPodcasts}
                 keyExtractor={({ id }) => id}
@@ -130,7 +128,13 @@ const DiscoverScreen: React.FC = () => {
             <Separator y={32} />
             <Section
               title="Hottest Podcasts"
-              callToActionButton={<Button text="SEE ALL" type="primary" />}>
+              callToActionButton={
+                <Button
+                  text="SEE ALL"
+                  type="primary"
+                  onPress={() => navigate('hottest-podcasts')}
+                />
+              }>
               <FlatList
                 horizontal
                 ItemSeparatorComponent={() => <Separator x={22} />}
