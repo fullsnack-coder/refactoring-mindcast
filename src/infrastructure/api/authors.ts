@@ -7,7 +7,7 @@ export const getAuthorInfo = async (authorId: string) => {
   return authorInfo
 }
 
-type TrendingOptions = {
+export type TrendingOptions = {
   size?: number
   order?: 'asc' | 'desc'
 }
@@ -16,6 +16,10 @@ export const getTrendingAuthors = async ({
   size = 5,
   order = 'asc',
 }: TrendingOptions) => {
-  const authors = await Promise.resolve(trendingAuthors)
+  const authors = await new Promise(resolve => {
+    setTimeout(() => {
+      resolve(trendingAuthors)
+    })
+  })
   return authors
 }

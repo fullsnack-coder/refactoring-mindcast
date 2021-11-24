@@ -7,13 +7,15 @@ export const getPodcastInformation = async (podcastId: string) => {
   return podcast
 }
 
-type HottestOptions = {
+export type HottestOptions = {
   size?: number
   order?: 'asc' | 'desc'
 }
 
 export const getRecentlyReleases = async () => {
-  const recentlyReleases = await Promise.resolve(podcasts.reverse())
+  const recentlyReleases = await new Promise(resolve => {
+    setTimeout(() => resolve(podcasts.reverse()), 1000)
+  })
   return recentlyReleases
 }
 
@@ -21,10 +23,17 @@ export const getHottestPodcasts = async ({
   size = 10,
   order = 'asc',
 }: HottestOptions) => {
-  const hottestPodcasts = await Promise.resolve(
-    podcasts.sort(
-      (current, next) => current.averagePuntuation - next.averagePuntuation,
-    ),
-  )
+  const hottestPodcasts = await new Promise(resolve => {
+    setTimeout(
+      () =>
+        resolve(
+          podcasts.sort(
+            (current, next) =>
+              current.averagePuntuation - next.averagePuntuation,
+          ),
+        ),
+      1000,
+    )
+  })
   return hottestPodcasts
 }
