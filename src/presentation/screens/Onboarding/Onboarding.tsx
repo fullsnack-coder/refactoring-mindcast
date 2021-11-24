@@ -19,7 +19,11 @@ const OnboardingScreen: React.FC = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={colors.primaryBackground} translucent />
+      <StatusBar
+        backgroundColor={colors.primaryBackground}
+        barStyle="dark-content"
+        translucent
+      />
       <OnboardingSlider onSkip={handleNavigate} onComplete={handleNavigate} />
     </>
   )
