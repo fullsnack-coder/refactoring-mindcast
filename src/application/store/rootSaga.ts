@@ -5,6 +5,14 @@ import {
   watcherRegisterAuthentication,
 } from './modules/auth'
 
+import { watcherHottestPodcasts } from './modules/podcasts'
+import { getTopAuthorsWatcher } from './modules/authors'
+
 export default function* rootSaga() {
-  yield all([watcherLoginAuthentication(), watcherRegisterAuthentication()])
+  yield all([
+    watcherLoginAuthentication(),
+    watcherRegisterAuthentication(),
+    watcherHottestPodcasts(),
+    getTopAuthorsWatcher(),
+  ])
 }
