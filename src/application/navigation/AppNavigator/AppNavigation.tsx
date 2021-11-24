@@ -1,8 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import YourInterestsStack from '@presentation/screens/YourInterests'
 import AboutScreen from '@presentation/screens/About'
+import YourInterestsStack from '@presentation/screens/YourInterests'
+import PodcastPlayerScreen from '@presentation/screens/PodcastPlayer'
 
 import AppHomeStack from '../AppHome'
 import AuthStack from '../Auth'
@@ -20,6 +21,7 @@ const AppNavigation = () => {
         <AppStack.Screen name="interests" component={YourInterestsStack} />
         <AppStack.Screen name="home" component={AppHomeStack} />
         <AppStack.Screen name="about" component={AboutScreen} />
+        <AppStack.Screen name="player" component={PodcastPlayerScreen} />
       </AppStack.Navigator>
     </NavigationContainer>
   )
