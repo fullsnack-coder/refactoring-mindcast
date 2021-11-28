@@ -220,3 +220,11 @@ export const hottestPodcast: Podcast[] = [
     coverImage: 'https://i.ytimg.com/vi/SmJz-GSmdrg/maxresdefault.jpg',
   },
 ]
+
+export const user: User = {
+  id: '12221',
+  username: 'yoboy',
+  email: 'chokidar@mailinator.com',
+  avatarUrl: 'https://randomuser.me/api/portraits/men/76.jpg',
+  description: 'whatever description',
+}
