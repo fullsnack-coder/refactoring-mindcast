@@ -10,6 +10,7 @@ export type Topic = {
 }
 
 export type User = {
+  id: string
   email?: string
   username: string
   description?: string
@@ -53,4 +54,14 @@ export type Podcast = {
   description: string
   title: string
   subjects: PodcastSubject[]
+}
+
+export type Playlist = {
+  id: string
+  name: string
+  description?: string
+  coverImage?: string
+  createdAt: Date
+  ownerId: User['id']
+  podcasts: Podcast[]
 }
