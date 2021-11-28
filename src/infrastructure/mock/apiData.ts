@@ -1,4 +1,4 @@
-import { Author, Podcast } from '@application/types'
+import { Author, Playlist, Podcast, User } from '@application/types'
 
 export const podcasts: Podcast[] = [
   {
@@ -228,3 +228,27 @@ export const user: User = {
   avatarUrl: 'https://randomuser.me/api/portraits/men/76.jpg',
   description: 'whatever description',
 }
+
+export const playlists: Playlist[] = [
+  {
+    createdAt: new Date(),
+    id: 'hashedplaylistid',
+    name: 'awesome playlist',
+    ownerId: user.id,
+    podcasts,
+  },
+  {
+    createdAt: new Date(),
+    id: 'hashedplaylistid2',
+    name: 'walking around new york',
+    ownerId: user.id,
+    podcasts,
+  },
+  {
+    createdAt: new Date(),
+    id: 'hashedplaylistid3',
+    name: 'my favorite',
+    ownerId: user.id,
+    podcasts,
+  },
+]
