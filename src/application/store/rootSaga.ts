@@ -5,8 +5,16 @@ import {
   watcherRegisterAuthentication,
 } from './modules/auth'
 
-import { watcherHottestPodcasts } from './modules/podcasts'
 import { getTopAuthorsWatcher } from './modules/authors'
+import {
+  watcherCreatePlaylistSaga,
+  watcherRemovePlaylistSaga,
+  watcherAddPodcastSaga,
+  watcherRemovePodcastSaga,
+  watcherGetPlaylistsSaga,
+} from './modules/playlists'
+
+import { watcherHottestPodcasts } from './modules/podcasts'
 
 export default function* rootSaga() {
   yield all([
@@ -14,5 +22,10 @@ export default function* rootSaga() {
     watcherRegisterAuthentication(),
     watcherHottestPodcasts(),
     getTopAuthorsWatcher(),
+    watcherGetPlaylistsSaga(),
+    watcherCreatePlaylistSaga(),
+    watcherRemovePlaylistSaga(),
+    watcherAddPodcastSaga(),
+    watcherRemovePodcastSaga(),
   ])
 }

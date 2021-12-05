@@ -1,5 +1,5 @@
-import { Playlist } from '@application/types'
-import { playlists as mockedPlaylists } from '../mock/apiData'
+import { Playlist, Podcast } from '@application/types'
+import { playlists as mockedPlaylists, podcasts } from '../mock/apiData'
 
 export const getPlaylists = async (userId: string): Promise<Playlist[]> => {
   const playlists = await Promise.resolve(mockedPlaylists)
@@ -22,7 +22,7 @@ export const createPlaylist = async (
 
 export type UpdatePlaylist = Omit<
   Playlist,
-  'id' | 'createdAt' | 'podcasts' | 'ownerId'
+  'createdAt' | 'podcasts' | 'ownerId'
 >
 
 export const updatePlaylist = async (
@@ -34,4 +34,20 @@ export const updatePlaylist = async (
 
 export const deletePlaylist = async (playlistId: string): Promise<void> => {
   return Promise.resolve()
+}
+
+export const addPodcastToPlaylist = async (
+  playlistId: Playlist['id'],
+  podcastId: string,
+): Promise<Podcast> => {
+  const addedPodcast = await Promise.resolve(podcasts[0])
+  return addedPodcast
+}
+
+export const removePodcastFromPlaylist = async (
+  playlistId: Playlist['id'],
+  podcastId: string,
+): Promise<Podcast> => {
+  const removedPodcast = await Promise.resolve(podcasts[0])
+  return removedPodcast
 }
