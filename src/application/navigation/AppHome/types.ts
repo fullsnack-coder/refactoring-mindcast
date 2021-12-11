@@ -28,7 +28,6 @@ export type SearchStackParamList = {
 
 export type LibraryStackParamList = {
   library: undefined
-  playlist: undefined
   downloads: undefined
   'your-podcasts': undefined
   'recently-played': undefined

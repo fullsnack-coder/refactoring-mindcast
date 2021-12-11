@@ -46,9 +46,14 @@ type PlaylistPayloads =
       playlistId: Playlist['id']
       removedPodcastId: Podcast['id']
     }
+  | CreatePlaylistSagaWorkerOptions
+  | PlaylistStartAddPodcastOptions
 
-export const playlistGetPlaylistsStart = (): StoreAction<void> => ({
+export const playlistGetPlaylistsStart = (
+  opts: PlaylistGetPlaylistsOptions,
+): StoreAction<PlaylistGetPlaylistsOptions> => ({
   type: PLAYLIST_GET_PLAYLISTS_START,
+  payload: opts,
 })
 
 const playlistsGetPlaylistsSuccess = (
@@ -92,11 +97,18 @@ export const playlistStartRemovePlaylist = (
   payload: { removedPlaylistId: playlistId },
 })
 
-export const playlistAddPodcast = (
+const playlistAddPodcast = (
   addedPodcast: Podcast & { playlistId: string },
 ): StoreAction<PlaylistPayloads> => ({
   type: PLAYLIST_ADD_PODCAST_TO_PLAYLIST,
   payload: { addedPodcast },
+})
+
+export const playlistStartAddPodcast = (
+  options: PlaylistStartAddPodcastOptions,
+): StoreAction<PlaylistPayloads> => ({
+  type: PLAYLIST_START_ADD_PODCAST,
+  payload: options,
 })
 
 export const playlistRemovePodcast = (

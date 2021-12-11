@@ -74,7 +74,6 @@ export const SearchStack: React.FC = () => (
 export const LibraryStack: React.FC = () => (
   <LibraryNativeStack.Navigator screenOptions={{ headerShown: false }}>
     <LibraryNativeStack.Screen name="library" component={LibraryScreen} />
-    <LibraryNativeStack.Screen name="playlist" component={PlaylistsScreen} />
     <LibraryNativeStack.Screen name="downloads" component={DownloadsScreen} />
     <LibraryNativeStack.Screen
       name="your-podcasts"
