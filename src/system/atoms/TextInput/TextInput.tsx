@@ -19,7 +19,14 @@ export type Props = {
 
 const TextInput = forwardRef<RNTextInput, Props>(
   (
-    { leftInput, rightInput, variant = 'simple', containerProps = {}, ...rest },
+    {
+      leftInput,
+      rightInput,
+      variant = 'simple',
+      containerProps = {},
+      style,
+      ...rest
+    },
     ref,
   ) => {
     const { colors, textSize } = useAppTheme()
@@ -46,7 +53,7 @@ const TextInput = forwardRef<RNTextInput, Props>(
           ref={ref}
           placeholderTextColor={colors.secondaryBackground}
           selectionColor={colors.primary}
-          style={baseStyles}
+          style={[baseStyles, style]}
           {...rest}
         />
         {!rightInput ? null : <Box ml="xs">{rightInput}</Box>}
