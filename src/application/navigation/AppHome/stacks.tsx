@@ -6,7 +6,6 @@ import DownloadsScreen from '@presentation/screens/Downloads'
 import HottestPodcastsScreen from '@presentation/screens/HottestPodcasts'
 import LibraryScreen from '@presentation/screens/Library'
 
-import PlaylistsScreen from '@presentation/screens/Playlists'
 import PodcastDetailScreen from '@presentation/screens/PodcastDetail'
 import RecentlyPlayedScreen from '@presentation/screens/RecentlyPlayed'
 import ReleasesScreen from '@presentation/screens/Releases'
