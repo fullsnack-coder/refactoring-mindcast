@@ -3,8 +3,10 @@ import { podcasts } from '@infrastructure/mock/apiData'
 //TODO: change this mock value by podcast real backend
 
 export const getPodcastInformation = async (podcastId: string) => {
-  const podcast = await Promise.resolve(podcasts[0])
-  return podcast
+  const podcast = await Promise.resolve(
+    podcasts.find(podcast => podcast.id === podcastId),
+  )
+  return podcast ?? podcasts[0]
 }
 
 export type HottestOptions = {

@@ -13,7 +13,9 @@ export type DiscoverStackParamList = {
   'podcast-details': {
     podcastId: Podcast['id']
   }
-  'author-details': undefined
+  'author-details': {
+    authorId: Podcast['author']['id']
+  }
   'new-releases': undefined
   'hottest-podcasts': undefined
 }
