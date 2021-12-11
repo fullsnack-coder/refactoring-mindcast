@@ -8,6 +8,8 @@ import PodcastPlayerScreen from '@presentation/screens/PodcastPlayer'
 import AppHomeStack from '../AppHome'
 import AuthStack from '../Auth'
 import OnboardingStack from '../Onboarding'
+import PlaylistsStack from '../Playlists'
+
 import { AppStackParamList } from './types'
 
 const AppStack = createNativeStackNavigator<AppStackParamList>()
@@ -22,6 +24,7 @@ const AppNavigation = () => {
         <AppStack.Screen name="home" component={AppHomeStack} />
         <AppStack.Screen name="about" component={AboutScreen} />
         <AppStack.Screen name="player" component={PodcastPlayerScreen} />
+        <AppStack.Screen name="playlistsStack" component={PlaylistsStack} />
       </AppStack.Navigator>
     </NavigationContainer>
   )

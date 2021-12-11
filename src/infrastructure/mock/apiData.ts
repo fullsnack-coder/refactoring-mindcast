@@ -241,8 +241,12 @@ export const playlists: Playlist[] = [
     createdAt: new Date(),
     id: 'hashedplaylistid2',
     name: 'walking around new york',
+    description:
+      'Playlist to feel like walking around new york, with some music and some other stuff',
     ownerId: user.id,
-    podcasts,
+    podcasts: podcasts.slice(0, 2),
+    coverImage:
+      'https://cdn.dribbble.com/users/5325603/screenshots/12190443/3.jpg',
   },
   {
     createdAt: new Date(),

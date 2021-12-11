@@ -29,6 +29,7 @@ const appTheme = createTheme({
     buttonTextSecondary: palette.red,
     transparent: palette.transparent,
     warning: palette.saffron,
+    darkOverlay: `${palette['coolGray-900']}6b`,
   },
   breakpoints: {
     phone: 0,

@@ -16,7 +16,12 @@ export type CreatePlaylist = Omit<Playlist, 'id' | 'createdAt' | 'podcasts'>
 export const createPlaylist = async (
   playlist: CreatePlaylist,
 ): Promise<Playlist> => {
-  const createdPlaylist = await Promise.resolve(mockedPlaylists[0])
+  const createdPlaylist = await Promise.resolve({
+    ...mockedPlaylists[0],
+    id: mockedPlaylists[0].id + 1,
+    name: playlist.name,
+    podcasts: [],
+  })
   return createdPlaylist
 }
 
