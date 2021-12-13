@@ -1,14 +1,15 @@
 import { useAppTheme } from '@application/hooks'
 import usePodcast from '@application/hooks/usePodcast'
-import {
-  DiscoverStackParamList,
-  HomeTabsParamList,
-} from '@application/navigation/AppHome'
+import { DiscoverStackParamList } from '@application/navigation/AppHome'
 import { AppStackParamList } from '@application/navigation/AppNavigator'
 import { Podcast } from '@application/types'
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { CompositeScreenProps } from '@react-navigation/native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import {
+  CompositeNavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import Box from '@system/atoms/Box'
 import Button from '@system/atoms/Button'
 import Icon from '@system/atoms/Icon'
@@ -28,15 +29,21 @@ import GenericPodcastCover from './GenericPodcastCover'
 
 const { Text } = Typography
 
-type Props = CompositeScreenProps<
-  NativeStackScreenProps<DiscoverStackParamList, 'podcast-details'>,
-  CompositeScreenProps<
-    BottomTabScreenProps<HomeTabsParamList>,
-    NativeStackScreenProps<AppStackParamList>
-  >
+//TODO: change to stackactions when the screen is shared between Navigators
+type Navigation = CompositeNavigationProp<
+  NativeStackNavigationProp<DiscoverStackParamList>,
+  NativeStackNavigationProp<AppStackParamList>
 >
 
-const PodcastDetailScreen: React.FC<Props> = ({ route, navigation }) => {
+type Params = {
+  detail: {
+    podcastId: string
+  }
+}
+
+const PodcastDetailScreen: React.FC = () => {
+  const route = useRoute<RouteProp<Params, 'detail'>>()
+  const navigation = useNavigation<Navigation>()
   const { params } = route
   const { podcast, isLoading } = usePodcast(params.podcastId)
   const { borderRadii, colors } = useAppTheme()
