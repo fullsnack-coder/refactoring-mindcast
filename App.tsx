@@ -9,6 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { Provider } from 'react-redux'
 import { useEffect } from 'react'
+import { LogBox } from 'react-native'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -25,5 +26,8 @@ const App: React.FC = () => {
     </Provider>
   )
 }
+
+// TODO: Remove this when we have a better solution for the log box
+if (__DEV__) LogBox.ignoreLogs([`EventEmitter.removeListener('change', ...)`])
 
 export default App
