@@ -24,7 +24,13 @@ const AppNavigation = () => {
         <AppStack.Screen name="home" component={AppHomeStack} />
         <AppStack.Screen name="about" component={AboutScreen} />
         <AppStack.Screen name="player" component={PodcastPlayerScreen} />
-        <AppStack.Screen name="playlistsStack" component={PlaylistsStack} />
+        <AppStack.Screen
+          name="playlistsStack"
+          component={PlaylistsStack}
+          options={{
+            animation: 'slide_from_right',
+          }}
+        />
       </AppStack.Navigator>
     </NavigationContainer>
   )

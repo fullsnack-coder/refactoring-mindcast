@@ -1,3 +1,4 @@
+import { useAppTheme } from '@application/hooks'
 import { useAppSelector } from '@application/hooks/store'
 import { Playlist } from '@application/types'
 import Icon from '@system/atoms/Icon'
@@ -24,6 +25,7 @@ const PlaylistCollection: React.FC<Props> = ({
   listProps,
   onPressItem,
 }) => {
+  const { colors } = useAppTheme()
   const playlists = useAppSelector(state => state.playlists.playlists)
 
   return (
@@ -37,7 +39,11 @@ const PlaylistCollection: React.FC<Props> = ({
             renderRightComponent={
               enableAddToPlaylistButtons ? (
                 <Pressable onPress={() => addToPlaylistMethod?.(item)}>
-                  <Icon size="md" name="plus-circle-outline" />
+                  <Icon
+                    size="md"
+                    name="plus-circle-outline"
+                    color={colors.primaryText}
+                  />
                 </Pressable>
               ) : null
             }
