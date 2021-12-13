@@ -97,7 +97,8 @@ export const podcasts: Podcast[] = [
 export const trendingAuthors: Author[] = [
   {
     id: '1212',
-    description: 'some description',
+    description:
+      'Some awesome description about author 1, he is awesome and so on and so on',
     firstName: 'YOBOY',
     podcasts: 7,
     avatarUrl: 'https://randomuser.me/api/portraits/women/54.jpg',
@@ -108,6 +109,24 @@ export const trendingAuthors: Author[] = [
         tag: '#tec',
         title: 'the title of subject',
       },
+      {
+        description: 'subject description',
+        id: 'id2',
+        tag: '#drawing',
+        title: 'upload about drawing',
+      },
+      {
+        description: 'subject description',
+        id: 'id3',
+        tag: '#cloud-computing',
+        title: 'upload about cloud computing',
+      },
+      {
+        description: 'subject description',
+        id: 'id4',
+        tag: '#software-engineering',
+        title: 'upload about software engineering',
+      },
     ],
   },
   {
@@ -116,6 +135,50 @@ export const trendingAuthors: Author[] = [
     firstName: 'The First Dude',
     podcasts: 7,
     avatarUrl: 'https://randomuser.me/api/portraits/women/57.jpg',
+    subjects: [
+      {
+        description: 'subject description',
+        id: 'id',
+        tag: '#tec',
+        title: 'the title of subject',
+      },
+    ],
+  },
+  {
+    id: '222',
+    description: 'some description',
+    firstName: 'Love and Lie',
+    podcasts: 7,
+    avatarUrl: 'https://randomuser.me/api/portraits/women/22.jpg',
+    subjects: [
+      {
+        description: 'subject description',
+        id: 'id',
+        tag: '#tec',
+        title: 'the title of subject',
+      },
+    ],
+  },
+  {
+    id: '2222',
+    description: 'some description',
+    firstName: 'mly cyriys',
+    podcasts: 7,
+    subjects: [
+      {
+        description: 'subject description',
+        id: 'id',
+        tag: '#tec',
+        title: 'the title of subject',
+      },
+    ],
+  },
+  {
+    id: '2220',
+    description: 'some description',
+    firstName: 'kny west',
+    avatarUrl: 'https://randomuser.me/api/portraits/men/59.jpg',
+    podcasts: 7,
     subjects: [
       {
         description: 'subject description',
