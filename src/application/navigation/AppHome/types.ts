@@ -18,6 +18,7 @@ export type DiscoverStackParamList = {
   }
   'new-releases': undefined
   'hottest-podcasts': undefined
+  'trending-authors': undefined
 }
 
 export type SearchStackParamList = {
