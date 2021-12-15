@@ -110,7 +110,13 @@ const DiscoverScreen: React.FC = () => {
             </Box>
             <Section
               title="New Releases"
-              callToActionButton={<Button type="primary" text="SEE ALL" />}>
+              callToActionButton={
+                <Button
+                  type="primary"
+                  text="SEE ALL"
+                  onPress={() => navigate('new-releases')}
+                />
+              }>
               <FlatList
                 data={hottestPodcasts}
                 keyExtractor={({ id }) => id}
@@ -131,7 +137,13 @@ const DiscoverScreen: React.FC = () => {
             <Separator y={32} />
             <Section
               title="Trending Authors"
-              callToActionButton={<Button text="SEE ALL" type="primary" />}>
+              callToActionButton={
+                <Button
+                  text="SEE ALL"
+                  type="primary"
+                  onPress={() => navigate('trending-authors')}
+                />
+              }>
               <FlatList
                 horizontal
                 ItemSeparatorComponent={() => <Separator x={22} />}

@@ -1,8 +1,11 @@
 import { useAppTheme } from '@application/hooks'
 import useAuthor from '@application/hooks/useAuthor'
-import { DiscoverStackParamList } from '@application/navigation/AppHome'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import {
+  RouteProp,
+  StackActions,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
 import Box from '@system/atoms/Box'
 import Button from '@system/atoms/Button'
 import Icon from '@system/atoms/Icon'
@@ -27,30 +30,24 @@ type ScreenParams = {
   }
 }
 
-//TODO: change to stackactions when the screen is shared between Navigators
-type Navigation = NativeStackNavigationProp<
-  DiscoverStackParamList,
-  'author-details'
->
-
 const AuthorDetailScreen: React.FC = () => {
   const { colors, spacing } = useAppTheme()
   const {
     params: { authorId },
   } = useRoute<RouteProp<ScreenParams, 'authorDetails'>>()
-  const navigation = useNavigation<Navigation>()
+  const navigation = useNavigation()
   const { authorInfo, error, isLoading } = useAuthor(authorId)
 
   const handleRedirectToPodcast = useCallback(
     (podcastId: string) => () => {
-      navigation.push('podcast-details', { podcastId })
+      navigation.dispatch(StackActions.push('podcast-details', { podcastId }))
     },
     [navigation],
   )
 
   const handleRedirectToAuthor = useCallback(
     (authorId: string) => () => {
-      navigation.push('author-details', { authorId })
+      navigation.dispatch(StackActions.push('author-details', { authorId }))
     },
     [navigation],
   )
@@ -123,9 +120,10 @@ const AuthorDetailScreen: React.FC = () => {
               contentContainerStyle={{ paddingLeft: spacing.md }}
               ItemSeparatorComponent={() => <Separator x={22} />}
               renderItem={({ item }) => (
-                <Pressable onPress={handleRedirectToPodcast(item.id)}>
-                  <PodcastHottestPreview podcast={item} />
-                </Pressable>
+                <PodcastHottestPreview
+                  onPress={handleRedirectToPodcast(item.id)}
+                  podcast={item}
+                />
               )}
             />
           </Section>
