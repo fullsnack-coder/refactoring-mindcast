@@ -1,3 +1,4 @@
+import { Podcast } from '@application/types'
 import { podcasts } from '@infrastructure/mock/apiData'
 
 //TODO: change this mock value by podcast real backend
@@ -38,4 +39,11 @@ export const getHottestPodcasts = async ({
     )
   })
   return hottestPodcasts
+}
+
+export const getNewReleases = async (): Promise<Podcast[]> => {
+  const newReleases: Podcast[] = await new Promise(resolve => {
+    setTimeout(() => resolve(podcasts.reverse()), 1500)
+  })
+  return newReleases
 }

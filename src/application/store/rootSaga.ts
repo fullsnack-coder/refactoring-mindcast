@@ -14,7 +14,7 @@ import {
   watcherGetPlaylistsSaga,
 } from './modules/playlists'
 
-import { watcherHottestPodcasts } from './modules/podcasts'
+import { watcherHottestPodcasts, watcherNewReleases } from './modules/podcasts'
 
 export default function* rootSaga() {
   yield all([
@@ -27,5 +27,6 @@ export default function* rootSaga() {
     watcherRemovePlaylistSaga(),
     watcherAddPodcastSaga(),
     watcherRemovePodcastSaga(),
+    watcherNewReleases(),
   ])
 }

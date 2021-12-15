@@ -1,6 +1,6 @@
-export type StoreAction<T = unknown> = {
-  payload?: T
-  type: string
+export type StoreAction<P = unknown, T = string> = {
+  payload?: P
+  type: T
 }
 
 export type Topic = {
