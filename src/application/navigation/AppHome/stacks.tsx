@@ -14,6 +14,7 @@ import SearchResultsScreen from '@presentation/screens/SearchResults'
 import SearchScreen from '@presentation/screens/Search'
 import SettingsScreen from '@presentation/screens/Settings'
 import TopicScreen from '@presentation/screens/Topic'
+import TrendingAuthorsScreem from '@presentation/screens/TrendingAuthors'
 import YourPodcastsScreen from '@presentation/screens/YourPodcasts'
 import YourInterestsScreen from '@presentation/screens/YourInterests'
 
@@ -47,6 +48,10 @@ export const DiscoverStack: React.FC = () => (
     <DiscoverNativeStack.Screen
       name="hottest-podcasts"
       component={HottestPodcastsScreen}
+    />
+    <DiscoverNativeStack.Screen
+      name="trending-authors"
+      component={TrendingAuthorsScreem}
     />
   </DiscoverNativeStack.Navigator>
 )
