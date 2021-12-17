@@ -1,4 +1,4 @@
-import { Author, Playlist, Podcast, User } from '@application/types'
+import { Author, Episode, Playlist, Podcast, User } from '@application/types'
 
 export const podcasts: Podcast[] = [
   {
@@ -317,5 +317,32 @@ export const playlists: Playlist[] = [
     name: 'my favorite',
     ownerId: user.id,
     podcasts,
+  },
+]
+
+export const podcastEpisodes: Episode[] = [
+  {
+    id: '1',
+    title: 'Episode 1',
+    description: 'Episode 1 description',
+    podcastId: '21',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    duration: 139,
+    url: 'https://www.chosic.com/wp-content/uploads/2021/07/purrple-cat-equinox.mp3',
+    coverUrl:
+      'https://direct.rhapsody.com/imageserver/images/alb.195541491/600x600.jpg',
+    // url: 'https://www.mboxdrive.com/028%20-%20Falco%20-%20Rock%20Me%20Amadeus%20(1).mp3',
+  },
+  {
+    id: '1',
+    title: 'Episode 2',
+    description: 'Episode 1 description',
+    podcastId: '21',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    duration: 207,
+    url: 'https://www.chosic.com/wp-content/uploads/2021/04/And-So-It-Begins-Inspired-By-Crush-Sometimes.mp3',
+    // url: 'https://www.mboxdrive.com/028%20-%20Falco%20-%20Rock%20Me%20Amadeus%20(1).mp3',
   },
 ]
