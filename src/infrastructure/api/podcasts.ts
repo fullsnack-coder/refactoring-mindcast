@@ -1,13 +1,20 @@
-import { Podcast } from '@application/types'
-import { podcasts } from '@infrastructure/mock/apiData'
+import { Episode, Podcast } from '@application/types'
+import { podcastEpisodes, podcasts } from '@infrastructure/mock/apiData'
 
 //TODO: change this mock value by podcast real backend
 
-export const getPodcastInformation = async (podcastId: string) => {
+export const getPodcastInformation = async (
+  podcastId: string,
+): Promise<Podcast & { episodes: Episode[] }> => {
   const podcast = await Promise.resolve(
-    podcasts.find(podcast => podcast.id === podcastId),
+    podcasts.find(podcast => podcast.id === podcastId) ?? podcasts[0],
   )
-  return podcast ?? podcasts[0]
+  return {
+    ...podcast,
+    episodes: podcastEpisodes.filter(
+      episode => episode.podcastId === podcastId,
+    ),
+  }
 }
 
 export type HottestOptions = {
