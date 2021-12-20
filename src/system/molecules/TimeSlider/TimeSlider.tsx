@@ -3,17 +3,21 @@ import Slider, { SliderProps } from '@react-native-community/slider'
 import Box, { BoxProps } from '@system/atoms/Box'
 import Separator from '@system/atoms/Separator'
 import Typography from '@system/atoms/Typography'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+
+import { getTime } from './utils'
 
 const { Text } = Typography
 
 export type Props = {
+  initialTime?: number
   containerProps?: BoxProps
   durationInSeconds: number
   onSeekTo?: (timeInSeconds: number) => void
 } & SliderProps
 
 const TimeSlider: React.FC<Props> = ({
+  initialTime = 0,
   containerProps,
   durationInSeconds,
   onSeekTo,
@@ -22,20 +26,35 @@ const TimeSlider: React.FC<Props> = ({
   ...rest
 }) => {
   const { colors } = useAppTheme()
-  const [currentSlideTime, setCurrentSlideTime] = useState(0)
+  const [currentSlideTime, setCurrentSlideTime] = useState(initialTime)
+
+  const currentTime = getTime(currentSlideTime)
+  const totalTime = getTime(durationInSeconds)
 
   const handleChangeSlider = useCallback(
     (value: number) => {
       setCurrentSlideTime(value)
-      onSeekTo?.(value)
       onValueChange?.(value)
     },
-    [onSeekTo, onValueChange],
+    [onValueChange],
   )
+
+  const handleSlidingComplete = useCallback(
+    (value: number) => {
+      setCurrentSlideTime(value)
+      onSeekTo?.(value)
+    },
+    [onSeekTo],
+  )
+
+  useEffect(() => {
+    setCurrentSlideTime(initialTime)
+  }, [initialTime])
 
   return (
     <Box width="100%" {...containerProps}>
       <Slider
+        onSlidingComplete={handleSlidingComplete}
         thumbTintColor={colors.primary}
         onValueChange={handleChangeSlider}
         minimumValue={0}
@@ -51,15 +70,15 @@ const TimeSlider: React.FC<Props> = ({
         width="100%"
         p="sm">
         <Box flexDirection="row">
-          <Text>{`00${Math.floor(currentSlideTime / 60)}`.slice(-2)}</Text>
+          <Text>{currentTime.minutes}</Text>
           <Text>:</Text>
-          <Text>{`00${Math.floor(currentSlideTime % 60)}`.slice(-2)}</Text>
+          <Text>{currentTime.seconds}</Text>
         </Box>
         <Separator x={20} />
         <Box flexDirection="row">
-          <Text>{`00${Math.floor(durationInSeconds / 60)}`.slice(-2)}</Text>
+          <Text>{totalTime.minutes}</Text>
           <Text>:</Text>
-          <Text>{`00${Math.floor(durationInSeconds % 60)}`.slice(-2)}</Text>
+          <Text>{totalTime.seconds}</Text>
         </Box>
       </Box>
     </Box>
