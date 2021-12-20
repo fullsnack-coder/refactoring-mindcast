@@ -6,16 +6,21 @@ import TrackPlayer, {
   Capability,
   useTrackPlayerEvents,
   Event,
+  useProgress,
 } from 'react-native-track-player'
 
 type PlayerStatus = 'playing' | 'paused' | 'stopped'
 
 type AudioPlayerContextType = {
   actions: {
+    addTracks: (track: Track[]) => void
+    goToPrevious: () => void
+    goToNext: () => void
     play: () => void
     pause: () => void
+    reset: () => void
+    seekTo: (time: number) => void
     stop: () => void
-    addTracks: (track: Track[]) => void
   }
   audioplayerStatus: PlayerStatus
   currentTrack: Track | null
@@ -26,6 +31,10 @@ type AudioPlayerContextType = {
     isFirst: boolean
   }
   tracks: Track[]
+  progress: {
+    duration: number
+    position: number
+  }
 }
 
 const AudioPlayerContext = createContext({} as AudioPlayerContextType)
@@ -50,6 +59,10 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
     pause: () => TrackPlayer.pause(),
     stop: () => TrackPlayer.stop(),
     addTracks: (tracks: Track[]) => TrackPlayer.add(tracks),
+    seekTo: (time: number) => TrackPlayer.seekTo(time),
+    reset: () => TrackPlayer.reset(),
+    goToPrevious: () => TrackPlayer.skipToPrevious(),
+    goToNext: () => TrackPlayer.skipToNext(),
   }
 
   const audioplayerStatus: PlayerStatus = useMemo(() => {
@@ -61,6 +74,8 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
     }
     return 'stopped'
   }, [playbackState])
+
+  const { duration, position } = useProgress()
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], ({ type, nextTrack }) => {
     if (type === Event.PlaybackTrackChanged) {
@@ -103,6 +118,10 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
         tracks,
         isInitialized,
         infoPosition,
+        progress: {
+          duration,
+          position,
+        },
       }}>
       {children}
     </AudioPlayerContext.Provider>
