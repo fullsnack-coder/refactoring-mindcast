@@ -23,7 +23,13 @@ const AppNavigation = () => {
         <AppStack.Screen name="interests" component={YourInterestsStack} />
         <AppStack.Screen name="home" component={AppHomeStack} />
         <AppStack.Screen name="about" component={AboutScreen} />
-        <AppStack.Screen name="player" component={PodcastPlayerScreen} />
+        <AppStack.Screen
+          name="player"
+          component={PodcastPlayerScreen}
+          options={{
+            animation: 'slide_from_right',
+          }}
+        />
         <AppStack.Screen
           name="playlistsStack"
           component={PlaylistsStack}

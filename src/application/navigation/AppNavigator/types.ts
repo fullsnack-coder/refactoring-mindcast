@@ -10,8 +10,6 @@ export type AppStackParamList = {
   interests: undefined
   home: NavigatorScreenParams<HomeTabsParamList>
   about: undefined
-  player: {
-    podcastId: Podcast['id']
-  }
+  player: undefined
   playlistsStack: NavigatorScreenParams<PlaylistStackParamList>
 }

@@ -24,6 +24,7 @@ const appTheme = createTheme({
     primaryText: palette['coolGray-900'],
     secondaryText: palette.mineshaft,
     primaryTransparent: `${palette.red}3b`,
+    primaryBackgroundTransparent: `${palette.white}5b`,
     primaryTextTransparent: `${palette['coolGray-900']}6b`,
     buttonTextPrimary: palette.white,
     buttonTextSecondary: palette.red,

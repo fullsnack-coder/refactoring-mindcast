@@ -41,15 +41,20 @@ const Ribbon: React.FC<Props> = ({
           {renderLeft}
         </Pressable>
       ) : null}
-      <Text
-        color="primaryText"
-        textAlign="center"
-        fontFamily="CircularStd-Bold"
-        fontSize={textSize.md}
-        fontWeight="600"
-        style={{ flex: 1 }}>
-        {title}
-      </Text>
+      <Box flex={1} flexDirection="row" justifyContent="center">
+        <Text
+          color="primaryText"
+          textAlign="center"
+          fontFamily="CircularStd-Bold"
+          fontSize={textSize.md}
+          fontWeight="600"
+          numberOfLines={1}
+          style={{
+            maxWidth: '70%',
+          }}>
+          {title}
+        </Text>
+      </Box>
       {renderRight ? (
         <Pressable
           hitSlop={{ bottom: 10, top: 10, left: 10, right: 10 }}
