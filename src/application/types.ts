@@ -65,3 +65,15 @@ export type Playlist = {
   ownerId: User['id']
   podcasts: Podcast[]
 }
+
+export type Episode = {
+  id: string
+  coverUrl?: string
+  podcastId: Podcast['id']
+  title: string
+  description: string
+  duration: number
+  url: string
+  createdAt: Date
+  updatedAt: Date
+}

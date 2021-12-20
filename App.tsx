@@ -1,15 +1,16 @@
 import 'react-native-gesture-handler'
 
+import { AudioPlayerProvider } from '@application/context/audioPlayer'
 import AppNavigator from '@application/navigation'
 import store from '@application/store'
 import { ThemeProvider } from '@shopify/restyle'
 import appTheme from '@system/theme'
+
 import Orientation from 'react-native-orientation-locker'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-
+import { LogBox } from 'react-native'
 import { Provider } from 'react-redux'
 import { useEffect } from 'react'
-import { LogBox } from 'react-native'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -19,9 +20,11 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={appTheme}>
-        <SafeAreaProvider>
-          <AppNavigator />
-        </SafeAreaProvider>
+        <AudioPlayerProvider>
+          <SafeAreaProvider>
+            <AppNavigator />
+          </SafeAreaProvider>
+        </AudioPlayerProvider>
       </ThemeProvider>
     </Provider>
   )

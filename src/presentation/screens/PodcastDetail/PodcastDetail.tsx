@@ -1,8 +1,8 @@
+import { useAudioPlayerContext } from '@application/context/audioPlayer'
 import { useAppTheme } from '@application/hooks'
-import usePodcast from '@application/hooks/usePodcast'
+import usePodcast, { PodcastInfo } from '@application/hooks/usePodcast'
 import { DiscoverStackParamList } from '@application/navigation/AppHome'
 import { AppStackParamList } from '@application/navigation/AppNavigator'
-import { Podcast } from '@application/types'
 import {
   CompositeNavigationProp,
   RouteProp,
@@ -23,6 +23,7 @@ import Section from '@system/molecules/Section'
 import { useCallback } from 'react'
 import { Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Track } from 'react-native-track-player'
 
 import SearchAuthorButton from './AuthorSearchButton'
 import GenericPodcastCover from './GenericPodcastCover'
@@ -47,6 +48,7 @@ const PodcastDetailScreen: React.FC = () => {
   const { params } = route
   const { podcast, isLoading } = usePodcast(params.podcastId)
   const { borderRadii, colors } = useAppTheme()
+  const { actions } = useAudioPlayerContext()
 
   const {
     author,
@@ -54,13 +56,27 @@ const PodcastDetailScreen: React.FC = () => {
     coverImage,
     description,
     subjects,
-    title,
+    title: podcastTitle,
     id: podcastId,
-  } = podcast || ({} as Podcast)
+    episodes,
+  } = podcast || ({} as PodcastInfo)
 
   const handlePressPlayButton = useCallback(() => {
-    navigation.navigate('player', { podcastId })
-  }, [navigation, podcastId])
+    if (episodes?.length > 0) {
+      const parsedTracks: Track[] = episodes.map(episode => ({
+        album: podcastTitle,
+        title: episode.title,
+        url: episode.url,
+        artist: author.firstName,
+        duration: episode.duration,
+        artwork: episode.coverUrl || coverImage,
+      }))
+      actions.reset()
+      actions.addTracks(parsedTracks)
+      actions.play()
+      navigation.navigate('player')
+    }
+  }, [author, actions, navigation, episodes, podcastTitle, coverImage])
 
   const handlePressAddButton = useCallback(() => {
     navigation.navigate('playlistsStack', {
@@ -108,7 +124,7 @@ const PodcastDetailScreen: React.FC = () => {
               />
             )}
             <Box flexShrink={1} p="md">
-              <Text color="primaryText">{title}</Text>
+              <Text color="primaryText">{podcastTitle}</Text>
               <Separator y={8} />
               <Puntuation
                 puntuation={averagePuntuation}

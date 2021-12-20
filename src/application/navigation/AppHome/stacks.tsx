@@ -24,6 +24,7 @@ import {
   LibraryStackParamList,
   SettingsStackParamList,
 } from './types'
+import { MiniPlayer } from '@presentation/containers/AudioPlayer'
 
 const DiscoverNativeStack = createNativeStackNavigator<DiscoverStackParamList>()
 const SearchNativeStack = createNativeStackNavigator<SearchStackParamList>()
@@ -31,75 +32,87 @@ const LibraryNativeStack = createNativeStackNavigator<LibraryStackParamList>()
 const SettingsNativeStack = createNativeStackNavigator<SettingsStackParamList>()
 
 export const DiscoverStack: React.FC = () => (
-  <DiscoverNativeStack.Navigator screenOptions={{ headerShown: false }}>
-    <DiscoverNativeStack.Screen name="discover" component={DiscoverScreen} />
-    <DiscoverNativeStack.Screen
-      name="podcast-details"
-      component={PodcastDetailScreen}
-    />
-    <DiscoverNativeStack.Screen
-      name="author-details"
-      component={AuthorDetailScreen}
-    />
-    <DiscoverNativeStack.Screen
-      name="new-releases"
-      component={ReleasesScreen}
-    />
-    <DiscoverNativeStack.Screen
-      name="hottest-podcasts"
-      component={HottestPodcastsScreen}
-    />
-    <DiscoverNativeStack.Screen
-      name="trending-authors"
-      component={TrendingAuthorsScreem}
-    />
-  </DiscoverNativeStack.Navigator>
+  <>
+    <DiscoverNativeStack.Navigator screenOptions={{ headerShown: false }}>
+      <DiscoverNativeStack.Screen name="discover" component={DiscoverScreen} />
+      <DiscoverNativeStack.Screen
+        name="podcast-details"
+        component={PodcastDetailScreen}
+      />
+      <DiscoverNativeStack.Screen
+        name="author-details"
+        component={AuthorDetailScreen}
+      />
+      <DiscoverNativeStack.Screen
+        name="new-releases"
+        component={ReleasesScreen}
+      />
+      <DiscoverNativeStack.Screen
+        name="hottest-podcasts"
+        component={HottestPodcastsScreen}
+      />
+      <DiscoverNativeStack.Screen
+        name="trending-authors"
+        component={TrendingAuthorsScreem}
+      />
+    </DiscoverNativeStack.Navigator>
+    <MiniPlayer />
+  </>
 )
 
 export const SearchStack: React.FC = () => (
-  <SearchNativeStack.Navigator screenOptions={{ headerShown: false }}>
-    <SearchNativeStack.Screen name="search" component={SearchScreen} />
-    <SearchNativeStack.Screen
-      name="search-results"
-      component={SearchResultsScreen}
-    />
-    <SearchNativeStack.Screen name="topic" component={TopicScreen} />
-    <SearchNativeStack.Screen
-      name="author-details"
-      component={AuthorDetailScreen}
-    />
-    <SearchNativeStack.Screen
-      name="podcast-details"
-      component={PodcastDetailScreen}
-    />
-  </SearchNativeStack.Navigator>
+  <>
+    <SearchNativeStack.Navigator screenOptions={{ headerShown: false }}>
+      <SearchNativeStack.Screen name="search" component={SearchScreen} />
+      <SearchNativeStack.Screen
+        name="search-results"
+        component={SearchResultsScreen}
+      />
+      <SearchNativeStack.Screen name="topic" component={TopicScreen} />
+      <SearchNativeStack.Screen
+        name="author-details"
+        component={AuthorDetailScreen}
+      />
+      <SearchNativeStack.Screen
+        name="podcast-details"
+        component={PodcastDetailScreen}
+      />
+    </SearchNativeStack.Navigator>
+    <MiniPlayer />
+  </>
 )
 
 export const LibraryStack: React.FC = () => (
-  <LibraryNativeStack.Navigator screenOptions={{ headerShown: false }}>
-    <LibraryNativeStack.Screen name="library" component={LibraryScreen} />
-    <LibraryNativeStack.Screen name="downloads" component={DownloadsScreen} />
-    <LibraryNativeStack.Screen
-      name="your-podcasts"
-      component={YourPodcastsScreen}
-    />
-    <LibraryNativeStack.Screen
-      name="recently-played"
-      component={RecentlyPlayedScreen}
-    />
-    <LibraryNativeStack.Screen
-      name="podcast-details"
-      component={PodcastDetailScreen}
-    />
-    <LibraryNativeStack.Screen
-      name="your-interests"
-      component={YourInterestsScreen}
-    />
-  </LibraryNativeStack.Navigator>
+  <>
+    <LibraryNativeStack.Navigator screenOptions={{ headerShown: false }}>
+      <LibraryNativeStack.Screen name="library" component={LibraryScreen} />
+      <LibraryNativeStack.Screen name="downloads" component={DownloadsScreen} />
+      <LibraryNativeStack.Screen
+        name="your-podcasts"
+        component={YourPodcastsScreen}
+      />
+      <LibraryNativeStack.Screen
+        name="recently-played"
+        component={RecentlyPlayedScreen}
+      />
+      <LibraryNativeStack.Screen
+        name="podcast-details"
+        component={PodcastDetailScreen}
+      />
+      <LibraryNativeStack.Screen
+        name="your-interests"
+        component={YourInterestsScreen}
+      />
+    </LibraryNativeStack.Navigator>
+    <MiniPlayer />
+  </>
 )
 
 export const SettingsStack: React.FC = () => (
-  <SettingsNativeStack.Navigator screenOptions={{ headerShown: false }}>
-    <SettingsNativeStack.Screen name="settings" component={SettingsScreen} />
-  </SettingsNativeStack.Navigator>
+  <>
+    <SettingsNativeStack.Navigator screenOptions={{ headerShown: false }}>
+      <SettingsNativeStack.Screen name="settings" component={SettingsScreen} />
+    </SettingsNativeStack.Navigator>
+    <MiniPlayer />
+  </>
 )
