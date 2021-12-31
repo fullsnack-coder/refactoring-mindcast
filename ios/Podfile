@@ -12,6 +12,8 @@ target 'mindCastTwo' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'mindCastTwoTests' do
     inherit! :complete
     # Pods for testing
