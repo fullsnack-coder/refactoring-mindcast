@@ -8,6 +8,7 @@ import appTheme from '@system/theme'
 
 import Orientation from 'react-native-orientation-locker'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import SplashScreen from 'react-native-splash-screen'
 import { LogBox } from 'react-native'
 import { Provider } from 'react-redux'
 import { useEffect } from 'react'
@@ -15,6 +16,7 @@ import { useEffect } from 'react'
 const App: React.FC = () => {
   useEffect(() => {
     Orientation.lockToPortrait()
+    SplashScreen.hide()
   }, [])
 
   return (
