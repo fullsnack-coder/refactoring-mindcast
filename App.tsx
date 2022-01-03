@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler'
 
 import { AudioPlayerProvider } from '@application/context/audioPlayer'
+import NotificationsProvider from '@application/context/notifications'
 import AppNavigator from '@application/navigation'
 import store from '@application/store'
 import { ThemeProvider } from '@shopify/restyle'
@@ -22,11 +23,13 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={appTheme}>
-        <AudioPlayerProvider>
-          <SafeAreaProvider>
-            <AppNavigator />
-          </SafeAreaProvider>
-        </AudioPlayerProvider>
+        <NotificationsProvider>
+          <AudioPlayerProvider>
+            <SafeAreaProvider>
+              <AppNavigator />
+            </SafeAreaProvider>
+          </AudioPlayerProvider>
+        </NotificationsProvider>
       </ThemeProvider>
     </Provider>
   )
