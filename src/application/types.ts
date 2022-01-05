@@ -67,6 +67,7 @@ export type Playlist = {
 }
 
 export type Episode = {
+  artist?: string
   id: string
   coverUrl?: string
   podcastId: Podcast['id']
