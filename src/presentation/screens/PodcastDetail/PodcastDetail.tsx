@@ -150,7 +150,7 @@ const PodcastDetailScreen: React.FC = () => {
             />
             <Separator x={12} />
             <Box flex={1} alignItems="flex-end">
-              <Pressable onPress={() => console.log('download action')}>
+              <Pressable disabled>
                 <Box
                   p="sm"
                   justifyContent="center"

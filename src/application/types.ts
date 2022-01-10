@@ -75,6 +75,7 @@ export type Episode = {
   description: string
   duration: number
   url: string
+  localUrl?: string
   createdAt: Date
   updatedAt: Date
 }
