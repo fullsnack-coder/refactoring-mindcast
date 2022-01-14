@@ -7,6 +7,11 @@ import {
 
 import { getTopAuthorsWatcher } from './modules/authors'
 import {
+  watcherDownloadEpisodeSaga,
+  watcherRemoveDownloadedEpisode,
+  watcherLoadAllDownloads,
+} from './modules/downloads'
+import {
   watcherCreatePlaylistSaga,
   watcherRemovePlaylistSaga,
   watcherAddPodcastSaga,
@@ -28,5 +33,8 @@ export default function* rootSaga() {
     watcherAddPodcastSaga(),
     watcherRemovePodcastSaga(),
     watcherNewReleases(),
+    watcherDownloadEpisodeSaga(),
+    watcherRemoveDownloadedEpisode(),
+    watcherLoadAllDownloads(),
   ])
 }

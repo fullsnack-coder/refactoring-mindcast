@@ -36,6 +36,11 @@ const App: React.FC = () => {
 }
 
 // TODO: Remove this when we have a better solution for the log box
-if (__DEV__) LogBox.ignoreLogs([`EventEmitter.removeListener('change', ...)`])
+if (__DEV__) {
+  LogBox.ignoreLogs([
+    `EventEmitter.removeListener('change', ...)`,
+    'NativeEventEmitter',
+  ])
+}
 
 export default App
