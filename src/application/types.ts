@@ -8,7 +8,7 @@ export type Topic = {
   title: string
   description: string
   tag: string
-  coverUrl?: string
+  coverUrl: string
 }
 
 export type User = {
