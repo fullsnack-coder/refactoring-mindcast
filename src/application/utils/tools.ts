@@ -1,3 +1,4 @@
+import { PressableProps } from 'react-native'
 import RNFS from 'react-native-fs'
 
 export const getTime = (time: number) => {
@@ -12,4 +13,11 @@ export const fileManager = () => ({
     const url = `${RNFS.DocumentDirectoryPath}/${filePath}`
     await RNFS.unlink(url)
   },
+})
+
+export const getHitSlop = (): PressableProps['hitSlop'] => ({
+  top: 10,
+  bottom: 10,
+  left: 10,
+  right: 10,
 })
