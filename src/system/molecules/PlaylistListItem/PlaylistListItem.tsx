@@ -57,7 +57,7 @@ const PlaylistListItem: React.FC<Props> = ({
         <Box alignItems="center" flexDirection="row">
           <Text color="secondaryText" fontSize={textSize.sm}>
             {containsPodcasts
-              ? `${podcasts.length} podcasts`
+              ? `${podcasts.length} podcast${podcasts.length > 1 ? 's' : ''}`
               : 'playlist empty'}
           </Text>
           <Separator x={10} />
