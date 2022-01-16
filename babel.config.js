@@ -25,5 +25,6 @@ module.exports = {
         },
       },
     ],
+    ['@babel/plugin-proposal-logical-assignment-operators'],
   ],
 }
