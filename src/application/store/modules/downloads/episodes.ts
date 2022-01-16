@@ -259,6 +259,7 @@ const downloadEpisodesReducer = (
         return {
           ...state,
           episodes: state.episodes.filter(({ id }) => id !== episodeId),
+          isLoading: false,
         }
       }
       return state
