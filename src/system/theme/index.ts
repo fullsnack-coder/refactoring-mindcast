@@ -21,6 +21,7 @@ const appTheme = createTheme({
     googlePlus: palette.punch,
     primaryBackground: palette.white,
     secondaryBackground: palette.silver,
+    primaryBackgroundOverlay: palette['coolGray-200'],
     primaryText: palette['coolGray-900'],
     secondaryText: palette.mineshaft,
     primaryTransparent: `${palette.red}3b`,
