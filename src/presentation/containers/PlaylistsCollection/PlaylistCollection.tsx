@@ -1,6 +1,7 @@
 import { useAppTheme } from '@application/hooks'
 import { useAppSelector } from '@application/hooks/store'
 import { Playlist } from '@application/types'
+import { getHitSlop } from '@application/utils/tools'
 import Icon from '@system/atoms/Icon'
 import PlaylistListItem from '@system/molecules/PlaylistListItem'
 import {
@@ -10,12 +11,15 @@ import {
   PressableProps,
 } from 'react-native'
 
+const hitSlop = getHitSlop()
+
 type Props = {
   onPressItem: (item: Playlist) => void
   containerButtonProps?: PressableProps
   enableAddToPlaylistButtons?: boolean
   addToPlaylistMethod?: (item: Playlist) => void
   listProps?: FlatListProps<Playlist>
+  podcastIdToAdd?: string
 }
 
 const PlaylistCollection: React.FC<Props> = ({
@@ -24,6 +28,7 @@ const PlaylistCollection: React.FC<Props> = ({
   addToPlaylistMethod,
   listProps,
   onPressItem,
+  podcastIdToAdd,
 }) => {
   const { colors } = useAppTheme()
   const playlists = useAppSelector(state => state.playlists.playlists)
@@ -32,24 +37,41 @@ const PlaylistCollection: React.FC<Props> = ({
     <FlatList
       data={playlists}
       keyExtractor={item => item.id}
-      renderItem={({ item }) => (
-        <Pressable onPress={() => onPressItem(item)} {...containerButtonProps}>
-          <PlaylistListItem
-            playlistInfo={item}
-            renderRightComponent={
-              enableAddToPlaylistButtons ? (
-                <Pressable onPress={() => addToPlaylistMethod?.(item)}>
-                  <Icon
-                    size="md"
-                    name="plus-circle-outline"
-                    color={colors.primaryText}
-                  />
-                </Pressable>
-              ) : null
-            }
-          />
-        </Pressable>
-      )}
+      renderItem={({ item }) => {
+        const isIncludedInPlaylist = item.podcasts.some(
+          podcast => podcast.id === podcastIdToAdd,
+        )
+        return (
+          <Pressable
+            onPress={() => onPressItem(item)}
+            {...containerButtonProps}>
+            <PlaylistListItem
+              playlistInfo={item}
+              renderRightComponent={
+                enableAddToPlaylistButtons ? (
+                  <Pressable
+                    onPress={() => addToPlaylistMethod?.(item)}
+                    hitSlop={hitSlop}>
+                    <Icon
+                      size="md"
+                      name={
+                        isIncludedInPlaylist
+                          ? 'check-circle'
+                          : 'plus-circle-outline'
+                      }
+                      color={
+                        isIncludedInPlaylist
+                          ? colors.primary
+                          : colors.secondaryText
+                      }
+                    />
+                  </Pressable>
+                ) : null
+              }
+            />
+          </Pressable>
+        )
+      }}
       {...listProps}
     />
   )

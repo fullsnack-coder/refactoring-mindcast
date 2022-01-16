@@ -9,10 +9,11 @@ export type PodcastInfo = Podcast & {
 
 export const getPodcastInformation = async (
   podcastId: string,
-): Promise<PodcastInfo> => {
+): Promise<PodcastInfo | null> => {
   const podcast = await Promise.resolve(
-    podcasts.find(podcast => podcast.id === podcastId) ?? podcasts[0],
+    podcasts.find(podcast => podcast.id === podcastId),
   )
+  if (!podcast) return null
   return {
     ...podcast,
     episodes: podcastEpisodes.filter(
