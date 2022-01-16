@@ -49,7 +49,7 @@ const PlaylistDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Box flex={1}>
         <Ribbon
-          title="Podcast Detail"
+          title={name}
           onPressLeftButton={navigation.goBack}
           renderLeft={
             <Icon
@@ -71,9 +71,6 @@ const PlaylistDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
           )}
           <Separator x={16} />
           <Box py="sm" flexShrink={1}>
-            <Heading color="primaryText" fontSize={textSize.md}>
-              {name}
-            </Heading>
             {description ? (
               <Text
                 color="secondaryText"

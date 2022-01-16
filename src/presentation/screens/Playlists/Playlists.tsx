@@ -1,9 +1,11 @@
+import { useNotifications } from '@application/context/notifications'
 import { useAppTheme } from '@application/hooks'
 import { useAppDispatch, useAppSelector } from '@application/hooks/store'
 import { PlaylistStackParamList } from '@application/navigation/Playlists'
 import {
   playlistGetPlaylistsStart,
   playlistStartAddPodcast,
+  playlistStartRemovePodcast,
 } from '@application/store/modules/playlists'
 import { Playlist } from '@application/types'
 import CreatePlaylistModal, {
@@ -26,6 +28,7 @@ const PlaylistScreen: React.FC<Props> = ({ navigation, route }) => {
   const createPlaylistModalRef = useRef<CreatePlaylistModalRef>(null)
   const { playlists } = useAppSelector(state => state.playlists)
   const dispatch = useAppDispatch()
+  const { showNotification } = useNotifications()
 
   const { podcastIdToAdd, renderAddPlaylistActionable = false } =
     route.params || {}
@@ -35,18 +38,47 @@ const PlaylistScreen: React.FC<Props> = ({ navigation, route }) => {
   }, [])
 
   const handleAddToPlaylist = useCallback(
-    (item: Playlist) => {
+    ({ id: playlistId, podcasts }: Playlist) => {
       if (!podcastIdToAdd) return
-      dispatch(
-        playlistStartAddPodcast({
-          updateInfo: {
-            playlistId: item.id,
-            podcastId: podcastIdToAdd,
-          },
-        }),
-      )
+      const podcastIds = podcasts.map(({ id }) => id)
+      const isInPlaylist = podcastIds.includes(podcastIdToAdd)
+      if (isInPlaylist) {
+        dispatch(
+          playlistStartRemovePodcast({
+            updateInfo: {
+              playlistId,
+              podcastId: podcastIdToAdd,
+            },
+            onSuccess: () =>
+              showNotification({
+                content: 'Podcast removed from playlist successfully',
+              }),
+            onError: () =>
+              showNotification({
+                content: 'Error removing podcast from playlist',
+              }),
+          }),
+        )
+      } else {
+        dispatch(
+          playlistStartAddPodcast({
+            updateInfo: {
+              playlistId,
+              podcastId: podcastIdToAdd,
+            },
+            onSuccess: () =>
+              showNotification({
+                content: 'Podcast added to playlist successfully',
+              }),
+            onError: () =>
+              showNotification({
+                content: 'Error adding podcast to playlist',
+              }),
+          }),
+        )
+      }
     },
-    [dispatch, podcastIdToAdd],
+    [dispatch, podcastIdToAdd, showNotification],
   )
 
   useEffect(() => {
@@ -83,6 +115,7 @@ const PlaylistScreen: React.FC<Props> = ({ navigation, route }) => {
           onPressItem={({ id: playlistId }) =>
             navigation.navigate('playlistDetails', { playlistId })
           }
+          podcastIdToAdd={podcastIdToAdd}
         />
         <CreatePlaylistModal
           dismissable
