@@ -45,7 +45,9 @@ export const addPodcastToPlaylist = async (
   playlistId: Playlist['id'],
   podcastId: string,
 ): Promise<Podcast> => {
-  const addedPodcast = await Promise.resolve(podcasts[0])
+  const [addedPodcast] = await Promise.resolve(
+    podcasts.filter(podcast => podcast.id === podcastId),
+  )
   return addedPodcast
 }
 
@@ -53,6 +55,8 @@ export const removePodcastFromPlaylist = async (
   playlistId: Playlist['id'],
   podcastId: string,
 ): Promise<Podcast> => {
-  const removedPodcast = await Promise.resolve(podcasts[0])
+  const [removedPodcast] = await Promise.resolve(
+    podcasts.filter(p => p.id === podcastId),
+  )
   return removedPodcast
 }
