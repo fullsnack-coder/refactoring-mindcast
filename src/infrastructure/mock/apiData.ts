@@ -1,4 +1,11 @@
-import { Author, Episode, Playlist, Podcast, User } from '@application/types'
+import {
+  Author,
+  Episode,
+  Playlist,
+  Podcast,
+  Topic,
+  User,
+} from '@application/types'
 
 export const podcasts: Podcast[] = [
   {
@@ -347,5 +354,56 @@ export const podcastEpisodes: Episode[] = [
     url: 'https://www.chosic.com/wp-content/uploads/2021/04/And-So-It-Begins-Inspired-By-Crush-Sometimes.mp3',
     coverUrl: 'https://i.ytimg.com/vi/SmJz-GSmdrg/maxresdefault.jpg',
     // url: 'https://www.mboxdrive.com/028%20-%20Falco%20-%20Rock%20Me%20Amadeus%20(1).mp3',
+  },
+]
+
+export const topics: Topic[] = [
+  {
+    description: 'topic 1 description',
+    id: 'id-topic-1',
+    tag: '#technology',
+    title: 'technology',
+    coverUrl:
+      'https://s3-sa-east-1.amazonaws.com/mind-cast/images/categories/technology/big.jpg',
+  },
+  {
+    description: 'topic 2 description',
+    id: 'id-topic-2',
+    tag: '#philosophy',
+    title: 'philosophy',
+    coverUrl:
+      'https://s3-sa-east-1.amazonaws.com/mind-cast/images/categories/philosofy/big.jpg',
+  },
+  {
+    description: 'topic 3 description',
+    id: 'id-topic-3',
+    tag: '#science',
+    title: 'science',
+    coverUrl:
+      'https://s3-sa-east-1.amazonaws.com/mind-cast/images/categories/science/big.jpeg',
+  },
+  {
+    description: 'topic 4 description',
+    id: 'id-topic-4',
+    tag: '#business',
+    title: 'business',
+    coverUrl:
+      'https://s3-sa-east-1.amazonaws.com/mind-cast/images/categories/business/big.jpg',
+  },
+  {
+    description: 'topic 5 description',
+    id: 'id-topic-5',
+    tag: '#popculture',
+    title: 'pop culture',
+    coverUrl:
+      'https://s3-sa-east-1.amazonaws.com/mind-cast/images/categories/pop-culture/big.jpg',
+  },
+  {
+    description: 'topic 6 description',
+    id: 'id-topic-6',
+    tag: '#history',
+    title: 'history',
+    coverUrl:
+      'https://s3-sa-east-1.amazonaws.com/mind-cast/images/categories/history/big.jpg',
   },
 ]

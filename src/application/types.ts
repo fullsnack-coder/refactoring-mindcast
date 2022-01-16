@@ -5,8 +5,10 @@ export type StoreAction<P = unknown, T = string> = {
 
 export type Topic = {
   id: string
-  name: string
+  title: string
   description: string
+  tag: string
+  coverUrl?: string
 }
 
 export type User = {
