@@ -16,6 +16,7 @@ import Icon from '@system/atoms/Icon'
 import Image from '@system/atoms/Image'
 import Separator from '@system/atoms/Separator'
 import Typography from '@system/atoms/Typography'
+import AuthorSearchItem from '@system/molecules/AuthorSearchItem'
 import Badge from '@system/molecules/Badge'
 import Puntuation from '@system/molecules/Puntuation'
 import Ribbon from '@system/molecules/Ribbon'
@@ -25,7 +26,6 @@ import { Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Track } from 'react-native-track-player'
 
-import SearchAuthorButton from './AuthorSearchButton'
 import GenericPodcastCover from './GenericPodcastCover'
 
 const { Text } = Typography
@@ -173,9 +173,9 @@ const PodcastDetailScreen: React.FC = () => {
           </Section>
           <Separator y={16} />
           <Section title="Author">
-            <SearchAuthorButton
+            <AuthorSearchItem
               author={author}
-              onPressAuthorButton={handlePressAuthorButton}
+              onPressSearchButton={handlePressAuthorButton}
             />
           </Section>
         </Box>
