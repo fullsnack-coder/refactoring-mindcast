@@ -1,12 +1,8 @@
+import { useAppTheme } from '@application/hooks'
 import Box from '@system/atoms/Box'
+import Icon from '@system/atoms/Icon'
 import AnimatedSnackbar from '@system/organisms/AnimatedSnackbar'
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 import 'react-native-get-random-values'
 import { v4 as uuidV4 } from 'uuid'
 
@@ -22,6 +18,8 @@ type ShowNotificationOptions = {
   durationInMilliseconds?: number
   // stack?: boolean // TODO: implement stack option
   type?: Notification['type']
+  lefIcon?: JSX.Element
+  rightIcon?: JSX.Element
 }
 
 type NotificationsContext = {
@@ -34,6 +32,7 @@ export const NotificationsContext = createContext<NotificationsContext>(
 
 const NotificationsProvider: React.FC = ({ children }) => {
   const [notifications, setNotifications] = useState<Notification[]>([])
+  const { colors } = useAppTheme()
 
   const showNotification = useCallback((options: ShowNotificationOptions) => {
     const { content, type = 'info', durationInMilliseconds = 2000 } = options
@@ -47,6 +46,19 @@ const NotificationsProvider: React.FC = ({ children }) => {
       },
     ])
   }, [])
+
+  const notificationIcon = useCallback(
+    (type: Notification['type']) => {
+      if (type === 'error')
+        return { color: colors.primary, name: 'alert-octagon' }
+      if (type === 'info')
+        return { color: colors.facebook, name: 'information' }
+      if (type === 'success')
+        return { color: colors.success, name: 'check-circle-outline' }
+      return { color: colors.warning, name: 'alert' }
+    },
+    [colors],
+  )
 
   return (
     <NotificationsContext.Provider
@@ -62,18 +74,22 @@ const NotificationsProvider: React.FC = ({ children }) => {
           position="absolute"
           width="100%"
           zIndex={100}>
-          {notifications.map(({ id, ...notification }) => (
-            <AnimatedSnackbar
-              key={id}
-              containerProps={{ mb: 'sm' }}
-              onDismiss={() => {
-                setNotifications(prevNotifications =>
-                  prevNotifications.filter(not => not.id !== id),
-                )
-              }}
-              {...notification}
-            />
-          ))}
+          {notifications.map(({ id, ...notification }) => {
+            const { color, name } = notificationIcon(notification.type)
+            return (
+              <AnimatedSnackbar
+                key={id}
+                containerProps={{ mb: 'sm' }}
+                onDismiss={() => {
+                  setNotifications(prevNotifications =>
+                    prevNotifications.filter(not => not.id !== id),
+                  )
+                }}
+                left={<Icon color={color} name={name} size="md" />}
+                {...notification}
+              />
+            )
+          })}
         </Box>
       </Box>
     </NotificationsContext.Provider>

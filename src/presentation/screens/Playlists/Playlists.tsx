@@ -51,11 +51,13 @@ const PlaylistScreen: React.FC<Props> = ({ navigation, route }) => {
             },
             onSuccess: () =>
               showNotification({
-                content: 'Podcast removed from playlist successfully',
+                content: 'Podcast removed successfully',
+                type: 'success',
               }),
             onError: () =>
               showNotification({
                 content: 'Error removing podcast from playlist',
+                type: 'error',
               }),
           }),
         )
@@ -68,11 +70,13 @@ const PlaylistScreen: React.FC<Props> = ({ navigation, route }) => {
             },
             onSuccess: () =>
               showNotification({
-                content: 'Podcast added to playlist successfully',
+                content: 'Podcast added successfully',
+                type: 'success',
               }),
             onError: () =>
               showNotification({
                 content: 'Error adding podcast to playlist',
+                type: 'warning',
               }),
           }),
         )
