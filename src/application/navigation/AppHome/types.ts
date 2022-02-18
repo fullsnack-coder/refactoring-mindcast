@@ -23,7 +23,7 @@ export type DiscoverStackParamList = {
 
 export type SearchStackParamList = {
   search: undefined
-  topic: undefined
+  topic: { topicId: string }
   'search-results': undefined
   'author-details': undefined
   'podcast-details': undefined

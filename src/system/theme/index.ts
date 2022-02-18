@@ -33,7 +33,7 @@ const appTheme = createTheme({
     transparent: palette.transparent,
     warning: palette.saffron,
     success: palette.leaf,
-    darkOverlay: `${palette['coolGray-900']}6b`,
+    darkOverlay: `${palette['coolGray-900']}7b`,
   },
   breakpoints: {
     phone: 0,
