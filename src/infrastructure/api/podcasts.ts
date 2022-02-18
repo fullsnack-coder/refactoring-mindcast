@@ -26,6 +26,7 @@ export const getPodcastInformation = async (
 export type HottestOptions = {
   size?: number
   order?: 'asc' | 'desc'
+  topicTag?: string
 }
 
 export const getRecentlyReleases = async () => {
@@ -38,6 +39,7 @@ export const getRecentlyReleases = async () => {
 export const getHottestPodcasts = async ({
   size = 10,
   order = 'asc',
+  topicTag,
 }: HottestOptions) => {
   if (__DEV__) await sleep(100)
   const hottestPodcasts = await Promise.resolve(
@@ -45,7 +47,13 @@ export const getHottestPodcasts = async ({
       (current, next) => current.averagePuntuation - next.averagePuntuation,
     ),
   )
-  return hottestPodcasts
+  return topicTag
+    ? hottestPodcasts.filter(({ subjects }) =>
+        subjects.some(
+          ({ tag }) => tag.toLowerCase() === topicTag.trim().toLowerCase(),
+        ),
+      )
+    : hottestPodcasts
 }
 
 type GetNewReleasesOptions = {
