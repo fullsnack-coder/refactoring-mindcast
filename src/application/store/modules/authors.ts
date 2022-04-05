@@ -37,10 +37,11 @@ export const getTopAuthors = (
 
 const getTopAuthorsSuccess = (
   authors: Author[],
-): StoreAction<AuthorsPayloads> => ({
+): StoreAction<AuthorsPayloads> => {
+  return {
   type: AUTHORS_GET_TOP_SUCCESS,
   payload: { authors },
-})
+}}
 
 const getTopAuthorsFailure = (): StoreAction<AuthorsPayloads> => ({
   type: AUTHORS_GET_TOP_FAILURE,
