@@ -2,7 +2,7 @@
 
 import { Author, Podcast } from '@application/types'
 import { sleep } from '@application/utils/tools'
-import { trendingAuthors, podcasts } from '@infrastructure/mock/apiData'
+import { trendingAuthors, podcasts } from '../mock/apiData'
 
 export const getAuthorInfo = async (authorId: string) => {
   const authorInfo = await Promise.resolve(
@@ -32,9 +32,9 @@ export const getTrendingAuthors = async ({
   topicTag = '',
 }: TrendingOptions) => {
   if (__DEV__) await sleep(300)
-  const authors = await Promise.resolve(trendingAuthors.splice(0, size))
+  const authors = await Promise.resolve(trendingAuthors.slice(0, size))
   return authors.filter(({ subjects, firstName, lastName }) => {
-    let shouldReturn = false
+    let shouldReturn = true
     if (name)
       shouldReturn = `${firstName}${lastName}`.toLowerCase().includes(name)
     if (topicTag) shouldReturn = subjects.some(({ tag }) => tag === topicTag)
@@ -82,9 +82,9 @@ export const getAuthors = async ({
   size = 10,
 }: GetAuthorsOptions) => {
   if (__DEV__) await sleep(300)
-  const authors = await Promise.resolve(trendingAuthors.splice(0, size))
+  const authors = await Promise.resolve(trendingAuthors.slice(0, size))
   return authors.filter(({ subjects, firstName, lastName }) => {
-    let shouldReturn = false
+    let shouldReturn = true
     if (name)
       shouldReturn = `${firstName}${lastName}`.toLowerCase().includes(name)
     if (topicTag)

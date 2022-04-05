@@ -68,7 +68,7 @@ export const getNewReleases = async ({
   if (__DEV__) await sleep(270)
   const newReleases: Podcast[] = await Promise.resolve(podcasts.reverse())
   return newReleases.filter(({ subjects, author: podcastAuthor }) => {
-    let shouldReturn = false
+    let shouldReturn = true
     if (author)
       shouldReturn = `${podcastAuthor.firstName}${podcastAuthor.lastName}`
         .toLowerCase()
