@@ -55,16 +55,7 @@ const AuthScreen: React.FC = () => {
               <LoginForm
                 onRegisterTap={() => panelSliderRef.current?.nextStep()}
                 onSubmitForm={values => {
-                  dispatch(
-                    LoginStart(values, () =>
-                      navigate('home', {
-                        screen: 'home-discover',
-                        params: {
-                          screen: 'discover',
-                        },
-                      }),
-                    ),
-                  )
+                  dispatch(LoginStart(values, () => navigate('interests')))
                 }}
               />
               <Box pt="lg" flex={1} justifyContent="flex-end" pb="xl">

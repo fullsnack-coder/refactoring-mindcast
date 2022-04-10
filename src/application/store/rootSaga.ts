@@ -20,6 +20,11 @@ import {
 } from './modules/playlists'
 
 import { watcherHottestPodcasts, watcherNewReleases } from './modules/podcasts'
+import {
+  getTopicsSagaWatcher,
+  saveTopicToUserWatcher,
+  removeTopicFromUserWatcher,
+} from './modules/topics'
 
 export default function* rootSaga() {
   yield all([
@@ -36,5 +41,8 @@ export default function* rootSaga() {
     watcherDownloadEpisodeSaga(),
     watcherRemoveDownloadedEpisode(),
     watcherLoadAllDownloads(),
+    getTopicsSagaWatcher(),
+    saveTopicToUserWatcher(),
+    removeTopicFromUserWatcher(),
   ])
 }

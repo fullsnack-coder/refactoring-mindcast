@@ -1,7 +1,7 @@
 import { createTheme } from '@shopify/restyle'
 
 const palette = {
-  red: '#EF010B',
+  red: '#c73866',
   punch: '#DD4B39',
   white: '#fff',
   saffron: '#F8C330',
@@ -11,6 +11,7 @@ const palette = {
   'coolGray-900': '#111827',
   'coolGray-500': '#4B5563',
   'coolGray-200': '#E5E7EB',
+  leaf: '#52af89',
   transparent: 'transparent',
 }
 
@@ -31,7 +32,8 @@ const appTheme = createTheme({
     buttonTextSecondary: palette.red,
     transparent: palette.transparent,
     warning: palette.saffron,
-    darkOverlay: `${palette['coolGray-900']}6b`,
+    success: palette.leaf,
+    darkOverlay: `${palette['coolGray-900']}7b`,
   },
   breakpoints: {
     phone: 0,

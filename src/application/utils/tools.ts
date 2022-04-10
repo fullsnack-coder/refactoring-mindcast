@@ -21,3 +21,10 @@ export const getHitSlop = (): PressableProps['hitSlop'] => ({
   left: 10,
   right: 10,
 })
+
+// just for test purposes (use only in debug mode)
+export const sleep = <TResponse = any>(time = 100, response?: TResponse) => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(response), time)
+  })
+}

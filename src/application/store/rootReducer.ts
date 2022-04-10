@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   downloads: downloadsReducer,
   playlists: playlistsReducer,
   podcasts: podcastsReducer,
-  topics: topicsReducer,
+  userTopics: topicsReducer,
 })
 
 export default rootReducer
