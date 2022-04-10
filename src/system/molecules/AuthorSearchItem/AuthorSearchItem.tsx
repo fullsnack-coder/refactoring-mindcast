@@ -12,7 +12,7 @@ const { Text } = Typography
 
 type Props = {
   author: Author
-  onPressSearchButton?: (author?: Author) => void
+  onPressSearchButton?: (author: Author) => void
 } & BoxProps
 
 const AuthorSearchItem: React.FC<Props> = ({
