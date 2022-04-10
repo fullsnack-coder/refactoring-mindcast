@@ -86,7 +86,9 @@ export const getAuthors = async ({
   return authors.filter(({ subjects, firstName, lastName }) => {
     let shouldReturn = true
     if (name)
-      shouldReturn = `${firstName}${lastName}`.toLowerCase().includes(name)
+      shouldReturn = `${firstName}${lastName}`
+        .toLowerCase()
+        .includes(name.toLowerCase())
     if (topicTag)
       shouldReturn = subjects.some(
         ({ tag }) => tag.toLowerCase() === topicTag.trim().toLowerCase(),
