@@ -1,4 +1,4 @@
-import { Podcast } from '@application/types'
+import { Author, Podcast, Topic } from '@application/types'
 import { NavigatorScreenParams } from '@react-navigation/native'
 
 export type HomeTabsParamList = {
@@ -23,10 +23,10 @@ export type DiscoverStackParamList = {
 
 export type SearchStackParamList = {
   search: undefined
-  topic: { topicId: string }
-  'search-results': undefined
-  'author-details': undefined
-  'podcast-details': undefined
+  topic: { topic: Topic }
+  'search-results': { searchedTerm: string }
+  'author-details': { authorId: Author['id'] }
+  'podcast-details': { podcastId: Podcast['id'] }
 }
 
 export type LibraryStackParamList = {
