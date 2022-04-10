@@ -33,7 +33,7 @@ const PodcastTrendingPreview: React.FC<Props> = memo(
             sourceUri={coverImage as string}
             style={{ borderRadius: borderRadii.sm, height: 220, width: '100%' }}
           />
-          <Box mt="xs" px="sm">
+          <Box my="sm" px="sm">
             <Text color="primaryText">{title}</Text>
           </Box>
           <Box alignItems="center" flexDirection="row" p="sm">
@@ -41,7 +41,6 @@ const PodcastTrendingPreview: React.FC<Props> = memo(
             <Separator x={12} />
             <Text
               color="primaryText"
-              fontWeight="bold"
               numberOfLines={2}
               style={{
                 maxWidth: 100,
