@@ -14,7 +14,7 @@ interface TopicResults {
   newestPodcasts: Podcast[]
 }
 
-const useTopicResults = (topicTag: string): TopicResults => {
+const useTopicResults = (topicTag = ''): TopicResults => {
   const [isLoading, setIsLoading] = useState(false)
   const [authors, setAuthors] = useState<Author[]>([])
   const [hottestPodcasts, setHottestPodcasts] = useState<Podcast[]>([])

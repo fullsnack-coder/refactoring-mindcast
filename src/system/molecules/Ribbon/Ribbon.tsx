@@ -1,17 +1,18 @@
 import { useAppTheme } from '@application/hooks'
 import Box, { BoxProps } from '@system/atoms/Box'
-import Typography from '@system/atoms/Typography'
+import Typography, { TextProps } from '@system/atoms/Typography'
 import { Pressable, StyleSheet } from 'react-native'
 
 const { Text } = Typography
 
 type Props = {
-  title: string
+  title: string | JSX.Element
   renderRight?: JSX.Element | null
   renderLeft?: JSX.Element | null
   onPressRightButton?: () => void
   onPressLeftButton?: () => void
   containerProps?: BoxProps
+  titleProps?: TextProps
 }
 
 const Ribbon: React.FC<Props> = ({
@@ -21,6 +22,7 @@ const Ribbon: React.FC<Props> = ({
   onPressRightButton,
   renderLeft,
   renderRight,
+  titleProps,
 }) => {
   const { textSize } = useAppTheme()
   return (
@@ -42,18 +44,23 @@ const Ribbon: React.FC<Props> = ({
         </Pressable>
       ) : null}
       <Box flex={1} flexDirection="row" justifyContent="center">
-        <Text
-          color="primaryText"
-          textAlign="center"
-          fontFamily="CircularStd-Bold"
-          fontSize={textSize.md}
-          fontWeight="600"
-          numberOfLines={1}
-          style={{
-            maxWidth: '70%',
-          }}>
-          {title}
-        </Text>
+        {typeof title === 'string' ? (
+          <Text
+            color="primaryText"
+            textAlign="center"
+            fontFamily="CircularStd-Bold"
+            fontSize={textSize.md}
+            fontWeight="600"
+            numberOfLines={1}
+            style={{
+              maxWidth: '70%',
+            }}
+            {...titleProps}>
+            {title}
+          </Text>
+        ) : (
+          title
+        )}
       </Box>
       {renderRight ? (
         <Pressable

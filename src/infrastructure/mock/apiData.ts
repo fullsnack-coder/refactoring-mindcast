@@ -61,7 +61,7 @@ export const podcasts: Podcast[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#music',
+        tag: '#technology',
         title: 'the title of subject',
       },
     ],
@@ -92,7 +92,7 @@ export const podcasts: Podcast[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#horror',
+        tag: '#technology',
         title: 'the title of subject',
       },
     ],
@@ -113,13 +113,13 @@ export const trendingAuthors: Author[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#tec',
+        tag: '#technology',
         title: 'the title of subject',
       },
       {
         description: 'subject description',
         id: 'id2',
-        tag: '#drawing',
+        tag: '#business',
         title: 'upload about drawing',
       },
       {
@@ -146,7 +146,7 @@ export const trendingAuthors: Author[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#tec',
+        tag: '#technology',
         title: 'the title of subject',
       },
     ],
@@ -161,7 +161,7 @@ export const trendingAuthors: Author[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#tec',
+        tag: '#technology',
         title: 'the title of subject',
       },
     ],
@@ -175,7 +175,7 @@ export const trendingAuthors: Author[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#tec',
+        tag: '#technology',
         title: 'the title of subject',
       },
     ],
@@ -190,7 +190,7 @@ export const trendingAuthors: Author[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#tec',
+        tag: '#technology',
         title: 'the title of subject',
       },
     ],
@@ -210,7 +210,7 @@ export const hottestPodcast: Podcast[] = [
         {
           description: 'subject description',
           id: 'id',
-          tag: '#tec',
+          tag: '#technology',
           title: 'the title of subject',
         },
       ],
@@ -251,7 +251,7 @@ export const hottestPodcast: Podcast[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#music',
+        tag: '#business',
         title: 'the title of subject',
       },
     ],
@@ -282,7 +282,7 @@ export const hottestPodcast: Podcast[] = [
       {
         description: 'subject description',
         id: 'id',
-        tag: '#horror',
+        tag: '#technology',
         title: 'the title of subject',
       },
     ],

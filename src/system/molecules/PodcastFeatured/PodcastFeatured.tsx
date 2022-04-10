@@ -36,7 +36,7 @@ const PodcastFeaturedPreview: React.FC<Props> = memo(
           />
           <Separator x={12} />
           <Box>
-            <Text fontWeight="bold" color="primaryText">
+            <Text fontFamily="CircularStd-Bold" color="primaryText">
               {title}
             </Text>
             <Puntuation
@@ -50,9 +50,7 @@ const PodcastFeaturedPreview: React.FC<Props> = memo(
           <Box alignItems="center" flex={1} flexDirection="row">
             <Avatar avatarUri={avatarUrl} name={firstName} size="small" />
             <Separator x={12} />
-            <Text color="primaryText" fontWeight="bold">
-              {firstName}
-            </Text>
+            <Text color="primaryText">{firstName}</Text>
           </Box>
           <Button text="MORE" type="primary" onPress={handlePressRedirect} />
         </Box>
