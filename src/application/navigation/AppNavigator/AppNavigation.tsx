@@ -17,7 +17,9 @@ const AppStack = createNativeStackNavigator<AppStackParamList>()
 const AppNavigation = () => {
   return (
     <NavigationContainer>
-      <AppStack.Navigator screenOptions={{ headerShown: false }}>
+      <AppStack.Navigator
+        initialRouteName="home"
+        screenOptions={{ headerShown: false }}>
         <AppStack.Screen name="onboarding" component={OnboardingStack} />
         <AppStack.Screen name="auth" component={AuthStack} />
         <AppStack.Screen name="interests" component={YourInterestsStack} />
