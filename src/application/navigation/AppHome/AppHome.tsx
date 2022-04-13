@@ -10,6 +10,7 @@ import { homeTabs } from './utils'
 import { useEffect } from 'react'
 import { useAppDispatch } from '@application/hooks/store'
 import { downloadEpisodesLoadAll } from '@application/store/modules/downloads'
+import { loadRecentlyListStart } from '@application/store/modules/episodes'
 
 const HomeTabs = createBottomTabNavigator<HomeTabsParamList>()
 const { Text } = Typography
@@ -21,7 +22,9 @@ const AppHomeStackNavigation: React.FC<Props> = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    // load initial app data
     dispatch(downloadEpisodesLoadAll())
+    dispatch(loadRecentlyListStart())
   }, [dispatch])
 
   return (

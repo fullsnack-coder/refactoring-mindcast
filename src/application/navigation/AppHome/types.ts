@@ -34,7 +34,7 @@ export type LibraryStackParamList = {
   downloads: undefined
   'your-podcasts': undefined
   'recently-played': undefined
-  'podcast-details': undefined
+  'podcast-details': { podcastId: Podcast['id'] }
   'your-interests': undefined
 }
 

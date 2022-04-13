@@ -24,7 +24,6 @@ import Section from '@system/molecules/Section'
 import { useCallback } from 'react'
 import { Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Track } from 'react-native-track-player'
 
 import GenericPodcastCover from './GenericPodcastCover'
 
@@ -63,16 +62,13 @@ const PodcastDetailScreen: React.FC = () => {
 
   const handlePressPlayButton = useCallback(() => {
     if (episodes?.length > 0) {
-      const parsedTracks: Track[] = episodes.map(episode => ({
-        album: podcastTitle,
-        title: episode.title,
-        url: episode.url,
-        artist: author.firstName,
-        duration: episode.duration,
-        artwork: episode.coverUrl || coverImage,
-      }))
       actions.reset()
-      actions.addTracks(parsedTracks)
+      const episodesWithCover = episodes.map(episode => ({
+        ...episode,
+        coverUrl: episode.coverUrl || coverImage,
+      }))
+
+      actions.addEpisodes(episodesWithCover, author, podcastTitle)
       actions.play()
       navigation.navigate('player')
     }

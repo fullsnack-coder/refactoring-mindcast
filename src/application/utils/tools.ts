@@ -1,5 +1,7 @@
+import { Author, Episode } from '@application/types'
 import { PressableProps } from 'react-native'
 import RNFS from 'react-native-fs'
+import { Track } from 'react-native-track-player'
 
 export const getTime = (time: number) => {
   return {
@@ -27,4 +29,20 @@ export const sleep = <TResponse = any>(time = 100, response?: TResponse) => {
   return new Promise(resolve => {
     setTimeout(() => resolve(response), time)
   })
+}
+
+export const getTrackFromEpisodeInfo = (
+  episode: Episode,
+  author: Author,
+  podcastTitle: string,
+): Track => {
+  return {
+    ...episode,
+    album: podcastTitle,
+    title: episode.title,
+    url: episode.url,
+    artist: author.firstName,
+    duration: episode.duration,
+    artwork: episode.coverUrl,
+  }
 }
