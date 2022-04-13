@@ -6,6 +6,7 @@ import { podcastsReducer } from './modules/podcasts'
 import topicsReducer from './modules/topics'
 import playlistsReducer from './modules/playlists'
 import downloadsReducer from './modules/downloads'
+import { episodesReducer } from './modules/episodes'
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   playlists: playlistsReducer,
   podcasts: podcastsReducer,
   userTopics: topicsReducer,
+  episodes: episodesReducer,
 })
 
 export default rootReducer

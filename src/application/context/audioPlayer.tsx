@@ -1,3 +1,6 @@
+import { addRecentlyEpisodesStart } from '@application/store/modules/episodes'
+import { Author, Episode } from '@application/types'
+import { getTrackFromEpisodeInfo } from '@application/utils/tools'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import TrackPlayer, {
   Track,
@@ -8,6 +11,7 @@ import TrackPlayer, {
   Event,
   useProgress,
 } from 'react-native-track-player'
+import { useDispatch } from 'react-redux'
 
 type PlayerStatus = 'playing' | 'paused' | 'stopped'
 
@@ -21,6 +25,11 @@ type AudioPlayerContextType = {
     reset: () => void
     seekTo: (time: number) => void
     stop: () => void
+    addEpisodes: (
+      episodes: Episode[],
+      author: Author,
+      podcastTitle: string,
+    ) => void
   }
   audioplayerStatus: PlayerStatus
   currentTrack: Track | null
@@ -54,6 +63,8 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
     isFirst: false,
   })
 
+  const dispatch = useDispatch()
+
   const actions = {
     play: () => TrackPlayer.play(),
     pause: () => TrackPlayer.pause(),
@@ -63,6 +74,17 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
     reset: () => TrackPlayer.reset(),
     goToPrevious: () => TrackPlayer.skipToPrevious(),
     goToNext: () => TrackPlayer.skipToNext(),
+    addEpisodes: (
+      episodes: Episode[],
+      author: Author,
+      podcastTitle: string,
+    ) => {
+      const tracks = episodes.map(episode =>
+        getTrackFromEpisodeInfo(episode, author, podcastTitle),
+      )
+      TrackPlayer.add(tracks)
+      dispatch(addRecentlyEpisodesStart(episodes))
+    },
   }
 
   const audioplayerStatus: PlayerStatus = useMemo(() => {
