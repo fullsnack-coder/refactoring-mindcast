@@ -12,6 +12,10 @@ import {
   watcherLoadAllDownloads,
 } from './modules/downloads'
 import {
+  watcherUpdateRecentlyEpisode,
+  watcherLoadRecentlyList,
+} from './modules/episodes'
+import {
   watcherCreatePlaylistSaga,
   watcherRemovePlaylistSaga,
   watcherAddPodcastSaga,
@@ -44,5 +48,7 @@ export default function* rootSaga() {
     getTopicsSagaWatcher(),
     saveTopicToUserWatcher(),
     removeTopicFromUserWatcher(),
+    watcherUpdateRecentlyEpisode(),
+    watcherLoadAllDownloads(),
   ])
 }
