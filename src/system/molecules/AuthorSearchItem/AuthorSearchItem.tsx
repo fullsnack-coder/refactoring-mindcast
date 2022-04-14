@@ -12,20 +12,20 @@ const { Text } = Typography
 
 type Props = {
   author: Author
-  onPressAuthorButton?: (author?: Author) => void
+  onPressSearchButton?: (author: Author) => void
 } & BoxProps
 
-const AuthorSearchButton: React.FC<Props> = ({
+const AuthorSearchItem: React.FC<Props> = ({
   author,
-  onPressAuthorButton,
+  onPressSearchButton,
   ...rest
 }) => {
   const { avatarUrl, firstName } = author
   const { colors } = useAppTheme()
 
   const handlePress = useCallback(() => {
-    onPressAuthorButton?.(author)
-  }, [onPressAuthorButton])
+    onPressSearchButton?.(author)
+  }, [onPressSearchButton])
 
   return (
     <Box
@@ -53,4 +53,4 @@ const AuthorSearchButton: React.FC<Props> = ({
   )
 }
 
-export default AuthorSearchButton
+export default AuthorSearchItem

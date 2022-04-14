@@ -1,7 +1,7 @@
 import { createTheme } from '@shopify/restyle'
 
-const palette = {
-  red: '#EF010B',
+export const palette = {
+  red: '#c73866',
   punch: '#DD4B39',
   white: '#fff',
   saffron: '#F8C330',
@@ -11,6 +11,7 @@ const palette = {
   'coolGray-900': '#111827',
   'coolGray-500': '#4B5563',
   'coolGray-200': '#E5E7EB',
+  leaf: '#52af89',
   transparent: 'transparent',
 }
 
@@ -21,14 +22,18 @@ const appTheme = createTheme({
     googlePlus: palette.punch,
     primaryBackground: palette.white,
     secondaryBackground: palette.silver,
+    primaryBackgroundOverlay: palette['coolGray-200'],
     primaryText: palette['coolGray-900'],
     secondaryText: palette.mineshaft,
     primaryTransparent: `${palette.red}3b`,
+    primaryBackgroundTransparent: `${palette.white}5b`,
     primaryTextTransparent: `${palette['coolGray-900']}6b`,
     buttonTextPrimary: palette.white,
     buttonTextSecondary: palette.red,
     transparent: palette.transparent,
     warning: palette.saffron,
+    success: palette.leaf,
+    darkOverlay: `${palette['coolGray-900']}7b`,
   },
   breakpoints: {
     phone: 0,

@@ -4,7 +4,7 @@ type Props = BoxProps
 
 const StepPanel: React.FC<Props> = ({ children, ...rest }) => {
   return (
-    <Box flex={1} {...rest}>
+    <Box flexGrow={1} {...rest}>
       {children}
     </Box>
   )

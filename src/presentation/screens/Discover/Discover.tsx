@@ -59,6 +59,20 @@ const DiscoverScreen: React.FC = () => {
     dispatch(getTopAuthors({}))
   }, [dispatch])
 
+  const handleRedirectToAuthor = useCallback(
+    (authorId: string) => () => {
+      navigate('author-details', { authorId })
+    },
+    [navigate],
+  )
+
+  const handleRedirectToPodcast = useCallback(
+    (podcastId: string) => () => {
+      navigate('podcast-details', { podcastId })
+    },
+    [navigate],
+  )
+
   useEffect(() => {
     loadScreenData()
   }, [loadScreenData])
@@ -96,7 +110,13 @@ const DiscoverScreen: React.FC = () => {
             </Box>
             <Section
               title="New Releases"
-              callToActionButton={<Button type="primary" text="SEE ALL" />}>
+              callToActionButton={
+                <Button
+                  type="primary"
+                  text="SEE ALL"
+                  onPress={() => navigate('new-releases')}
+                />
+              }>
               <FlatList
                 data={hottestPodcasts}
                 keyExtractor={({ id }) => id}
@@ -105,14 +125,25 @@ const DiscoverScreen: React.FC = () => {
                   paddingVertical: 10,
                 }}
                 ItemSeparatorComponent={() => <Separator x={12} />}
-                renderItem={({ item }) => <PodcastPreview podcast={item} />}
+                renderItem={({ item }) => (
+                  <PodcastPreview
+                    podcast={item}
+                    onPress={handleRedirectToPodcast(item.id)}
+                  />
+                )}
                 horizontal
               />
             </Section>
             <Separator y={32} />
             <Section
               title="Trending Authors"
-              callToActionButton={<Button text="SEE ALL" type="primary" />}>
+              callToActionButton={
+                <Button
+                  text="SEE ALL"
+                  type="primary"
+                  onPress={() => navigate('trending-authors')}
+                />
+              }>
               <FlatList
                 horizontal
                 ItemSeparatorComponent={() => <Separator x={22} />}
@@ -122,7 +153,12 @@ const DiscoverScreen: React.FC = () => {
                 }}
                 data={trendingAuthors}
                 keyExtractor={({ id }) => id}
-                renderItem={({ item }) => <AuthorCard.Trending author={item} />}
+                renderItem={({ item }) => (
+                  <AuthorCard.Trending
+                    author={item}
+                    onCallToAction={handleRedirectToAuthor(item.id)}
+                  />
+                )}
               />
             </Section>
             <Separator y={32} />
@@ -145,7 +181,10 @@ const DiscoverScreen: React.FC = () => {
                 data={hottestPodcasts}
                 keyExtractor={({ id }) => id}
                 renderItem={({ item }) => (
-                  <PodcastHottestPreview podcast={item} />
+                  <PodcastHottestPreview
+                    podcast={item}
+                    onPress={handleRedirectToPodcast(item.id)}
+                  />
                 )}
               />
             </Section>

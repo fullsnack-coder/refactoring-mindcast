@@ -1,15 +1,18 @@
-export type StoreAction<T = unknown> = {
-  payload?: T
-  type: string
+export type StoreAction<P = unknown, T = string> = {
+  payload?: P
+  type: T
 }
 
 export type Topic = {
   id: string
-  name: string
+  title: string
   description: string
+  tag: string
+  coverUrl: string
 }
 
 export type User = {
+  id: string
   email?: string
   username: string
   description?: string
@@ -53,4 +56,36 @@ export type Podcast = {
   description: string
   title: string
   subjects: PodcastSubject[]
+}
+
+export type Playlist = {
+  id: string
+  name: string
+  description?: string
+  coverImage?: string
+  createdAt: Date
+  ownerId: User['id']
+  podcasts: Podcast[]
+}
+
+export type Episode = {
+  artist?: string
+  id: string
+  coverUrl?: string
+  podcastId: Podcast['id']
+  title: string
+  description: string
+  duration: number
+  url: string
+  localUrl?: string
+  createdAt: Date
+  updatedAt: Date
+}
+
+export type AppAuthor = {
+  avatarURL: string
+  name: string
+  role: string
+  socialLinks: { icon: string; link: string; color: string }[]
+  description: string
 }

@@ -1,3 +1,4 @@
+import { useAppTheme } from '@application/hooks'
 import Box from '@system/atoms/Box'
 import {
   Children,
@@ -8,9 +9,16 @@ import {
   useRef,
   useState,
 } from 'react'
-import { FlatList, FlatListProps, Dimensions } from 'react-native'
+import {
+  FlatList,
+  FlatListProps,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+} from 'react-native'
 
 import StepPanel from './StepPanel'
+import StepPanelThumbs, { Props as ThumbsProps } from './StepPanelThumbs'
 
 type RenderProps = {
   currentIndex: number
@@ -24,6 +32,9 @@ type RenderProps = {
 type Props = {
   renderFooter?: (options: RenderProps) => JSX.Element | null | boolean
   renderHeader?: (options: RenderProps) => JSX.Element | null | boolean
+  thumb?: {
+    config: ThumbsProps['thumbsConfig']
+  }
 } & Omit<FlatListProps<any>, 'data' | 'renderItem'>
 
 export type SliderHandle = {
@@ -34,7 +45,7 @@ export type SliderHandle = {
 }
 
 const Slider = forwardRef<SliderHandle, Props>(
-  ({ children, renderHeader, renderFooter, ...rest }, ref) => {
+  ({ children, renderHeader, renderFooter, thumb, ...rest }, ref) => {
     const [itemsWith, setItemWidth] = useState(0)
     const arraySteps = Children.toArray(children).map((child, i) => ({
       id: i,
@@ -42,6 +53,7 @@ const Slider = forwardRef<SliderHandle, Props>(
     }))
     const [currentIndex, setCurrentIndex] = useState(0)
     const flatListRef = useRef<FlatList>(null)
+    const { colors } = useAppTheme()
 
     useEffect(() => {
       const subscription = Dimensions.addEventListener('change', () =>
@@ -83,22 +95,37 @@ const Slider = forwardRef<SliderHandle, Props>(
     }))
 
     return (
-      <Box flex={1}>
+      <Box flexGrow={1}>
         {renderHeader?.({
           currentIndex: currentIndex + 1,
           total: arraySteps.length,
           ...actions,
         })}
+        {thumb ? (
+          <ScrollView
+            contentContainerStyle={sliderStyles.sliderThumbWrapper}
+            horizontal
+            style={{
+              flexGrow: 0,
+              backgroundColor: colors.primaryBackground,
+            }}>
+            <StepPanelThumbs
+              activeThumbIndex={currentIndex}
+              thumbsConfig={thumb.config}
+              onPressThumb={actions.goToIndex}
+            />
+          </ScrollView>
+        ) : null}
         <FlatList
           data={arraySteps}
+          keyExtractor={({ id }) => id}
+          keyboardShouldPersistTaps="handled"
           onScroll={({ nativeEvent }) => {
             const index =
               nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width
             setCurrentIndex(Math.round(index))
           }}
           horizontal
-          keyExtractor={({ id }) => id}
-          keyboardShouldPersistTaps="handled"
           onLayout={({ nativeEvent }) => setItemWidth(nativeEvent.layout.width)}
           pagingEnabled
           ref={flatListRef}
@@ -119,5 +146,11 @@ const Slider = forwardRef<SliderHandle, Props>(
     )
   },
 )
+
+const sliderStyles = StyleSheet.create({
+  sliderThumbWrapper: {
+    minWidth: '100%',
+  },
+})
 
 export default Slider

@@ -7,6 +7,10 @@ import Typography from '@system/atoms/Typography'
 
 import type { HomeTabsParamList } from './types'
 import { homeTabs } from './utils'
+import { useEffect } from 'react'
+import { useAppDispatch } from '@application/hooks/store'
+import { downloadEpisodesLoadAll } from '@application/store/modules/downloads'
+import { loadRecentlyListStart } from '@application/store/modules/episodes'
 
 const HomeTabs = createBottomTabNavigator<HomeTabsParamList>()
 const { Text } = Typography
@@ -15,6 +19,14 @@ type Props = {} & NativeStackScreenProps<AppStackParamList, 'home'>
 
 const AppHomeStackNavigation: React.FC<Props> = () => {
   const { colors } = useAppTheme()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    // load initial app data
+    dispatch(downloadEpisodesLoadAll())
+    dispatch(loadRecentlyListStart())
+  }, [dispatch])
+
   return (
     <HomeTabs.Navigator>
       {homeTabs.map(({ name, stack, icon, label }) => (
