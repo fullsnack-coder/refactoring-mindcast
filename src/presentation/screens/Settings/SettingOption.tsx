@@ -1,4 +1,5 @@
 import { SettingOption as Option } from '@application/context/settings'
+import { useAppTheme } from '@application/hooks'
 import Box from '@system/atoms/Box'
 import Typography from '@system/atoms/Typography'
 import { Switch } from 'react-native-gesture-handler'
@@ -12,6 +13,7 @@ type Props = {
 
 const SettingOption: React.FC<Props> = ({ setting, onUpdateOption }) => {
   const { description, label, value } = setting
+  const { colors } = useAppTheme()
 
   return (
     <Box alignItems="center" flexDirection="row">
@@ -25,6 +27,8 @@ const SettingOption: React.FC<Props> = ({ setting, onUpdateOption }) => {
       </Box>
       {typeof value === 'boolean' ? (
         <Switch
+          thumbColor={value ? colors.primary : colors.secondaryBackground}
+          trackColor={{ true: colors.primaryTransparent }}
           accessibilityLabel={label}
           value={value}
           onValueChange={onUpdateOption}

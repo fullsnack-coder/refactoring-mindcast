@@ -18,7 +18,7 @@ import Image from '@system/atoms/Image'
 import Ribbon from '@system/molecules/Ribbon'
 import StepPanelSlider from '@system/organisms/StepsPanelSlider'
 import { useCallback } from 'react'
-import { ScrollView, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = CompositeScreenProps<
