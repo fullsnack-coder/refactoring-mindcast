@@ -81,3 +81,11 @@ export type Episode = {
   createdAt: Date
   updatedAt: Date
 }
+
+export type AppAuthor = {
+  avatarURL: string
+  name: string
+  role: string
+  socialLinks: { icon: string; link: string; color: string }[]
+  description: string
+}
