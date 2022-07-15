@@ -4,7 +4,7 @@ import {
   StoreAction,
   User,
 } from '@application/types'
-import { loginUser, registerUser } from '@infrastructure/api/auth'
+import { loginUser, logoutUser, registerUser } from '@infrastructure/api/auth'
 
 import { takeLatest, put, call } from 'redux-saga/effects'
 
@@ -12,7 +12,7 @@ type AuthStatus = 'idle' | 'started' | 'success' | 'failure'
 
 type AuthState = {
   authStatus: AuthStatus
-  isLogedIn: boolean
+  isLoggedIn: boolean
   currentUser?: User | null
 }
 
@@ -21,7 +21,7 @@ type AuthPayloads = {
   loginInfo?: AuthLoginInput
   registerInfo?: AuthRegisterInput
   onSuccess?: () => void
-  onFailure?: () => void
+  onFailure?: (error?: Error) => void
 }
 
 const AUTH_LOGIN_STARTED = 'auth/login-started'
@@ -32,14 +32,14 @@ const AUTH_LOGOUT = 'auth/logout'
 
 const initialState: AuthState = {
   currentUser: null,
-  isLogedIn: false,
+  isLoggedIn: false,
   authStatus: 'idle',
 }
 
 export const LoginStart = (
   input: AuthLoginInput,
   onSuccess?: () => void,
-  onFailure?: () => void,
+  onFailure?: (error?: Error) => void,
 ): StoreAction<AuthPayloads> => ({
   type: AUTH_LOGIN_STARTED,
   payload: { loginInfo: input, onSuccess, onFailure },
@@ -48,7 +48,7 @@ export const LoginStart = (
 export const RegisterStart = (
   input: AuthRegisterInput,
   onSuccess?: () => void,
-  onFailure?: () => void,
+  onFailure?: (error?: Error) => void,
 ): StoreAction<AuthPayloads> => ({
   type: AUTH_REGISTER_STARTED,
   payload: { registerInfo: input, onSuccess, onFailure },
@@ -75,7 +75,7 @@ function* loginSagaWorker({ payload }: StoreAction<AuthPayloads>) {
     if (payload?.onSuccess) yield call(payload.onSuccess)
   } catch (error) {
     yield put(authFailure(error as Error))
-    if (payload?.onFailure) yield call(payload.onFailure)
+    if (payload?.onFailure) yield call(payload.onFailure, error as Error)
   }
 }
 
@@ -87,7 +87,16 @@ function* registerSagaWorker({ payload }: StoreAction<AuthPayloads>) {
     if (payload?.onSuccess) yield call(payload.onSuccess)
   } catch (error) {
     yield put(authFailure(error as Error))
-    if (payload?.onFailure) yield call(payload.onFailure)
+    if (payload?.onFailure) yield call(payload.onFailure, error as Error)
+  }
+}
+
+function* logoutSagaWorker({ payload }: StoreAction<AuthPayloads>) {
+  try {
+    yield call(logoutUser)
+    if (payload?.onSuccess) yield call(payload?.onSuccess)
+  } catch (error) {
+    if (payload?.onFailure) yield call(payload?.onFailure, error as Error)
   }
 }
 
@@ -97,6 +106,10 @@ export function* watcherLoginAuthentication() {
 
 export function* watcherRegisterAuthentication() {
   yield takeLatest(AUTH_REGISTER_STARTED, registerSagaWorker)
+}
+
+export function* watcherLogoutAuthentication() {
+  yield takeLatest(AUTH_LOGOUT, logoutSagaWorker)
 }
 
 const authReducer = (
@@ -116,7 +129,7 @@ const authReducer = (
       return {
         ...state,
         authStatus: 'success',
-        isLogedIn: true,
+        isLoggedIn: true,
         currentUser: payload!.user,
       }
     }
@@ -124,10 +137,11 @@ const authReducer = (
       return {
         ...state,
         authStatus: 'failure',
-        isLogedIn: false,
+        isLoggedIn: false,
         currentUser: null,
       }
     case AUTH_LOGOUT:
+      return initialState
     default:
       return state
   }

@@ -46,3 +46,16 @@ export const getTrackFromEpisodeInfo = (
     artwork: episode.coverUrl,
   }
 }
+
+export const getErrorMessage = (response?: string): string => {
+  if (
+    response?.includes('auth/wrong-password') ||
+    response?.includes('auth/user-not-found')
+  )
+    return 'Incorrect user or password'
+  if (response?.includes('auth/email-already-in-use'))
+    return 'Email already in use'
+  if (response?.includes("password doesn't match"))
+    return 'Both passwords must be equal'
+  return 'Something went wrong'
+}

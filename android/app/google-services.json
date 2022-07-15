@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "920706628855",
+    "project_id": "mind-cast-app",
+    "storage_bucket": "mind-cast-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920706628855:android:94f05d5c97efccd7bee7f2",
+        "android_client_info": {
+          "package_name": "com.mindcasttwo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920706628855-vm5hb5h1m33123ao0g82smp5qragcu4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB60x_pnxEfeM9WyW6dKdncwbBzRljCj8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920706628855-vm5hb5h1m33123ao0g82smp5qragcu4d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
