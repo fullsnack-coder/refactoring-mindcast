@@ -1,12 +1,12 @@
 import { useAppTheme } from '@application/hooks'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Box from '@system/atoms/Box'
-import Button from '@system/atoms/Button'
 import Icon from '@system/atoms/Icon'
 import Separator from '@system/atoms/Separator'
 import TextInput from '@system/atoms/TextInput'
 import Typography from '@system/atoms/Typography'
 import FormField from '@system/molecules/FormField'
+import LoadingButton from '@system/molecules/LoadingButton'
 import PasswordInput from '@system/molecules/PasswordInput'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
@@ -22,11 +22,16 @@ type LoginFormValues = {
 }
 
 type Props = {
+  isSubmittingForm?: boolean
   onSubmitForm?: (values: LoginFormValues) => void | Promise<void>
   onRegisterTap?: () => void
 }
 
-const LoginForm: React.FC<Props> = ({ onRegisterTap, onSubmitForm }) => {
+const LoginForm: React.FC<Props> = ({
+  isSubmittingForm = false,
+  onRegisterTap,
+  onSubmitForm,
+}) => {
   const { colors } = useAppTheme()
   const {
     handleSubmit,
@@ -36,7 +41,10 @@ const LoginForm: React.FC<Props> = ({ onRegisterTap, onSubmitForm }) => {
     resolver: yupResolver(loginSchema),
   })
 
-  const submitLoginForm = useCallback(values => onSubmitForm?.(values), [])
+  const submitLoginForm = useCallback(
+    values => onSubmitForm?.(values),
+    [onSubmitForm],
+  )
 
   return (
     <Box>
@@ -46,12 +54,13 @@ const LoginForm: React.FC<Props> = ({ onRegisterTap, onSubmitForm }) => {
         name="email"
         render={({ field: { onChange, ...rest } }) => (
           <TextInput
-            placeholder="E-mail"
             containerProps={{ bg: 'primaryBackground' }}
+            editable={!isSubmittingForm}
             leftInput={
               <Icon size="md" name="email-outline" color={colors.primaryText} />
             }
             onChangeText={onChange}
+            placeholder="E-mail"
             {...rest}
           />
         )}
@@ -66,6 +75,7 @@ const LoginForm: React.FC<Props> = ({ onRegisterTap, onSubmitForm }) => {
           <PasswordInput
             placeholder="Password"
             containerProps={{ bg: 'primaryBackground' }}
+            editable={!isSubmittingForm}
             leftInput={
               <Icon size="md" name="lock" color={colors.primaryText} />
             }
@@ -79,16 +89,17 @@ const LoginForm: React.FC<Props> = ({ onRegisterTap, onSubmitForm }) => {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center"
-        px="md">
-        <Box flexDirection="row">
+        px="sm">
+        <Box flex={1} flexDirection="row">
           <Text color="primaryBackground">Not account? </Text>
           <Pressable onPress={onRegisterTap}>
             <Text color="primary">Register now</Text>
           </Pressable>
         </Box>
-        <Button
+        <LoadingButton
           text="LOGIN"
           type="primary"
+          loading={isSubmittingForm}
           onPress={handleSubmit(submitLoginForm)}
         />
       </Box>

@@ -1,20 +1,34 @@
 import { User, AuthLoginInput, AuthRegisterInput } from '@application/types'
-import { user as mockedUser } from '../mock/apiData'
+import auth from '@react-native-firebase/auth'
 
-//TODO: working around a real service to login from backend
 export const loginUser = async ({
   email,
   password,
 }: AuthLoginInput): Promise<User> => {
-  const authenticatedUser = await Promise.resolve(mockedUser)
-  return authenticatedUser
+  const { user } = await auth().signInWithEmailAndPassword(email, password)
+  return {
+    id: user.uid,
+    avatarUrl: user.photoURL || '',
+    username: user.displayName || '',
+    email: user.email || '',
+  }
 }
 
-export const registerUser = async ({}: AuthRegisterInput): Promise<User> => {
-  const registeredUser = await Promise.resolve({
-    id: 'hash',
-    username: 'Moock002',
-    email: 'mock@mailinator.com',
-  })
-  return registeredUser
+export const registerUser = async ({
+  confirmPassword,
+  email,
+  password,
+}: AuthRegisterInput): Promise<User> => {
+  if (confirmPassword !== password) throw new Error("Passwords doesn't match")
+  const { user } = await auth().createUserWithEmailAndPassword(email, password)
+  return {
+    id: user.uid,
+    avatarUrl: user.photoURL || '',
+    username: user.displayName || '',
+    email: user.email || '',
+  }
+}
+
+export const logoutUser = async () => {
+  await auth().signOut()
 }

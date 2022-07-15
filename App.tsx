@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'
 
+import { AuthProvider } from '@application/context/auth'
 import { AudioPlayerProvider } from '@application/context/audioPlayer'
 import NotificationsProvider from '@application/context/notifications'
 import AppSettingsProvider from '@application/context/settings'
@@ -23,17 +24,19 @@ const App: React.FC = () => {
 
   return (
     <Provider store={store}>
-      <AppSettingsProvider>
-        <ThemeProvider theme={appTheme}>
-          <NotificationsProvider>
-            <AudioPlayerProvider>
-              <SafeAreaProvider>
-                <AppNavigator />
-              </SafeAreaProvider>
-            </AudioPlayerProvider>
-          </NotificationsProvider>
-        </ThemeProvider>
-      </AppSettingsProvider>
+      <AuthProvider>
+        <AppSettingsProvider>
+          <ThemeProvider theme={appTheme}>
+            <NotificationsProvider>
+              <AudioPlayerProvider>
+                <SafeAreaProvider>
+                  <AppNavigator />
+                </SafeAreaProvider>
+              </AudioPlayerProvider>
+            </NotificationsProvider>
+          </ThemeProvider>
+        </AppSettingsProvider>
+      </AuthProvider>
     </Provider>
   )
 }

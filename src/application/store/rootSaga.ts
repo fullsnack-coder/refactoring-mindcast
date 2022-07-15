@@ -3,6 +3,7 @@ import { all } from 'redux-saga/effects'
 import {
   watcherLoginAuthentication,
   watcherRegisterAuthentication,
+  watcherLogoutAuthentication,
 } from './modules/auth'
 
 import { getTopAuthorsWatcher } from './modules/authors'
@@ -50,5 +51,6 @@ export default function* rootSaga() {
     removeTopicFromUserWatcher(),
     watcherUpdateRecentlyEpisode(),
     watcherLoadAllDownloads(),
+    watcherLogoutAuthentication(),
   ])
 }

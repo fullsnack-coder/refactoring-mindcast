@@ -1,12 +1,12 @@
 import { useAppTheme } from '@application/hooks'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Box from '@system/atoms/Box'
-import Button from '@system/atoms/Button'
 import Icon from '@system/atoms/Icon'
 import Separator from '@system/atoms/Separator'
 import TextInput from '@system/atoms/TextInput'
 import Typography from '@system/atoms/Typography'
 import FormField from '@system/molecules/FormField'
+import LoadingButton from '@system/molecules/LoadingButton'
 import PasswordInput from '@system/molecules/PasswordInput'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
@@ -23,11 +23,16 @@ type RegisterFormValues = {
 }
 
 type Props = {
+  isSubmittingForm?: boolean
   onSubmitForm?: (values: RegisterFormValues) => void | Promise<void>
   onLoginTap?: () => void
 }
 
-const RegisterForm: React.FC<Props> = ({ onLoginTap, onSubmitForm }) => {
+const RegisterForm: React.FC<Props> = ({
+  onLoginTap,
+  onSubmitForm,
+  isSubmittingForm = false,
+}) => {
   const { colors } = useAppTheme()
   const {
     control,
@@ -51,6 +56,7 @@ const RegisterForm: React.FC<Props> = ({ onLoginTap, onSubmitForm }) => {
         render={({ field: { onChange, ...rest } }) => (
           <TextInput
             containerProps={{ bg: 'primaryBackground' }}
+            editable={!isSubmittingForm}
             placeholder="E-mail"
             onChangeText={onChange}
             leftInput={
@@ -68,6 +74,7 @@ const RegisterForm: React.FC<Props> = ({ onLoginTap, onSubmitForm }) => {
         render={({ field: { onChange, ...rest } }) => (
           <PasswordInput
             containerProps={{ bg: 'primaryBackground' }}
+            editable={!isSubmittingForm}
             placeholder="Password"
             onChangeText={onChange}
             {...rest}
@@ -82,6 +89,7 @@ const RegisterForm: React.FC<Props> = ({ onLoginTap, onSubmitForm }) => {
         render={({ field: { onChange, ...rest } }) => (
           <PasswordInput
             containerProps={{ bg: 'primaryBackground' }}
+            editable={!isSubmittingForm}
             leftInput={
               <Icon name="lock-reset" size="md" color={colors.primaryText} />
             }
@@ -103,7 +111,8 @@ const RegisterForm: React.FC<Props> = ({ onLoginTap, onSubmitForm }) => {
             <Text color="primary">Log-In!</Text>
           </Pressable>
         </Box>
-        <Button
+        <LoadingButton
+          loading={isSubmittingForm}
           text="REGISTER"
           type="primary"
           onPress={handleSubmit(submitForm)}
