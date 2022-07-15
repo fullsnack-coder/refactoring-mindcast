@@ -1,18 +1,22 @@
 import { SettingKey, useAppSettings } from '@application/context/settings'
 import { useAppTheme } from '@application/hooks'
+import { useAppDispatch } from '@application/hooks/store'
 import {
   HomeTabsParamList,
   SettingsStackParamList,
 } from '@application/navigation/AppHome'
 import { AppStackParamList } from '@application/navigation/AppNavigator'
+import { logout } from '@application/store/modules/auth'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import Box from '@system/atoms/Box'
 import Icon from '@system/atoms/Icon'
+import Separator from '@system/atoms/Separator'
 import Typography from '@system/atoms/Typography'
 import { useCallback } from 'react'
 import { Pressable, SafeAreaView, ScrollView } from 'react-native'
+
 import SettingOption from './SettingOption'
 
 const { Heading, Text } = Typography
@@ -28,6 +32,11 @@ type Props = {} & CompositeScreenProps<
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { currentSettings, updateSetting } = useAppSettings()
   const { colors } = useAppTheme()
+  const dispatch = useAppDispatch()
+
+  const logoutUser = useCallback(() => {
+    dispatch(logout())
+  }, [dispatch])
 
   const redirectToAboutPage = useCallback(() => {
     navigation.navigate('about')
@@ -63,6 +72,20 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                   </Text>
                 </Box>
                 <Icon name="arrow-right" size="lg" color={colors.primaryText} />
+              </Box>
+            </Pressable>
+            <Separator y={30} />
+            <Pressable onPress={logoutUser}>
+              <Box alignItems="center" flexDirection="row">
+                <Box flex={1} mr="md">
+                  <Text fontFamily="CircularStd-Bold" fontSize={20}>
+                    Logout
+                  </Text>
+                  <Text fontSize={16} color="primaryTextTransparent">
+                    Close your app session
+                  </Text>
+                </Box>
+                <Icon name="logout" size="lg" color={colors.primaryText} />
               </Box>
             </Pressable>
           </Box>
