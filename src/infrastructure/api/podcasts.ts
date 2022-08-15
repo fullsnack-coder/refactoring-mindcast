@@ -56,16 +56,16 @@ export const getHottestPodcasts = async ({
     : hottestPodcasts
 }
 
-type GetNewReleasesOptions = {
+export type GetNewReleasesOptions = {
   author?: string
   topicTag?: string
 }
 
 export const getNewReleases = async ({
-  author,
-  topicTag,
+  author = '',
+  topicTag = '',
 }: GetNewReleasesOptions): Promise<Podcast[]> => {
-  if (__DEV__) await sleep(270)
+  if (__DEV__) await sleep(1270)
   const newReleases: Podcast[] = await Promise.resolve(podcasts.reverse())
   return newReleases.filter(({ subjects, author: podcastAuthor }) => {
     let shouldReturn = true

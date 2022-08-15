@@ -1,11 +1,14 @@
+import { useAppTheme } from '@application/hooks'
 import useTopics from '@application/hooks/useTopics'
 import { Topic } from '@application/types'
+import Box from '@system/atoms/Box'
 import Separator from '@system/atoms/Separator'
+import MessageScreen from '@system/molecules/MessageScreen'
 import PressableTextWithOverlay, {
   RenderContentType,
 } from '@system/molecules/PressableTextWithOverlay'
 import { useCallback } from 'react'
-import { FlatList } from 'react-native'
+import { ActivityIndicator, FlatList } from 'react-native'
 
 const getContentTopicButton =
   (item: Topic): RenderContentType =>
@@ -16,7 +19,8 @@ type Props = {
 }
 
 const TopicsCollection: React.FC<Props> = ({ onTapTopic }) => {
-  const { error, isLoading, topics } = useTopics()
+  const { isLoading, topics } = useTopics()
+  const { colors } = useAppTheme()
 
   const handlePressTopic = useCallback(
     (topic: Topic) => () => {
@@ -25,7 +29,12 @@ const TopicsCollection: React.FC<Props> = ({ onTapTopic }) => {
     [onTapTopic],
   )
 
-  if (isLoading || error) return null
+  if (isLoading)
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <ActivityIndicator color={colors.primary} size="large" />
+      </Box>
+    )
 
   return (
     <FlatList
@@ -35,6 +44,12 @@ const TopicsCollection: React.FC<Props> = ({ onTapTopic }) => {
       columnWrapperStyle={{
         justifyContent: 'space-between',
       }}
+      contentContainerStyle={{ flexGrow: 1 }}
+      ListEmptyComponent={
+        <Box pt="xxl" alignItems="center" justifyContent="center">
+          <MessageScreen message="There is no topics at this moment" />
+        </Box>
+      }
       ItemSeparatorComponent={() => <Separator y={10} />}
       renderItem={({ item }) => (
         <PressableTextWithOverlay

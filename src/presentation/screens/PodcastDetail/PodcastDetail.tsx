@@ -22,7 +22,7 @@ import Puntuation from '@system/molecules/Puntuation'
 import Ribbon from '@system/molecules/Ribbon'
 import Section from '@system/molecules/Section'
 import { useCallback } from 'react'
-import { Pressable, ScrollView } from 'react-native'
+import { ActivityIndicator, Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import GenericPodcastCover from './GenericPodcastCover'
@@ -88,7 +88,14 @@ const PodcastDetailScreen: React.FC = () => {
     navigation.navigate('author-details', { authorId: author.id })
   }, [author, navigation])
 
-  if (isLoading || !podcast) return null
+  if (isLoading || !podcast)
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <ActivityIndicator size="large" color={colors.primary} />
+        <Separator y={12} />
+        <Typography.Text>Loading info about this podcast</Typography.Text>
+      </Box>
+    )
 
   const [firstSubject] = subjects
 

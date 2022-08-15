@@ -37,7 +37,7 @@ const CreatePlaylistModal = forwardRef<ModalRef, Props>(
           }),
         )
       },
-      [onCreatePlaylist, dispatch, onCreatePlaylist, playlistName],
+      [onCreatePlaylist, dispatch, playlistName],
     )
 
     return (

@@ -2,6 +2,7 @@ import { useAppTheme } from '@application/hooks'
 import { useAppSelector } from '@application/hooks/store'
 import { Playlist } from '@application/types'
 import { getHitSlop } from '@application/utils/tools'
+import NoDataComponent from '@presentation/containers/NoDataComponent'
 import Icon from '@system/atoms/Icon'
 import PlaylistListItem from '@system/molecules/PlaylistListItem'
 import {
@@ -35,8 +36,24 @@ const PlaylistCollection: React.FC<Props> = ({
 
   return (
     <FlatList
+      contentContainerStyle={{ flexGrow: 1 }}
       data={playlists}
       keyExtractor={item => item.id}
+      ListEmptyComponent={
+        <NoDataComponent
+          noDataMessage="Your playlist collection is empty"
+          extraProps={{
+            containerProps: {
+              px: 'md',
+              pt: 'xxl',
+              flex: 1,
+            },
+            messageProps: {
+              textAlign: 'center',
+            },
+          }}
+        />
+      }
       renderItem={({ item }) => {
         const isIncludedInPlaylist = item.podcasts.some(
           podcast => podcast.id === podcastIdToAdd,

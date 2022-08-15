@@ -3,7 +3,7 @@ import FastImage, { FastImageProps, Source } from 'react-native-fast-image'
 type ImagePriority = 'low' | 'normal' | 'high'
 
 export type Props = {
-  sourceUri: string
+  sourceUri?: string
   height?: string | number
   width?: string | number
   priority?: ImagePriority

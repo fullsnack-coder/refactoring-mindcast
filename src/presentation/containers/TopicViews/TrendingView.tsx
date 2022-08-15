@@ -1,6 +1,7 @@
 import { useAppTheme } from '@application/hooks'
 import { Podcast } from '@application/types'
 import Box from '@system/atoms/Box'
+import MessageScreen from '@system/molecules/MessageScreen'
 import PodcastTrendingPreview from '@system/molecules/PodcastTrendingPreview'
 import { FlatList } from 'react-native'
 
@@ -18,6 +19,14 @@ const TrendingViews: React.FC<Props> = ({ podcasts, onTapPodcast }) => {
       data={podcasts}
       numColumns={2}
       keyExtractor={({ id }) => id}
+      ListEmptyComponent={
+        <Box pt="xxl" alignItems="center" flex={1}>
+          <MessageScreen
+            message="There is no trending podcasts found"
+            renderAs="text"
+          />
+        </Box>
+      }
       contentContainerStyle={{
         backgroundColor: colors.primaryBackground,
         flexGrow: 1,
