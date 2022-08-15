@@ -1,5 +1,8 @@
 import { Podcast, StoreAction } from '@application/types'
-import { getNewReleases } from '@infrastructure/api/podcasts'
+import {
+  getNewReleases,
+  GetNewReleasesOptions,
+} from '@infrastructure/api/podcasts'
 import { call, put, takeLatest } from 'redux-saga/effects'
 
 const PODCASTS_GET_NEW_RELEASES_START = 'podcasts/get-new-releases-start'
@@ -28,6 +31,7 @@ export type NewReleasesPayloads =
       podcasts: Podcast[]
     }
   | { error: Error | null }
+  | GetNewReleasesOptions
 
 export const initialState: NewReleasesState = {
   status: 'idle',
@@ -51,10 +55,18 @@ const guards = {
   ): payload is { error: Error } => {
     return 'error' in payload
   },
+  isNewReleasesGet: (
+    payload: NewReleasesPayloads,
+  ): payload is GetNewReleasesOptions => {
+    return 'author' in payload || 'topicTag' in payload
+  },
 }
 
-export const getNewReleasesStart = (): StoreAction<NewReleasesPayloads> => ({
+export const getNewReleasesStart = (
+  options: GetNewReleasesOptions,
+): StoreAction<NewReleasesPayloads> => ({
   type: PODCASTS_GET_NEW_RELEASES_START,
+  payload: options,
 })
 
 const getNewReleasesSuccess = (
@@ -71,9 +83,13 @@ const getNewReleasesFailure = (
   payload: { error },
 })
 
-function* newReleasesSagaWorker() {
+function* newReleasesSagaWorker({ payload }: StoreAction<NewReleasesPayloads>) {
   try {
-    const podcasts: Podcast[] = yield call(getNewReleases)
+    const { author, topicTag } = (payload || {}) as GetNewReleasesOptions
+    const podcasts: Podcast[] = yield call(getNewReleases, {
+      author,
+      topicTag,
+    })
     yield put(getNewReleasesSuccess(podcasts))
   } catch (error) {
     yield put(getNewReleasesFailure(error as Error))

@@ -5,9 +5,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import Box from '@system/atoms/Box'
 import Icon from '@system/atoms/Icon'
 import AuthorSearchItem from '@system/molecules/AuthorSearchItem'
+import MessageScreen from '@system/molecules/MessageScreen'
 import Ribbon from '@system/molecules/Ribbon'
 import { useCallback } from 'react'
-import { FlatList } from 'react-native'
+import { ActivityIndicator, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {} & NativeStackScreenProps<SearchStackParamList, 'search-results'>
@@ -15,7 +16,7 @@ type Props = {} & NativeStackScreenProps<SearchStackParamList, 'search-results'>
 const SearchResultsScreen: React.FC<Props> = ({ route, navigation }) => {
   const { params } = route
   const { colors, spacing } = useAppTheme()
-  const { currentAuthors } = useAuthors({
+  const { currentAuthors, isLoading } = useAuthors({
     name: params.searchedTerm,
   })
 
@@ -25,6 +26,13 @@ const SearchResultsScreen: React.FC<Props> = ({ route, navigation }) => {
     },
     [navigation],
   )
+
+  if (isLoading)
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <ActivityIndicator color={colors.primary} size="large" />
+      </Box>
+    )
 
   return (
     <SafeAreaView>
@@ -45,6 +53,13 @@ const SearchResultsScreen: React.FC<Props> = ({ route, navigation }) => {
           padding: spacing.md,
           paddingBottom: 80,
         }}
+        ListEmptyComponent={
+          <Box pt="xxl">
+            <MessageScreen
+              message={`There is no authors for "${params.searchedTerm || ''}"`}
+            />
+          </Box>
+        }
         data={currentAuthors}
         ItemSeparatorComponent={() => <Box height={12} />}
         renderItem={({ item }) => (

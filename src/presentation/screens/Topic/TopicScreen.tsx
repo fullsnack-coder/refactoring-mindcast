@@ -13,12 +13,13 @@ import {
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import Box from '@system/atoms/Box'
 import Icon from '@system/atoms/Icon'
 import Image from '@system/atoms/Image'
 import Ribbon from '@system/molecules/Ribbon'
 import StepPanelSlider from '@system/organisms/StepsPanelSlider'
 import { useCallback } from 'react'
-import { StatusBar } from 'react-native'
+import { ActivityIndicator, StatusBar } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = CompositeScreenProps<
@@ -26,12 +27,22 @@ type Props = CompositeScreenProps<
   BottomTabScreenProps<HomeTabsParamList>
 >
 
+const TopicInfoLoader = () => {
+  const { colors } = useAppTheme()
+  return (
+    <Box flex={1} alignItems="center" justifyContent="center">
+      <ActivityIndicator color={colors.primary} />
+    </Box>
+  )
+}
+
 const TopicScreen: React.FC<Props> = ({ navigation, route }) => {
   const {
     params: { topic },
   } = route
   const { coverUrl, tag } = topic
-  const { authors, hottestPodcasts, newestPodcasts } = useTopicResults(tag)
+  const { authors, hottestPodcasts, newestPodcasts, isLoading } =
+    useTopicResults(tag)
   const { colors } = useAppTheme()
 
   const redirectToPodcastDetail = useCallback(
@@ -82,15 +93,27 @@ const TopicScreen: React.FC<Props> = ({ navigation, route }) => {
             ],
           },
         }}>
-        <FeaturedView
-          podcasts={hottestPodcasts}
-          onTapPodcast={redirectToPodcastDetail}
-        />
-        <TrendingView
-          podcasts={newestPodcasts}
-          onTapPodcast={redirectToPodcastDetail}
-        />
-        <AuthorsView authors={authors} onTapAuthor={redirectToAuthorDetail} />
+        {isLoading ? (
+          <TopicInfoLoader />
+        ) : (
+          <FeaturedView
+            podcasts={hottestPodcasts}
+            onTapPodcast={redirectToPodcastDetail}
+          />
+        )}
+        {isLoading ? (
+          <TopicInfoLoader />
+        ) : (
+          <TrendingView
+            podcasts={newestPodcasts}
+            onTapPodcast={redirectToPodcastDetail}
+          />
+        )}
+        {isLoading ? (
+          <TopicInfoLoader />
+        ) : (
+          <AuthorsView authors={authors} onTapAuthor={redirectToAuthorDetail} />
+        )}
       </StepPanelSlider>
     </SafeAreaView>
   )

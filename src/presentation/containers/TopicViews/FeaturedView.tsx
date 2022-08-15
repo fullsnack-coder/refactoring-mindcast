@@ -1,6 +1,7 @@
 import { useAppTheme } from '@application/hooks'
 import { Podcast } from '@application/types'
 import Box from '@system/atoms/Box'
+import MessageScreen from '@system/molecules/MessageScreen'
 import PodcastFeatured from '@system/molecules/PodcastFeatured'
 import { FlatList, FlatListProps } from 'react-native'
 
@@ -18,16 +19,24 @@ const FeaturedView: React.FC<Props> = ({
 
   return (
     <FlatList
-      style={{ flex: 1 }}
-      keyExtractor={({ id }) => id}
-      ItemSeparatorComponent={() => (
-        <Box height={4} bg="primaryBackgroundOverlay" />
-      )}
       contentContainerStyle={{
         backgroundColor: colors.primaryBackground,
         paddingVertical: spacing.md,
         flexGrow: 1,
       }}
+      style={{ flex: 1 }}
+      keyExtractor={({ id }) => id}
+      ListEmptyComponent={
+        <Box pt="xxl" alignItems="center" flex={1}>
+          <MessageScreen
+            message="There is no featured podcasts found"
+            renderAs="text"
+          />
+        </Box>
+      }
+      ItemSeparatorComponent={() => (
+        <Box height={4} bg="primaryBackgroundOverlay" />
+      )}
       data={podcasts}
       renderItem={({ item: podcast }) => (
         <PodcastFeatured

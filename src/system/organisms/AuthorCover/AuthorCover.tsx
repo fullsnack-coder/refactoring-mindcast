@@ -1,3 +1,4 @@
+import { PLACEHOLDER_AVATAR_URI } from '@application/constants'
 import { useAppTheme } from '@application/hooks'
 import Box, { BoxProps } from '@system/atoms/Box'
 import Image from '@system/atoms/Image'
@@ -33,9 +34,13 @@ const AuthorCover: React.FC<Props> = ({
       justifyContent="flex-end"
       bg="darkOverlay"
       {...containerProps}>
-      <Image sourceUri={avatar} style={styles.imageCover} resizeMode="cover" />
+      <Image
+        sourceUri={avatar || PLACEHOLDER_AVATAR_URI}
+        style={styles.imageCover}
+        resizeMode="cover"
+      />
       <LinearGradient
-        colors={[colors.transparent, colors.primaryBackground]}
+        colors={[colors.darkOverlay, colors.primaryBackground]}
         style={[
           styles.linearGradient,
           { paddingBottom: spacing.md, paddingLeft: spacing.md },

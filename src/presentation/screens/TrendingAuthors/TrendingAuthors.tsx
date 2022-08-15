@@ -6,14 +6,12 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import Box from '@system/atoms/Box'
 import Icon from '@system/atoms/Icon'
 import Separator from '@system/atoms/Separator'
-import Typography from '@system/atoms/Typography'
 import AuthorListItem from '@system/molecules/AuthorListItem'
+import MessageScreen from '@system/molecules/MessageScreen'
 import Ribbon from '@system/molecules/Ribbon'
 import { useCallback, useEffect } from 'react'
-import { FlatList, Pressable } from 'react-native'
+import { ActivityIndicator, FlatList, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
-const { Text } = Typography
 
 type Props = {} & NativeStackScreenProps<
   DiscoverStackParamList,
@@ -23,7 +21,9 @@ type Props = {} & NativeStackScreenProps<
 const TrendingAuthorsScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch()
   const { colors, spacing } = useAppTheme()
-  const trendingAuthors = useAppSelector(state => state.authors.topAuthors)
+  const { topAuthors: trendingAuthors, status } = useAppSelector(
+    state => state.authors,
+  )
 
   useEffect(() => {
     if (trendingAuthors.length === 0) {
@@ -53,17 +53,28 @@ const TrendingAuthorsScreen: React.FC<Props> = ({ navigation }) => {
             />
           }
         />
-        <FlatList
-          data={trendingAuthors}
-          keyExtractor={({ id }) => id}
-          contentContainerStyle={{ paddingTop: spacing.sm }}
-          ItemSeparatorComponent={() => <Separator y={10} />}
-          renderItem={({ item }) => (
-            <Pressable onPress={handleRedirectToAuthor(item.id)}>
-              <AuthorListItem author={item} />
-            </Pressable>
-          )}
-        />
+        {status === 'started' ? (
+          <Box flex={1} alignItems="center" justifyContent="center">
+            <ActivityIndicator size="large" color={colors.primary} />
+          </Box>
+        ) : (
+          <FlatList
+            data={trendingAuthors}
+            ListEmptyComponent={
+              <Box pt="xxl" alignItems="center">
+                <MessageScreen message="There is no authors" />
+              </Box>
+            }
+            keyExtractor={({ id }) => id}
+            contentContainerStyle={{ paddingTop: spacing.sm }}
+            ItemSeparatorComponent={() => <Separator y={10} />}
+            renderItem={({ item }) => (
+              <Pressable onPress={handleRedirectToAuthor(item.id)}>
+                <AuthorListItem author={item} />
+              </Pressable>
+            )}
+          />
+        )}
       </Box>
     </SafeAreaView>
   )

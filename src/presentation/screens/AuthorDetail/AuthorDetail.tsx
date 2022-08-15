@@ -1,5 +1,6 @@
 import { useAppTheme } from '@application/hooks'
 import useAuthor from '@application/hooks/useAuthor'
+import NoDataComponent from '@presentation/containers/NoDataComponent'
 import {
   RouteProp,
   StackActions,
@@ -20,7 +21,13 @@ import Section from '@system/molecules/Section'
 import AuthorCover from '@system/organisms/AuthorCover'
 
 import { useCallback } from 'react'
-import { FlatList, Pressable, ScrollView, StatusBar } from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  ScrollView,
+  StatusBar,
+} from 'react-native'
 
 const { Text } = Typography
 
@@ -31,7 +38,7 @@ type ScreenParams = {
 }
 
 const AuthorDetailScreen: React.FC = () => {
-  const { colors, spacing } = useAppTheme()
+  const { colors, spacing, textSize } = useAppTheme()
   const {
     params: { authorId },
   } = useRoute<RouteProp<ScreenParams, 'authorDetails'>>()
@@ -46,8 +53,10 @@ const AuthorDetailScreen: React.FC = () => {
   )
 
   const handleRedirectToAuthor = useCallback(
-    (authorId: string) => () => {
-      navigation.dispatch(StackActions.push('author-details', { authorId }))
+    (redirectId: string) => () => {
+      navigation.dispatch(
+        StackActions.push('author-details', { authorId: redirectId }),
+      )
     },
     [navigation],
   )
@@ -62,7 +71,14 @@ const AuthorDetailScreen: React.FC = () => {
     featured,
   } = authorInfo! || {}
 
-  if (error || isLoading) return null
+  if (error || isLoading)
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <ActivityIndicator size="large" color={colors.primary} />
+        <Separator y={12} />
+        <Typography.Text>Loading info about this author</Typography.Text>
+      </Box>
+    )
 
   return (
     <>
@@ -92,26 +108,34 @@ const AuthorDetailScreen: React.FC = () => {
           <AuthorCover avatar={avatarUrl as string} name={firstName} />
           <Section title="About">
             <Box px="md">
-              <Text color="primaryText">{description}</Text>
+              <Text color="primaryText">
+                {description || "This author doesn't have any description"}
+              </Text>
             </Box>
           </Section>
           <Separator y={22} />
-          <Section title="Subjects">
-            <Box flexDirection="row" px="md" flexWrap="wrap">
-              {subjects?.map(({ id, tag }) => (
-                <Badge
-                  key={id}
-                  text={tag}
-                  containerProps={{ mr: 'sm', mb: 'sm' }}
-                />
-              ))}
-            </Box>
-          </Section>
-          <Separator y={22} />
+          {subjects?.length > 0 ? (
+            <>
+              <Section title="Subjects">
+                <Box flexDirection="row" px="md" flexWrap="wrap">
+                  {subjects.map(({ id, tag }) => (
+                    <Badge
+                      key={id}
+                      text={tag}
+                      containerProps={{ mr: 'sm', mb: 'sm' }}
+                    />
+                  ))}
+                </Box>
+              </Section>
+              <Separator y={22} />
+            </>
+          ) : null}
           <Section
             title="New Releases"
             callToActionButton={
-              <Button text="LISTEN NOW" type="primary" size="sm" />
+              newReleases?.length > 0 ? (
+                <Button text="LISTEN NOW" type="primary" size="sm" />
+              ) : null
             }>
             <FlatList
               data={newReleases}
@@ -119,6 +143,12 @@ const AuthorDetailScreen: React.FC = () => {
               keyExtractor={item => item.id}
               contentContainerStyle={{ paddingLeft: spacing.md }}
               ItemSeparatorComponent={() => <Separator x={22} />}
+              ListEmptyComponent={
+                <NoDataComponent
+                  noDataMessage="This author doesn't have new releases"
+                  extraProps={{ renderAs: 'text' }}
+                />
+              }
               renderItem={({ item }) => (
                 <PodcastHottestPreview
                   onPress={handleRedirectToPodcast(item.id)}
@@ -128,39 +158,54 @@ const AuthorDetailScreen: React.FC = () => {
             />
           </Section>
           <Separator y={22} />
-          <Section
-            title="Featured"
-            callToActionButton={<Button size="sm" text="LISTEN NOW" />}>
-            {featured?.map((featuredPodcast, index) => (
-              <Pressable
-                key={featuredPodcast.id}
-                onPress={handleRedirectToPodcast(featuredPodcast.id)}>
-                <PodcastListItem
-                  podcast={featuredPodcast}
-                  renderLeftItem={
-                    <Box px="sm">
-                      <Text>{index}</Text>
-                    </Box>
-                  }
-                />
-              </Pressable>
-            ))}
-          </Section>
-          <Section title="Related Authors">
-            <FlatList
-              data={relatedAuthors}
-              horizontal
-              keyExtractor={item => item.id}
-              contentContainerStyle={{ paddingHorizontal: spacing.md }}
-              ItemSeparatorComponent={() => <Separator x={spacing.md} />}
-              renderItem={({ item }) => (
-                <AuthorCard.Related
-                  author={item}
-                  onPress={handleRedirectToAuthor(item.id)}
-                />
-              )}
-            />
-          </Section>
+          {featured ? (
+            <Section
+              title="Featured"
+              callToActionButton={<Button size="sm" text="LISTEN NOW" />}>
+              {featured?.map((featuredPodcast, index) => (
+                <Pressable
+                  key={featuredPodcast.id}
+                  onPress={handleRedirectToPodcast(featuredPodcast.id)}>
+                  <PodcastListItem
+                    podcast={featuredPodcast}
+                    renderLeftItem={
+                      <Box px="sm">
+                        <Text>{index}</Text>
+                      </Box>
+                    }
+                  />
+                </Pressable>
+              ))}
+            </Section>
+          ) : null}
+          {relatedAuthors ? (
+            <Section title="Related Authors">
+              <FlatList
+                data={relatedAuthors}
+                horizontal
+                keyExtractor={item => item.id}
+                contentContainerStyle={{ paddingHorizontal: spacing.md }}
+                ListEmptyComponent={
+                  <NoDataComponent
+                    noDataMessage="There are no authors related to this"
+                    extraProps={{
+                      messageProps: {
+                        fontSize: textSize.md,
+                      },
+                      renderAs: 'text',
+                    }}
+                  />
+                }
+                ItemSeparatorComponent={() => <Separator x={spacing.md} />}
+                renderItem={({ item }) => (
+                  <AuthorCard.Related
+                    author={item}
+                    onPress={handleRedirectToAuthor(item.id)}
+                  />
+                )}
+              />
+            </Section>
+          ) : null}
           <Separator y={42} />
         </ScrollView>
       </Box>
