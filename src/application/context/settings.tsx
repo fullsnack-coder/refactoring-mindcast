@@ -14,15 +14,16 @@ export type SettingKey =
   | 'darkmode'
   | 'download-mobile-network'
 
-export type SettingOption = {
+export type SettingOption<TValue = any> = {
   label: string
   description?: string
-  value: any
+  value: TValue
 }
 
 type SettingsContext = {
   currentSettings: Record<SettingKey, SettingOption>
   updateSetting: <T>(settingKey: SettingKey, updatedValue: T) => void
+  getSetting: <T>(settingKey: SettingKey) => Promise<SettingOption<T> | null>
 }
 
 const appSettingsContext = createContext<SettingsContext>({} as SettingsContext)
@@ -81,6 +82,15 @@ const AppSettingsProvider: React.FC = ({ children }) => {
     [currentSettings, saveOnInternalStorage],
   )
 
+  const getSetting = useCallback(async (key: SettingKey) => {
+    const localConfigStr = await AsyncStorageLib.getItem(STORE_APP_SETTINGS)
+    if (localConfigStr) {
+      const localConfig = JSON.parse(localConfigStr)
+      return localConfig[key]
+    }
+    return null
+  }, [])
+
   useEffect(() => {
     AsyncStorageLib.getItem(STORE_APP_SETTINGS).then(localSettings => {
       if (!localSettings) return
@@ -90,7 +100,8 @@ const AppSettingsProvider: React.FC = ({ children }) => {
   }, [])
 
   return (
-    <appSettingsContext.Provider value={{ currentSettings, updateSetting }}>
+    <appSettingsContext.Provider
+      value={{ currentSettings, updateSetting, getSetting }}>
       {children}
     </appSettingsContext.Provider>
   )
