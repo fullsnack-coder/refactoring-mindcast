@@ -15,7 +15,7 @@ const Badge: React.FC<Props> = ({ text, containerProps }) => (
     borderRadius="xs"
     p="sm"
     {...containerProps}>
-    <Text color="buttonTextPrimary" fontWeight="600" textAlign="center">
+    <Text color="primaryBackground" fontWeight="600" textAlign="center">
       {text}
     </Text>
   </Box>

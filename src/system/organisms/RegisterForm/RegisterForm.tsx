@@ -106,7 +106,7 @@ const RegisterForm: React.FC<Props> = ({
         alignItems="center"
         justifyContent="space-between">
         <Box flexDirection="row">
-          <Text color="primaryBackground">Has account? </Text>
+          <Text color="secondaryText">Has account? </Text>
           <Pressable onPress={onLoginTap}>
             <Text color="primary">Log-In!</Text>
           </Pressable>

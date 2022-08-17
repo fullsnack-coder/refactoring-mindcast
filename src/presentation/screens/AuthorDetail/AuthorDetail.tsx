@@ -26,7 +26,6 @@ import {
   FlatList,
   Pressable,
   ScrollView,
-  StatusBar,
 } from 'react-native'
 
 const { Text } = Typography
@@ -73,7 +72,11 @@ const AuthorDetailScreen: React.FC = () => {
 
   if (error || isLoading)
     return (
-      <Box flex={1} alignItems="center" justifyContent="center">
+      <Box
+        flex={1}
+        alignItems="center"
+        justifyContent="center"
+        bg="primaryBackground">
         <ActivityIndicator size="large" color={colors.primary} />
         <Separator y={12} />
         <Typography.Text>Loading info about this author</Typography.Text>
@@ -82,11 +85,6 @@ const AuthorDetailScreen: React.FC = () => {
 
   return (
     <>
-      <StatusBar
-        translucent
-        backgroundColor={colors.primaryTextTransparent}
-        barStyle="dark-content"
-      />
       <Box flex={1} position="relative" bg="primaryBackground">
         <Box position="absolute" top={22} zIndex={99}>
           <Ribbon

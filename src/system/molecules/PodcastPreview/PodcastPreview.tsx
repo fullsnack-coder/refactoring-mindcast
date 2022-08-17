@@ -29,11 +29,11 @@ const PodcastPreview: React.FC<Props> = ({ podcast, ...rest }) => {
         imageStyle={{ borderRadius: borderRadii.md }}
         source={{ uri: coverImage }}>
         <Box
+          bg="darkOverlay"
+          borderRadius="md"
           flex={1}
           justifyContent="space-between"
-          p="md"
-          borderRadius="md"
-          bg="primaryTextTransparent">
+          p="md">
           <Box flexDirection="row" alignItems="center">
             <Avatar
               name={author.firstName}

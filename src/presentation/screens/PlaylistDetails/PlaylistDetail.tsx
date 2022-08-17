@@ -47,7 +47,7 @@ const PlaylistDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Box flex={1}>
+      <Box flex={1} bg="primaryBackground">
         <Ribbon
           title={name}
           onPressLeftButton={navigation.goBack}

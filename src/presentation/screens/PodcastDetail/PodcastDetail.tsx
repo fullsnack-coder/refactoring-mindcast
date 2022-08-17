@@ -100,7 +100,8 @@ const PodcastDetailScreen: React.FC = () => {
   const [firstSubject] = subjects
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: colors.primaryBackground }}>
       <Ribbon
         title="Podcast Detail"
         onPressLeftButton={navigation.goBack}

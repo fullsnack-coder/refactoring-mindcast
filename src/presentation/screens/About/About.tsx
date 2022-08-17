@@ -14,7 +14,7 @@ const AboutScreen: React.FC<Props> = ({ navigation }) => {
   const { colors, spacing } = useAppTheme()
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Box flex={1}>
+      <Box flex={1} bg="primaryBackground">
         <Ribbon
           title="About"
           onPressLeftButton={navigation.goBack}

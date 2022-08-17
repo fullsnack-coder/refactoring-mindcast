@@ -30,9 +30,9 @@ const Authors: React.FC<Props> = () => {
               <Avatar avatarUri={avatarURL} />
             </Box>
             <Box flexDirection="row" justifyContent="center" mb="md">
-              {socialLinks.map(({ color, icon, link }, idx) => (
+              {socialLinks.map(({ color, icon, link }, idxSocial) => (
                 <Pressable
-                  key={idx}
+                  key={idxSocial}
                   style={{ marginLeft: 12 }}
                   onPress={() => Linking.openURL(link)}>
                   <Icon name={icon} color={color} size="lg" />

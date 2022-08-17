@@ -7,12 +7,13 @@ import MessageScreen from '@system/molecules/MessageScreen'
 import PressableTextWithOverlay, {
   RenderContentType,
 } from '@system/molecules/PressableTextWithOverlay'
+import { Theme } from '@system/theme'
 import { useCallback } from 'react'
 import { ActivityIndicator, FlatList } from 'react-native'
 
 const getContentTopicButton =
-  (item: Topic): RenderContentType =>
-  () => ({ text: item.title })
+  (item: Topic, fontColor?: keyof Theme['colors']): RenderContentType =>
+  () => ({ text: item.title, color: fontColor })
 
 type Props = {
   onTapTopic?: (topicTapped: Topic) => void
@@ -63,7 +64,7 @@ const TopicsCollection: React.FC<Props> = ({ onTapTopic }) => {
             style: { width: '48%' },
             onPress: handlePressTopic(item),
           }}
-          renderContent={getContentTopicButton(item)}
+          renderContent={getContentTopicButton(item, 'buttonTextPrimary')}
         />
       )}
     />

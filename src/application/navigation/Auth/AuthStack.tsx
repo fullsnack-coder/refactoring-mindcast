@@ -18,7 +18,7 @@ const AuthStack: React.FC<Props> = () => {
   return (
     <>
       <StatusBar
-        backgroundColor={colors.primaryText}
+        backgroundColor={colors.secondaryBackground}
         barStyle="light-content"
       />
       <Stack.Navigator screenOptions={{ headerShown: false }}>

@@ -11,7 +11,7 @@ import Typography from '@system/atoms/Typography'
 import PodcastListItem from '@system/molecules/PodcastListItem'
 import Ribbon from '@system/molecules/Ribbon'
 import { useCallback, useEffect } from 'react'
-import { ActivityIndicator, FlatList, Pressable } from 'react-native'
+import { ActivityIndicator, FlatList, Pressable, StatusBar } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const { Text } = Typography
@@ -38,6 +38,7 @@ const ReleasesScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar backgroundColor={colors.secondaryBackground} />
       <Box flex={1} bg="primaryBackground">
         <Ribbon
           title="New Releases"

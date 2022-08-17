@@ -47,7 +47,7 @@ const HottestsPodcastsScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Box flex={1}>
+      <Box flex={1} bg="primaryBackground">
         <Ribbon
           title="Hottests Podcasts"
           onPressLeftButton={navigation.goBack}
@@ -61,7 +61,11 @@ const HottestsPodcastsScreen: React.FC<Props> = ({ navigation }) => {
           }
         />
         {status === 'started' ? (
-          <Box flex={1} justifyContent="center" alignItems="center">
+          <Box
+            flex={1}
+            justifyContent="center"
+            alignItems="center"
+            bg="primaryBackground">
             <ActivityIndicator size="large" color={colors.primary} />
           </Box>
         ) : (

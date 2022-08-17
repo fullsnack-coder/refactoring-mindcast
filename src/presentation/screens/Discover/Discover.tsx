@@ -80,7 +80,7 @@ const DiscoverScreen: React.FC = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar
-        backgroundColor={colors.primaryBackground}
+        backgroundColor={colors.secondaryBackground}
         barStyle="dark-content"
       />
       <ScrollView
@@ -93,6 +93,7 @@ const DiscoverScreen: React.FC = () => {
             }}
             refreshing={dataIsFetching && isPulled}
             colors={[colors.primary]}
+            progressBackgroundColor={colors.secondaryBackground}
           />
         }>
         {dataIsFetching ? (

@@ -15,7 +15,7 @@ export const authors: AppAuthor[] = [
       {
         icon: 'github',
         link: 'https://github.com/steniowagner',
-        color: palette['coolGray-900'],
+        color: palette['coolGray-500'],
       },
     ],
     description:
@@ -29,7 +29,7 @@ export const authors: AppAuthor[] = [
       "Hello, my name's Manuel, Frontend developer in love to make solutions with software, since webapps to mobile apps, based on the JavaScript Ecosystem",
     socialLinks: [
       {
-        color: palette['coolGray-900'],
+        color: palette['coolGray-500'],
         icon: 'github',
         link: 'https://github.com/fullsnack-coder',
       },

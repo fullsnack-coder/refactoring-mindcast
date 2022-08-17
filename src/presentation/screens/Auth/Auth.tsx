@@ -80,17 +80,20 @@ const AuthScreen: React.FC = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{
+          flexGrow: 1,
+        }}
         keyboardShouldPersistTaps="handled">
-        <Box p="sm" justifyContent="space-between" bg="primaryText" flex={1}>
+        <Box
+          p="sm"
+          justifyContent="space-between"
+          bg="secondaryBackground"
+          flex={1}>
           <Box justifyContent="center" flex={1} minHeight={200}>
-            <Heading color="primaryBackground" textAlign="center">
+            <Heading color="primaryText" textAlign="center">
               MIND<Heading color="primary">CAST</Heading>
             </Heading>
-            <Heading
-              color="primaryBackground"
-              textAlign="center"
-              variant="title">
+            <Heading color="secondaryText" textAlign="center" variant="title">
               A new way to boost your knowledge
             </Heading>
           </Box>

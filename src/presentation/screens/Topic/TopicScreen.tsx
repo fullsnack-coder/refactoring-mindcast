@@ -84,6 +84,7 @@ const TopicScreen: React.FC<Props> = ({ navigation, route }) => {
       />
       <Image sourceUri={coverUrl} width="100%" height={200} />
       <StepPanelSlider
+        contentContainerStyle={{ backgroundColor: colors.primaryBackground }}
         thumb={{
           config: {
             thumbs: [
