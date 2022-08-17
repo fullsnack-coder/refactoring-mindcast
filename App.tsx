@@ -4,10 +4,9 @@ import { AuthProvider } from '@application/context/auth'
 import { AudioPlayerProvider } from '@application/context/audioPlayer'
 import NotificationsProvider from '@application/context/notifications'
 import AppSettingsProvider from '@application/context/settings'
+import ThemeProvider from '@application/context/theme'
 import AppNavigator from '@application/navigation'
 import store from '@application/store'
-import { ThemeProvider } from '@shopify/restyle'
-import appTheme from '@system/theme'
 
 import Orientation from 'react-native-orientation-locker'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -26,7 +25,7 @@ const App: React.FC = () => {
     <Provider store={store}>
       <AuthProvider>
         <AppSettingsProvider>
-          <ThemeProvider theme={appTheme}>
+          <ThemeProvider>
             <NotificationsProvider>
               <AudioPlayerProvider>
                 <SafeAreaProvider>
@@ -44,7 +43,7 @@ const App: React.FC = () => {
 // TODO: Remove this when we have a better solution for the log box
 if (__DEV__) {
   LogBox.ignoreLogs([
-    `EventEmitter.removeListener('change', ...)`,
+    "EventEmitter.removeListener('change', ...)",
     'NativeEventEmitter',
   ])
 }
