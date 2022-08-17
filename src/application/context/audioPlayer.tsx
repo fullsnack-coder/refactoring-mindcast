@@ -124,6 +124,7 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
           Capability.Pause,
           Capability.SkipToNext,
           Capability.SkipToPrevious,
+          Capability.SeekTo,
         ],
       }).then(() => {
         setIsInitialized(true)
