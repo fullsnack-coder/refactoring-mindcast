@@ -3,3 +3,5 @@ export const STORE_RECENTLY_EPISODES = '@store-recently-episodes'
 export const STORE_APP_SETTINGS = '@store-app-settings'
 export const PLACEHOLDER_AVATAR_URI =
   'https://res.cloudinary.com/snack-coder-cloud/image/upload/v1660523052/PROFILE_PLACEHOLDER_icnsux.png'
+
+export const TRACKPLAYER_NOTIFICATION_URI = 'trackplayer://notification.click'
