@@ -27,6 +27,7 @@ const TimeSlider: React.FC<Props> = ({
 }) => {
   const { colors } = useAppTheme()
   const [currentSlideTime, setCurrentSlideTime] = useState(initialTime)
+  const [isSliding, setIsSliding] = useState(false)
 
   const currentTime = getTime(currentSlideTime)
   const totalTime = getTime(durationInSeconds)
@@ -42,6 +43,7 @@ const TimeSlider: React.FC<Props> = ({
   const handleSlidingComplete = useCallback(
     (value: number) => {
       setCurrentSlideTime(value)
+      setIsSliding(false)
       onSeekTo?.(value)
     },
     [onSeekTo],
@@ -59,9 +61,10 @@ const TimeSlider: React.FC<Props> = ({
         onValueChange={handleChangeSlider}
         minimumValue={0}
         minimumTrackTintColor={colors.primary}
+        onSlidingStart={() => setIsSliding(true)}
         maximumTrackTintColor={colors.primaryTextTransparent}
         maximumValue={durationInSeconds}
-        value={currentSlideTime}
+        value={!isSliding ? currentSlideTime : undefined}
         {...rest}
       />
       <Box

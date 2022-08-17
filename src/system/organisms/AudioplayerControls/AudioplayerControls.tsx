@@ -30,16 +30,20 @@ const AudioplayerControls: React.FC<Props> = ({
   containerProps,
 }) => {
   const { colors } = useAppTheme()
-  const { isPlaying, durationInSeconds, currentTime, position } = audioInfo
-  const { current, total } = position
+  const {
+    isPlaying,
+    durationInSeconds,
+    currentTime: currentPlayerTime,
+    position: { current: currentPosition, total },
+  } = audioInfo
 
-  const isFirst = current === 0
-  const isLast = current === total - 1
+  const isFirst = currentPosition === 0
+  const isLast = currentPosition === total - 1
 
   return (
     <Box {...containerProps}>
       <TimeSlider
-        initialTime={currentTime}
+        initialTime={currentPlayerTime}
         onSeekTo={actions.onSeek}
         durationInSeconds={durationInSeconds}
       />

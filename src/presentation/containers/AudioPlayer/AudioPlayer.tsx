@@ -22,7 +22,7 @@ const AudioPlayer: React.FC = () => {
 
   const handleActionPress = useCallback(() => {
     return actions
-  }, [actions, infoPosition])
+  }, [actions])
 
   if (!currentTrack) return null
 
