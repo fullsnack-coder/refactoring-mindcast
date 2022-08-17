@@ -36,7 +36,10 @@ const PlaylistCollection: React.FC<Props> = ({
 
   return (
     <FlatList
-      contentContainerStyle={{ flexGrow: 1 }}
+      contentContainerStyle={{
+        flexGrow: 1,
+        backgroundColor: colors.primaryBackground,
+      }}
       data={playlists}
       keyExtractor={item => item.id}
       ListEmptyComponent={

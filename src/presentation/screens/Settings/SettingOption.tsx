@@ -21,14 +21,17 @@ const SettingOption: React.FC<Props> = ({ setting, onUpdateOption }) => {
         <Text color="primaryText" fontFamily="CircularStd-Bold" fontSize={20}>
           {label}
         </Text>
-        <Text color="primaryTextTransparent" fontSize={16}>
+        <Text color="secondaryText" fontSize={16}>
           {description}
         </Text>
       </Box>
       {typeof value === 'boolean' ? (
         <Switch
-          thumbColor={value ? colors.primary : colors.secondaryBackground}
-          trackColor={{ true: colors.primaryTransparent }}
+          thumbColor={value ? colors.primary : colors.primaryText}
+          trackColor={{
+            true: colors.primaryTransparent,
+            false: colors.primaryTextTransparent,
+          }}
           accessibilityLabel={label}
           value={value}
           onValueChange={onUpdateOption}

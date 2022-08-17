@@ -29,7 +29,7 @@ const Ribbon: React.FC<Props> = ({
     <Box
       alignItems="center"
       flexDirection="row"
-      bg="primaryBackground"
+      bg="secondaryBackground"
       elevation={1}
       height={58}
       position="relative"

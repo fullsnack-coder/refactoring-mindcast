@@ -24,7 +24,7 @@ const Snackbar: React.FC<Props> = ({
   return (
     <Box
       p={typeof content === 'string' ? 'md' : undefined}
-      bg="primaryBackground"
+      bg="secondaryBackground"
       mx="md"
       borderRadius="sm"
       alignItems="center"

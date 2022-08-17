@@ -117,12 +117,20 @@ const YourInterestsScreen: React.FC<Props> = ({ navigation }) => {
         }
       />
       {isPending ? (
-        <Box flex={1} justifyContent="center" alignItems="center">
+        <Box
+          flex={1}
+          justifyContent="center"
+          alignItems="center"
+          bg="primaryBackground">
           <ActivityIndicator size="large" color={colors.primary} />
         </Box>
       ) : (
         <FlatList
-          contentContainerStyle={{ flexGrow: 1, padding: spacing.md }}
+          contentContainerStyle={{
+            flexGrow: 1,
+            padding: spacing.md,
+            backgroundColor: colors.primaryBackground,
+          }}
           data={interestsOptions}
           keyExtractor={({ id }) => id}
           ItemSeparatorComponent={() => <Separator y={15} />}
@@ -139,11 +147,5 @@ const YourInterestsScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
 
 export default YourInterestsScreen

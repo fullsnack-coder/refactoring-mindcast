@@ -20,7 +20,7 @@ const AuthorCardTrending: React.FC<Props> = ({
   <Box
     alignItems="center"
     justifyContent="space-between"
-    bg="primaryBackground"
+    bg="secondaryBackground"
     borderRadius="xs"
     elevation={6}
     height={255}
@@ -35,7 +35,7 @@ const AuthorCardTrending: React.FC<Props> = ({
     </Text>
     <Separator y={12} />
     <Text
-      color="secondaryBackground"
+      color="secondaryText"
       textAlign="center">{`${author.podcasts} podcasts`}</Text>
     <Separator y={12} />
     <Button

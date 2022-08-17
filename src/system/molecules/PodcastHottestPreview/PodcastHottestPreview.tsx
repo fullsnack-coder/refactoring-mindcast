@@ -27,7 +27,7 @@ const PodcastHottestPreview: React.FC<Props> = ({ podcast, ...rest }) => {
         style={styles.wrapper}
         imageStyle={{ borderRadius: borderRadii.md }}
         source={{ uri: coverImage }}>
-        <Box flex={1} p="md" borderRadius="md" bg="primaryTextTransparent">
+        <Box flex={1} p="md" borderRadius="md" bg="darkOverlay">
           <Puntuation
             puntuation={averagePuntuation}
             iconColor={colors.warning}

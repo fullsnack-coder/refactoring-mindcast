@@ -29,13 +29,17 @@ const SearchResultsScreen: React.FC<Props> = ({ route, navigation }) => {
 
   if (isLoading)
     return (
-      <Box flex={1} alignItems="center" justifyContent="center">
+      <Box
+        flex={1}
+        alignItems="center"
+        justifyContent="center"
+        bg="primaryBackground">
         <ActivityIndicator color={colors.primary} size="large" />
       </Box>
     )
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flexGrow: 1 }}>
       <Ribbon
         title="Search Authors"
         onPressLeftButton={navigation.goBack}
@@ -49,6 +53,10 @@ const SearchResultsScreen: React.FC<Props> = ({ route, navigation }) => {
         }
       />
       <FlatList
+        style={{
+          flexGrow: 1,
+          backgroundColor: colors.primaryBackground,
+        }}
         contentContainerStyle={{
           padding: spacing.md,
           paddingBottom: 80,

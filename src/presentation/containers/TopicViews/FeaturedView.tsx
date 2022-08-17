@@ -34,9 +34,7 @@ const FeaturedView: React.FC<Props> = ({
           />
         </Box>
       }
-      ItemSeparatorComponent={() => (
-        <Box height={4} bg="primaryBackgroundOverlay" />
-      )}
+      ItemSeparatorComponent={() => <Box height={2} />}
       data={podcasts}
       renderItem={({ item: podcast }) => (
         <PodcastFeatured

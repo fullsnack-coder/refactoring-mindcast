@@ -43,7 +43,7 @@ const CreatePlaylistModal = forwardRef<ModalRef, Props>(
     return (
       <Modal {...rest} ref={propRef}>
         {({ hide }) => (
-          <Box borderRadius="sm" bg="primaryBackground" p="md">
+          <Box borderRadius="sm" bg="secondaryBackground" p="md">
             <Heading fontSize={textSize.lg}>Create Playlist</Heading>
             <TextInput
               containerProps={{ px: undefined }}

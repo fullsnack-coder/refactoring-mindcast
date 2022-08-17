@@ -4,27 +4,30 @@ export const palette = {
   red: '#c73866',
   punch: '#DD4B39',
   white: '#fff',
+  whiteDarker: '#f5f5f5',
   saffron: '#F8C330',
   chambray: '#3B5998',
-  silver: '#bbb',
+  silver: '#a8a8a8',
   mineshaft: '#222',
+  'coolGray-1000': '#0c111c',
   'coolGray-900': '#111827',
   'coolGray-500': '#4B5563',
   'coolGray-200': '#E5E7EB',
   leaf: '#52af89',
   transparent: 'transparent',
+  black: '#080808',
 }
 
-const appTheme = createTheme({
+export const lightTheme = createTheme({
   colors: {
     facebook: palette.chambray,
     primary: palette.red,
     googlePlus: palette.punch,
     primaryBackground: palette.white,
-    secondaryBackground: palette.silver,
+    secondaryBackground: palette.whiteDarker,
     primaryBackgroundOverlay: palette['coolGray-200'],
     primaryText: palette['coolGray-900'],
-    secondaryText: palette.mineshaft,
+    secondaryText: palette.silver,
     primaryTransparent: `${palette.red}3b`,
     primaryBackgroundTransparent: `${palette.white}5b`,
     primaryTextTransparent: `${palette['coolGray-900']}6b`,
@@ -83,6 +86,15 @@ const appTheme = createTheme({
   },
 })
 
-export type Theme = typeof appTheme
+export type Theme = typeof lightTheme
 
-export default appTheme
+export const darkTheme: Theme = {
+  ...lightTheme,
+  colors: {
+    ...lightTheme.colors,
+    primaryText: palette.white,
+    primaryTextTransparent: `${palette['coolGray-200']}6b`,
+    primaryBackground: palette['coolGray-900'],
+    secondaryBackground: palette['coolGray-1000'],
+  },
+}

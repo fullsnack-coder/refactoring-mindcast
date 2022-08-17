@@ -30,6 +30,7 @@ const TextInput = forwardRef<RNTextInput, Props>(
     ref,
   ) => {
     const { colors, textSize } = useAppTheme()
+
     const baseStyles: StyleProp<TextStyle> = {
       color: colors.secondaryText,
       flex: 1,
@@ -51,7 +52,7 @@ const TextInput = forwardRef<RNTextInput, Props>(
         {!leftInput ? null : <Box mr="xs">{leftInput}</Box>}
         <RNTextInput
           ref={ref}
-          placeholderTextColor={colors.secondaryBackground}
+          placeholderTextColor={colors.secondaryText}
           selectionColor={colors.primary}
           style={[baseStyles, style]}
           {...rest}

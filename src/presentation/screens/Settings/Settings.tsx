@@ -1,5 +1,5 @@
 import { SettingKey, useAppSettings } from '@application/context/settings'
-import { useAppTheme } from '@application/hooks'
+import { useThemeContext } from '@application/context/theme'
 import { useAppDispatch } from '@application/hooks/store'
 import {
   HomeTabsParamList,
@@ -31,7 +31,10 @@ type Props = {} & CompositeScreenProps<
 
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { currentSettings, updateSetting } = useAppSettings()
-  const { colors } = useAppTheme()
+  const {
+    currentTheme: { colors },
+    toggleDarkMode,
+  } = useThemeContext()
   const dispatch = useAppDispatch()
 
   const logoutUser = useCallback(() => {
@@ -53,9 +56,10 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                 <Box key={settingKey} mb="lg">
                   <SettingOption
                     setting={settingValue}
-                    onUpdateOption={newValue =>
+                    onUpdateOption={newValue => {
                       updateSetting(settingKey as SettingKey, newValue)
-                    }
+                      if (settingKey === 'darkmode') toggleDarkMode()
+                    }}
                   />
                 </Box>
               ),
@@ -66,7 +70,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                   <Text fontFamily="CircularStd-Bold" fontSize={20}>
                     About
                   </Text>
-                  <Text fontSize={16} color="primaryTextTransparent">
+                  <Text fontSize={16} color="secondaryText">
                     Want to know more about the Creator of this App? Chek it
                     out!
                   </Text>
@@ -81,7 +85,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                   <Text fontFamily="CircularStd-Bold" fontSize={20}>
                     Logout
                   </Text>
-                  <Text fontSize={16} color="primaryTextTransparent">
+                  <Text fontSize={16} color="secondaryText">
                     Close your app session
                   </Text>
                 </Box>

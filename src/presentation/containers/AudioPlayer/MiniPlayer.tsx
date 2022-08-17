@@ -38,10 +38,7 @@ const MiniPlayer: React.FC<PressableProps> = props => {
           bg="primary"
         />
       </Box>
-      <Box
-        alignItems="center"
-        bg="primaryBackgroundTransparent"
-        flexDirection="row">
+      <Box alignItems="center" bg="secondaryBackground" flexDirection="row">
         <Image
           sourceUri={artwork as string}
           style={{ borderRadius: borderRadii.xs }}
@@ -60,7 +57,7 @@ const MiniPlayer: React.FC<PressableProps> = props => {
               <Icon
                 name={isPlaying ? 'pause' : 'play'}
                 size="md"
-                color={colors.buttonTextPrimary}
+                color={colors.primaryBackground}
               />
             </Box>
           </Pressable>

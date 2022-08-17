@@ -91,7 +91,7 @@ const LoginForm: React.FC<Props> = ({
         alignItems="center"
         px="sm">
         <Box flex={1} flexDirection="row">
-          <Text color="primaryBackground">Not account? </Text>
+          <Text color="secondaryText">Not account? </Text>
           <Pressable onPress={onRegisterTap}>
             <Text color="primary">Register now</Text>
           </Pressable>

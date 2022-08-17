@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import { useAppDispatch } from '@application/hooks/store'
 import { downloadEpisodesLoadAll } from '@application/store/modules/downloads'
 import { loadRecentlyListStart } from '@application/store/modules/episodes'
+import { useThemeContext } from '@application/context/theme'
 
 const HomeTabs = createBottomTabNavigator<HomeTabsParamList>()
 const { Text } = Typography
@@ -18,7 +19,10 @@ const { Text } = Typography
 type Props = {} & NativeStackScreenProps<AppStackParamList, 'home'>
 
 const AppHomeStackNavigation: React.FC<Props> = () => {
-  const { colors } = useAppTheme()
+  const {
+    currentTheme: { colors },
+    isDarkModeEnabled,
+  } = useThemeContext()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -37,6 +41,10 @@ const AppHomeStackNavigation: React.FC<Props> = () => {
           options={{
             headerShown: false,
             tabBarStyle: {
+              backgroundColor: isDarkModeEnabled
+                ? colors.secondaryBackground
+                : colors.primaryBackground,
+              borderTopWidth: 0,
               paddingTop: 6,
               paddingBottom: 6,
               height: 55,
@@ -45,14 +53,12 @@ const AppHomeStackNavigation: React.FC<Props> = () => {
               <Icon
                 name={icon}
                 size="md"
-                color={focused ? colors.primary : colors.secondaryBackground}
+                color={focused ? colors.primary : colors.secondaryText}
               />
             ),
             tabBarActiveTintColor: colors.primary,
             tabBarLabel: ({ focused }) => (
-              <Text
-                color={focused ? 'primary' : 'secondaryBackground'}
-                fontSize={12}>
+              <Text color={focused ? 'primary' : 'secondaryText'} fontSize={12}>
                 {label}
               </Text>
             ),
