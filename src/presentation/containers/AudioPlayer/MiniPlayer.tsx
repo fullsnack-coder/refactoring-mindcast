@@ -78,6 +78,16 @@ const MiniPlayer: React.FC<PressableProps> = props => {
               </Pressable>
             </>
           ) : null}
+          <>
+            <Separator x={6} />
+            <Pressable
+              hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+              onPress={actions.stop}>
+              <Box p="sm">
+                <Icon name="close" size="md" color={colors.primaryText} />
+              </Box>
+            </Pressable>
+          </>
         </Box>
       </Box>
     </Pressable>
