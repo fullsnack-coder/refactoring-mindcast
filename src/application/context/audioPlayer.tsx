@@ -54,7 +54,7 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
   const playbackState = usePlaybackState()
   const [isInitialized, setIsInitialized] = useState(false)
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null)
-  const [tracks, setTracks] = useState<Track[]>([])
+  const [currentTracks, setCurrentTracks] = useState<Track[]>([])
   const [infoPosition, setInfoPosition] = useState<
     AudioPlayerContextType['infoPosition']
   >({
@@ -68,7 +68,10 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
   const actions = {
     play: () => TrackPlayer.play(),
     pause: () => TrackPlayer.pause(),
-    stop: () => TrackPlayer.stop(),
+    stop: () => {
+      TrackPlayer.stop()
+      setCurrentTrack(null)
+    },
     addTracks: (tracks: Track[]) => TrackPlayer.add(tracks),
     seekTo: (time: number) => TrackPlayer.seekTo(time),
     reset: () => TrackPlayer.reset(),
@@ -105,7 +108,7 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
         const isLast = nextTrack === tracks.length - 1
         const isFirst = nextTrack === 0
         setCurrentTrack(tracks[nextTrack])
-        setTracks(tracks)
+        setCurrentTracks(tracks)
         setInfoPosition({
           current: nextTrack,
           isLast,
@@ -138,7 +141,7 @@ export const AudioPlayerProvider: React.FC = ({ children }) => {
         audioplayerStatus,
         actions,
         currentTrack,
-        tracks,
+        tracks: currentTracks,
         isInitialized,
         infoPosition,
         progress: {

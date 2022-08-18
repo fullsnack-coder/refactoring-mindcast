@@ -90,7 +90,11 @@ const PodcastDetailScreen: React.FC = () => {
 
   if (isLoading || !podcast)
     return (
-      <Box flex={1} alignItems="center" justifyContent="center">
+      <Box
+        flex={1}
+        bg="primaryBackground"
+        alignItems="center"
+        justifyContent="center">
         <ActivityIndicator size="large" color={colors.primary} />
         <Separator y={12} />
         <Typography.Text>Loading info about this podcast</Typography.Text>
